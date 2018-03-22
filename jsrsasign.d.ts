@@ -1,3 +1,7 @@
+// Type definitions for jsrsasign v8.0.6
+// Project: https://github.com/kjur/jsrsasign
+// Definitions by: Florian Keller <https://github.com/ffflorian>
+
 interface RSAPublicKey {
   n_hex: string;
   e_hex: string;
