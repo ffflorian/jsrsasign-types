@@ -20,6 +20,442 @@ declare class BigInteger {
   toString(b: number): string;
 }
 
+type EncryptionAlgorithms = 'DES-CBC' |  'DES-EDE3-CBC' | 'AES-128-CBC' | 'AES-192-CBC' | 'AES-256-CBC';
+type PrivateKeyOutputFormatType = 'PKCS1PRV' | 'PKCS5PRV' | 'PKCS8PRV';
+
+/**
+ * class for RSA/ECC/DSA key utility
+ * @description
+ *
+ * `KEYUTIL` class is an update of former `PKCS5PKEY` class.
+ * `KEYUTIL` class has following features:
+ *
+ * __key loading - `KEYUTIL.getKey`__
+ *
+ *
+ * * supports RSAKey and KJUR.crypto.{ECDSA,DSA} key object
+ * * supports private key and public key
+ * * supports encrypted and plain private key
+ * * supports PKCS#1, PKCS#5 and PKCS#8 key
+ * * supports public key in X.509 certificate
+ * * key represented by JSON object
+ *
+ * NOTE1: Encrypted PKCS#8 only supports PBKDF2/HmacSHA1/3DES
+ * NOTE2: Encrypted PKCS#5 supports DES-CBC, DES-EDE3-CBC, AES-{128,192.256}-CBC
+ *
+ * __exporting key - `KEYUTIL.getPEM`__
+ *
+ * `KEYUTIL.getPEM` method supports following formats:
+ *
+ * * supports RSA/EC/DSA keys
+ * * PKCS#1 plain RSA/EC/DSA private key
+ * * PKCS#5 encrypted RSA/EC/DSA private key with DES-CBC, DES-EDE3-CBC, AES-{128,192.256}-CBC
+ * * PKCS#8 plain RSA/EC/DSA private key
+ * * PKCS#8 encrypted RSA/EC/DSA private key with PBKDF2_HmacSHA1_3DES
+ *
+ *
+ * __keypair generation - `KEYUTIL.generateKeypair`__
+ *
+ * * generate key pair of `RSAKey` or `KJUR.crypto.ECDSA`.
+ * * generate private key and convert it to PKCS#5 encrypted private key.
+ *
+ * NOTE: `KJUR.crypto.DSA` is not yet supported.
+ *
+ *
+ * @example
+ * // 1. loading PEM private key
+ * var key = KEYUTIL.getKey(pemPKCS1PrivateKey);
+ * var key = KEYUTIL.getKey(pemPKCS5EncryptedPrivateKey, "passcode");
+ * var key = KEYUTIL.getKey(pemPKC85PlainPrivateKey);
+ * var key = KEYUTIL.getKey(pemPKC85EncryptedPrivateKey, "passcode");
+ * // 2. loading PEM public key
+ * var key = KEYUTIL.getKey(pemPKCS8PublicKey);
+ * var key = KEYUTIL.getKey(pemX509Certificate);
+ * // 3. exporting private key
+ * var pem = KEYUTIL.getPEM(privateKeyObj, "PKCS1PRV");
+ * var pem = KEYUTIL.getPEM(privateKeyObj, "PKCS5PRV", "passcode"); // DES-EDE3-CBC by default
+ * var pem = KEYUTIL.getPEM(privateKeyObj, "PKCS5PRV", "passcode", "DES-CBC");
+ * var pem = KEYUTIL.getPEM(privateKeyObj, "PKCS8PRV");
+ * var pem = KEYUTIL.getPEM(privateKeyObj, "PKCS8PRV", "passcode");
+ * // 4. exporting public key
+ * var pem = KEYUTIL.getPEM(publicKeyObj);
+ */
+declare class KEYUTIL {
+    /**
+     * @description version string of KEYUTIL class
+     */
+    static readonly version: string;
+
+    constructor();
+
+    /**
+     * parse PEM formatted passcode protected PKCS#5 private key
+     * @param sEncryptedPEM PEM formatted protected passcode protected PKCS#5 private key
+     * @return hash of key information
+     * @description
+     * Resulted hash has following attributes.
+     *
+     * * cipher - symmetric key algorithm name (ex. 'DES-EBE3-CBC', 'AES-256-CBC')
+     * * ivsalt - IV used for decrypt. Its heading 8 bytes will be used for passcode salt.
+     * * type - asymmetric key algorithm name of private key described in PEM header.
+     * * data - base64 encoded encrypted private key.
+     */
+    parsePKCS5PEM(sPKCS5PEM);
+
+    /**
+     * the same function as OpenSSL EVP_BytsToKey to generate shared key and IV
+     * @param algName name of symmetric key algorithm (ex. 'DES-EBE3-CBC')
+     * @param passcode passcode to decrypt private key (ex. 'password')
+     * @param hexadecimal string of IV. heading 8 bytes will be used for passcode salt
+     * @return hash of key and unused IV (ex. {keyhex:2fe3..., ivhex:3fad..})
+     */
+    getKeyAndUnusedIvByPasscodeAndIvsalt(algName, passcode, ivsaltHex);
+
+    decryptKeyB64(privateKeyB64, sharedKeyAlgName, sharedKeyHex, ivsaltHex);
+
+    /**
+     * decrypt PEM formatted protected PKCS#5 private key with passcode
+     * @param sEncryptedPEM PEM formatted protected passcode protected PKCS#5 private key
+     * @param passcode passcode to decrypt private key (ex. 'password')
+     * @return hexadecimal string of decrypted RSA priavte key
+     */
+    getDecryptedKeyHex(sEncryptedPEM, passcode);
+
+    /**
+     * get PEM formatted encrypted PKCS#5 private key from hexadecimal string of plain private key
+     * @param pemHeadAlg algorithm name in the pem header (i.e. RSA,EC or DSA)
+     * @param hPrvKey hexadecimal string of plain private key
+     * @param passcode pass code to protect private key (ex. password)
+     * @param sharedKeyAlgName algorithm name to protect private key (ex. AES-256-CBC)
+     * @param ivsaltHex hexadecimal string of IV and salt
+     * @return string of PEM formatted encrypted PKCS#5 private key
+     * @description
+     *
+     * generate PEM formatted encrypted PKCS#5 private key by hexadecimal string encoded
+     * ASN.1 object of plain RSA private key.
+     * Following arguments can be omitted.
+     *
+     * * alg - AES-256-CBC will be used if omitted.
+     * * ivsaltHex - automatically generate IV and salt which length depends on algorithm
+     *
+     * NOTE1: DES-CBC, DES-EDE3-CBC, AES-{128,192.256}-CBC algorithm are supported.
+     * @example
+     * var pem =
+     *   KEYUTIL.getEncryptedPKCS5PEMFromPrvKeyHex(plainKeyHex, "password");
+     * var pem2 =
+     *   KEYUTIL.getEncryptedPKCS5PEMFromPrvKeyHex(plainKeyHex, "password", "AES-128-CBC");
+     * var pem3 =
+     *   KEYUTIL.getEncryptedPKCS5PEMFromPrvKeyHex(plainKeyHex, "password", "AES-128-CBC", "1f3d02...");
+     */
+    getEncryptedPKCS5PEMFromPrvKeyHex(pemHeadAlg, hPrvKey, passcode, sharedKeyAlgName, ivsaltHex);
+
+    // === PKCS8 ===============================================================
+
+    /**
+     * generate PBKDF2 key hexstring with specified passcode and information
+     * @param passcode passcode to decrypt private key
+     * @return info associative array of PKCS#8 parameters
+     * @description
+     * The associative array which is returned by this method has following properties:
+     *
+     * * info.pbkdf2Salt - hexadecimal string of PBKDF2 salt
+     * * info.pkbdf2Iter - iteration count
+     * * info.ciphertext - hexadecimal string of encrypted private key
+     * * info.encryptionSchemeAlg - encryption algorithm name (currently TripleDES only)
+     * * info.encryptionSchemeIV - initial vector for encryption algorithm
+     *
+     * Currently, this method only supports PKCS#5v2.0 with PBES2/PBDKF2 of HmacSHA1 and TripleDES.
+     *
+     * * keyDerivationFunc = pkcs5PBKDF2 with HmacSHA1
+     * * encryptionScheme = des-EDE3-CBC(i.e. TripleDES
+     *
+     * @example
+     * // to convert plain PKCS#5 private key to encrypted PKCS#8 private
+     * // key with PBKDF2 with TripleDES
+     * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
+     */
+    parseHexOfEncryptedPKCS8(passcode: string): any;
+
+    /**
+     * generate PBKDF2 key hexstring with specified passcode and information
+     * @param info result of `parseHexOfEncryptedPKCS8` which has preference of PKCS#8 file
+     * @param passcode passcode to decrypto private key
+     * @return hexadecimal string of PBKDF2 key
+     * @description
+     * As for info, this uses following properties:
+     *
+     * * info.pbkdf2Salt - hexadecimal string of PBKDF2 salt
+     * * info.pkbdf2Iter - iteration count
+     *
+     * Currently, this method only supports PKCS#5v2.0 with PBES2/PBDKF2 of HmacSHA1 and TripleDES.
+     *
+     * * keyDerivationFunc = pkcs5PBKDF2 with HmacSHA1
+     * * encryptionScheme = des-EDE3-CBC(i.e. TripleDES
+     *
+     * @example
+     * // to convert plain PKCS#5 private key to encrypted PKCS#8 private
+     * // key with PBKDF2 with TripleDES
+     * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
+     */
+    getPBKDF2KeyHexFromParam(info: any, passcode: string): any;
+
+    /**
+     * read PEM formatted encrypted PKCS#8 private key and returns hexadecimal string of plain PKCS#8 private key
+     * @param pkcs8PEM PEM formatted encrypted PKCS#8 private key
+     * @param passcode passcode to decrypto private key
+     * @return hexadecimal string of plain PKCS#8 private key
+     * @description
+     * Currently, this method only supports PKCS#5v2.0 with PBES2/PBDKF2 of HmacSHA1 and TripleDES.
+     *
+     * * keyDerivationFunc = pkcs5PBKDF2 with HmacSHA1
+     * * encryptionScheme = des-EDE3-CBC(i.e. TripleDES
+     *
+     * @example
+     * // to convert plain PKCS#5 private key to encrypted PKCS#8 private
+     * // key with PBKDF2 with TripleDES
+     * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
+     */
+    _getPlainPKCS8HexFromEncryptedPKCS8PEM(pkcs8PEM: string, passcode: string)
+    /**
+     * get RSAKey/ECDSA private key object from encrypted PEM PKCS#8 private key
+     * @param pkcs8PEM string of PEM formatted PKCS#8 private key
+     * @param passcode passcode string to decrypt key
+     * @return RSAKey or KJUR.crypto.ECDSA private key object
+     */
+    getKeyFromEncryptedPKCS8PEM(pkcs8PEM: string, passcode: string): RSAKey | KJUR.crypto.ECDSA
+
+    /**
+     * parse hexadecimal string of plain PKCS#8 private key
+     * @param pkcs8PrvHex hexadecimal string of PKCS#8 plain private key
+     * @return associative array of parsed key
+     * @description
+     * Resulted associative array has following properties:
+     *
+     * * algoid - hexadecimal string of OID of asymmetric key algorithm
+     * * algparam - hexadecimal string of OID of ECC curve name or null
+     * * keyidx - string starting index of key in pkcs8PrvHex
+     *
+     */
+    parsePlainPrivatePKCS8Hex(pkcs8PrvHex: string): any;
+
+    /**
+     * get RSAKey/ECDSA private key object from PEM plain PEM PKCS#8 private key
+     * @param pkcs8PEM string of plain PEM formatted PKCS#8 private key
+     * @return RSAKey or KJUR.crypto.ECDSA private key object
+     */
+    getKeyFromPlainPrivatePKCS8PEM(prvKeyPEM: string): RSAKey | KJUR.crypto.ECDSA
+
+    /**
+     * get RSAKey/DSA/ECDSA private key object from HEX plain PEM PKCS#8 private key
+     * @param prvKeyHex hexadecimal string of plain PKCS#8 private key
+     * @return RSAKey or KJUR.crypto.{DSA,ECDSA} private key object
+     */
+    getKeyFromPlainPrivatePKCS8Hex(prvKeyHex: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
+
+    // === PKCS8 RSA Public Key ================================================
+
+    /**
+     * get RSAKey/DSA/ECDSA public key object from hexadecimal string of PKCS#8 public key
+     * @param pkcsPub8Hex hexadecimal string of PKCS#8 public key
+     * @return RSAKey or KJUR.crypto.{ECDSA,DSA} private key object
+     */
+    _getKeyFromPublicPKCS8Hex(h: string): RSAKey | KJUR.crypto.ECDSA
+
+    /**
+     * parse hexadecimal string of plain PKCS#8 private key
+     * @param pubRawRSAHex hexadecimal string of ASN.1 encoded PKCS#8 public key
+     * @return associative array of parsed key
+     * @description
+     * Resulted associative array has following properties:
+     *
+     * * n - hexadecimal string of public key
+     * * e - hexadecimal string of public exponent
+     *
+     */
+    parsePublicRawRSAKeyHex(pubRawRSAHex: string): any;
+
+    /**
+     * parse hexadecimal string of PKCS#8 RSA/EC/DSA public key
+     * @param pkcs8PubHex hexadecimal string of PKCS#8 public key
+     * @return hash of key information
+     * @description
+     * Resulted hash has following attributes.
+     *
+     * * algoid - hexadecimal string of OID of asymmetric key algorithm
+     * * algparam - hexadecimal string of OID of ECC curve name, parameter SEQUENCE of DSA or null
+     * * key - hexadecimal string of public key
+     *
+     */
+    parsePublicPKCS8Hex(pkcs8PubHex: string): any;
+
+    /**
+    * get private or public key object from any arguments
+    * @param param parameter to get key object. see description in detail.
+    * @param passcode (OPTION) parameter to get key object. see description in detail.
+    * @param hextype (OPTION) parameter to get key object. see description in detail.
+    * @return `RSAKey`, `KJUR.crypto.ECDSA` or `KJUR.crypto.ECDSA` object
+    * @description
+    * This method gets private or public key object(`RSAKey`, `KJUR.crypto.DSA` or `KJUR.crypto.ECDSA`)
+    * for RSA, DSA and ECC.
+    * Arguments for this methods depends on a key format you specify.
+    * Following key representations are supported.
+    *
+    * * ECC private/public key object(as is): param=KJUR.crypto.ECDSA
+    * * DSA private/public key object(as is): param=KJUR.crypto.DSA
+    * * RSA private/public key object(as is): param=RSAKey
+    * * ECC private key parameters: param={d: d, curve: curveName}
+    * * RSA private key parameters: param={n: n, e: e, d: d, p: p, q: q, dp: dp, dq: dq, co: co}
+    *   NOTE: Each value shall be hexadecimal string of key spec.
+    * * DSA private key parameters: param={p: p, q: q, g: g, y: y, x: x}
+    *   NOTE: Each value shall be hexadecimal string of key spec.
+    * * ECC public key parameters: param={xy: xy, curve: curveName}
+    *   NOTE: ECC public key 'xy' shall be concatination of "04", x-bytes-hex and y-bytes-hex.
+    * * DSA public key parameters: param={p: p, q: q, g: g, y: y}
+    *   NOTE: Each value shall be hexadecimal string of key spec.
+    * * RSA public key parameters: param={n: n, e: e}
+    * * X.509v1/v3 PEM certificate (RSA/DSA/ECC): param=pemString
+    * * PKCS#8 hexadecimal RSA/ECC public key: param=pemString, null, "pkcs8pub"
+    * * PKCS#8 PEM RSA/DSA/ECC public key: param=pemString
+    * * PKCS#5 plain hexadecimal RSA private key: param=hexString, null, "pkcs5prv"
+    * * PKCS#5 plain PEM DSA/RSA private key: param=pemString
+    * * PKCS#8 plain PEM RSA/ECDSA private key: param=pemString
+    * * PKCS#5 encrypted PEM RSA/DSA private key: param=pemString, passcode
+    * * PKCS#8 encrypted PEM RSA/ECDSA private key: param=pemString, passcode
+    *
+    * Please note following limitation on encrypted keys:
+    *
+    * * Encrypted PKCS#8 only supports PBKDF2/HmacSHA1/3DES
+    * * Encrypted PKCS#5 supports DES-CBC, DES-EDE3-CBC, AES-{128,192.256}-CBC
+    * * JWT plain ECC private/public key
+    * * JWT plain RSA public key
+    * * JWT plain RSA private key with P/Q/DP/DQ/COEFF
+    * * JWT plain RSA private key without P/Q/DP/DQ/COEFF (since jsrsasign 5.0.0)
+    *
+    * NOTE1: <a href="https://tools.ietf.org/html/rfc7517">RFC 7517 JSON Web Key(JWK)</a> support for RSA/ECC private/public key from jsrsasign 4.8.1.<br/>
+    * NOTE2: X509v1 support is added since jsrsasign 5.0.11.
+    *
+    * @example
+    * // 1. loading private key from PEM string
+    * keyObj = KEYUTIL.getKey("-----BEGIN RSA PRIVATE KEY...");
+    * keyObj = KEYUTIL.getKey("-----BEGIN RSA PRIVATE KEY..., "passcode");
+    * keyObj = KEYUTIL.getKey("-----BEGIN PRIVATE KEY...");
+    * keyObj = KEYUTIL.getKey("-----BEGIN PRIVATE KEY...", "passcode");
+    * // 2. loading public key from PEM string
+    * keyObj = KEYUTIL.getKey("-----BEGIN PUBLIC KEY...");
+    * keyObj = KEYUTIL.getKey("-----BEGIN X509 CERTIFICATE...");
+    * // 3. loading hexadecimal PKCS#5/PKCS#8 key
+    * keyObj = KEYUTIL.getKey("308205c1...", null, "pkcs8pub");
+    * keyObj = KEYUTIL.getKey("3082048b...", null, "pkcs5prv");
+    * // 4. loading JSON Web Key(JWK)
+    * keyObj = KEYUTIL.getKey({kty: "RSA", n: "0vx7...", e: "AQAB"});
+    * keyObj = KEYUTIL.getKey({kty: "EC", crv: "P-256",
+    *                          x: "MKBC...", y: "4Etl6...", d: "870Mb..."});
+    * // 5. bare hexadecimal key
+    * keyObj = KEYUTIL.getKey({n: "75ab..", e: "010001"});
+    */
+    static getKey(param, passcode?: string, hextype?: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
+
+    /**
+    * @param alg 'RSA' or 'EC'
+    * @param keylenOrCurve key length for RSA or curve name for EC
+    * @return associative array of keypair which has prvKeyObj and pubKeyObj parameters
+    * @description
+    * This method generates a key pair of public key algorithm.
+    * The result will be an associative array which has following
+    * parameters:
+    *
+    * * prvKeyObj - RSAKey or ECDSA object of private key
+    * * pubKeyObj - RSAKey or ECDSA object of public key
+    *
+    * NOTE1: As for RSA algoirthm, public exponent has fixed
+    * value '0x10001'.
+    * NOTE2: As for EC algorithm, supported names of curve are
+    * secp256r1, secp256k1 and secp384r1.
+    * NOTE3: DSA is not supported yet.
+    * @example
+    * var rsaKeypair = KEYUTIL.generateKeypair("RSA", 1024);
+    * var ecKeypair = KEYUTIL.generateKeypair("EC", "secp256r1");
+    *
+    */
+    static generateKeypair(alg: 'RSA' | 'EC', keylenOrCurve: number): any;
+
+    /**
+    * get PEM formatted private or public key file from a RSA/ECDSA/DSA key object
+    * @param keyObjOrHex key object `RSAKey`, `KJUR.crypto.ECDSA` or `KJUR.crypto.DSA` to encode to
+    * @param formatType (OPTION) output format type of "PKCS1PRV", "PKCS5PRV" or "PKCS8PRV" for private key
+    * @param passwd (OPTION) password to protect private key
+    * @param encAlg (OPTION) encryption algorithm for PKCS#5. currently supports DES-CBC, DES-EDE3-CBC and AES-{128,192,256}-CBC
+    * @param hexType (OPTION) type of hex string (ex. pkcs5prv, pkcs8prv)
+    * @param ivsaltHex hexadecimal string of IV and salt (default generated random IV)
+    * @description
+    *
+    * __NOTE1:__ PKCS#5 encrypted private key protection algorithm supports DES-CBC, DES-EDE3-CBC and AES-{128,192,256}-CBC
+    * __NOTE2:__ OpenSSL supports
+    * __NOTE3:__ Parameter "ivsaltHex" supported since jsrsasign 8.0.0 keyutil 1.2.0.
+    *
+    * @example
+    * KEYUTIL.getPEM(publicKey) => generates PEM PKCS#8 public key
+    * KEYUTIL.getPEM(privateKey, "PKCS1PRV") => generates PEM PKCS#1 plain private key
+    * KEYUTIL.getPEM(privateKey, "PKCS5PRV", "pass") => generates PEM PKCS#5 encrypted private key
+    *                                                          with DES-EDE3-CBC (DEFAULT)
+    * KEYUTIL.getPEM(privateKey, "PKCS5PRV", "pass", "DES-CBC") => generates PEM PKCS#5 encrypted
+    *                                                                 private key with DES-CBC
+    * KEYUTIL.getPEM(privateKey, "PKCS8PRV") => generates PEM PKCS#8 plain private key
+    * KEYUTIL.getPEM(privateKey, "PKCS8PRV", "pass") => generates PEM PKCS#8 encrypted private key
+    *                                                      with PBKDF2_HmacSHA1_3DES
+    */
+    static getPEM(keyObjOrHex: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA, formatType?: PrivateKeyOutputFormatType, passwd?: string, encAlg?: string, hexType?, ivsaltHex?): void;
+
+    // -- PUBLIC METHODS FOR CSR --------------------------------------------------
+
+    /**
+    * get RSAKey/DSA/ECDSA public key object from PEM formatted PKCS#10 CSR string
+    * @param csrPEM PEM formatted PKCS#10 CSR string
+    * @return RSAKey/DSA/ECDSA public key object
+    */
+    static getKeyFromCSRPEM(csrPEM: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
+
+    /**
+    * get RSAKey/DSA/ECDSA public key object from hexadecimal string of PKCS#10 CSR
+    * @param csrHex hexadecimal string of PKCS#10 CSR
+    * @return RSAKey/DSA/ECDSA public key object
+    */
+    static getKeyFromCSRHex(csrHex: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
+
+    /**
+    * parse hexadecimal string of PKCS#10 CSR (certificate signing request)
+    * @param csrHex hexadecimal string of PKCS#10 CSR
+    * @return associative array of parsed CSR
+    * @description
+    * Resulted associative array has following properties:
+    *
+    * * p8pubkeyhex - hexadecimal string of subject public key in PKCS#8
+    *
+    */
+    static parseCSRHex(csrHex: string): any;
+
+    /**
+    * convert from RSAKey/KJUR.crypto.ECDSA public/private key object to RFC 7517 JSON Web Key(JWK)
+    * @param keyObj RSAKey/KJUR.crypto.ECDSA public/private key object
+    * @return JWK object
+    * @description
+    * This static method convert from RSAKey/KJUR.crypto.ECDSA public/private key object
+    * to RFC 7517 JSON Web Key(JWK)
+    * @example
+    * kp1 = KEYUTIL.generateKeypair("EC", "P-256");
+    * jwkPrv1 = KEYUTIL.getJWKFromKey(kp1.prvKeyObj);
+    * jwkPub1 = KEYUTIL.getJWKFromKey(kp1.pubKeyObj);
+    *
+    * kp2 = KEYUTIL.generateKeypair("RSA", 2048);
+    * jwkPrv2 = KEYUTIL.getJWKFromKey(kp2.prvKeyObj);
+    * jwkPub2 = KEYUTIL.getJWKFromKey(kp2.pubKeyObj);
+    *
+    * // if you need RFC 7638 JWK thumprint as kid do like this:
+    * jwkPub2.kid = KJUR.jws.JWS.getJWKthumbprint(jwkPub2);
+    */
+    static getJWKFromKey(keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA): JWK
+}
+
 /** Tom Wu's RSA Key class and extension */
 declare class RSAKey {
     constructor();
@@ -319,9 +755,9 @@ declare class X509 {
    * @example
    * x = new X509();
    * x.readCertPEM(sCertPEM);
-   * pubkey= x.getPublicKey();
+   * pubkey = x.getPublicKey();
    */
-  getPublicKey(): PublicKey;
+  getPublicKey(): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
   /**
    * get signature algorithm name from hexadecimal certificate data
@@ -532,7 +968,7 @@ declare class X509 {
    *  ["IP",   "192.168.1.1"],
    *  ["DN",   "/C=US/O=TEST1"]]
    */
-  getExtSubjectAltName2()
+  getExtSubjectAltName2(): Array<any>;
 
   /**
    * get array of string for fullName URIs in cRLDistributionPoints(CDP) in the certificate
@@ -550,7 +986,7 @@ declare class X509 {
    * x.getExtCRLDistributionPointsURI() &rarr;
    * ["http://example.com/aaa.crl", "http://example.org/aaa.crl"]
    */
-  getExtCRLDistributionPointsURI()
+  getExtCRLDistributionPointsURI(): Array<any> | undefined;
 
   /**
    * get AuthorityInfoAccess extension value in the certificate as associative array
@@ -558,10 +994,10 @@ declare class X509 {
    * @description
    * This method will get authority info access value
    * as associate array which has following properties:
-   * <ul>
-   * <li>ocsp - array of string for OCSP responder URL</li>
-   * <li>caissuer - array of string for caIssuer value (i.e. CA certificates URL)</li>
-   * </ul>
+   *
+   * * ocsp - array of string for OCSP responder URL
+   * * caissuer - array of string for caIssuer value (i.e. CA certificates URL)
+   *
    * If there is this in the certificate, it returns undefined;
    * @example
    * x = new X509();
@@ -570,7 +1006,7 @@ declare class X509 {
    * { ocsp:     ["http://ocsp.foo.com"],
    *   caissuer: ["http://rep.foo.com/aaa.p8m"] }
    */
-  getExtAIAInfo()
+  getExtAIAInfo(): Array<any> | undefined;
 
   /**
    * get CertificatePolicies extension value in the certificate as array
@@ -578,11 +1014,11 @@ declare class X509 {
    * @description
    * This method will get certificate policies value
    * as an array of JSON object which has following properties:
-   * <ul>
-   * <li>id - </li>
-   * <li>cps - URI of certification practice statement</li>
-   * <li>unotice - string of UserNotice explicitText</li>
-   * </ul>
+   *
+   * * id -
+   * * cps - URI of certification practice statement
+   * * unotice - string of UserNotice explicitText
+   *
    * If there is this extension in the certificate,
    * it returns undefined;
    * @example
@@ -593,9 +1029,8 @@ declare class X509 {
    *    cps: "http://example.com/cps",
    *    unotice: "explicit text" }]
    */
-  getExtCertificatePolicies()
+  getExtCertificatePolicies(): Array<any> | undefined;
 
-  // ===== read certificate =====================================
   /**
    * read PEM formatted X.509 certificate from string.<br/>
    * @param sCertPEM string for PEM formatted X.509 certificate
@@ -603,18 +1038,18 @@ declare class X509 {
    * x = new X509();
    * x.readCertPEM(sCertPEM); // read certificate
    */
-  readCertPEM(sCertPEM)
+  readCertPEM(sCertPEM: string): void;
 
   /**
    * read a hexadecimal string of X.509 certificate<br/>
    * @param sCertHex hexadecimal string of X.509 certificate
    * @description
-   * NOTE: {@link X509#parseExt} will called internally since jsrsasign 7.2.0.
+   * NOTE: `X509#parseExt` will be called internally since jsrsasign 7.2.0.
    * @example
    * x = new X509();
    * x.readCertHex("3082..."); // read certificate
    */
-  readCertHex(sCertHex)
+  readCertHex(sCertHex: string): void;
 
   /**
    * get certificate information as string.<br/>
@@ -699,7 +1134,7 @@ declare class X509 {
    * @param h hexadecimal string of X.509 certificate for RSA/ECDSA/DSA public key
    * @return returns RSAKey/KJUR.crypto.{ECDSA,DSA} object of public key
    */
-  static getPublicKeyFromCertHex(h: string) PublicKey;
+  static getPublicKeyFromCertHex(h: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
   /**
    * get RSA/DSA/ECDSA public key object from PEM certificate string
@@ -708,7 +1143,7 @@ declare class X509 {
    * @description
    * NOTE: DSA is also supported since x509 1.1.2.
    */
-  static getPublicKeyFromCertPEM(sCertPEM: string): Hash;
+  static getPublicKeyFromCertPEM(sCertPEM: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
   /**
    * get public key information from PEM certificate
@@ -716,17 +1151,20 @@ declare class X509 {
    * @return hash of information for public key
    * @description
    * Resulted associative array has following properties:<br/>
-   * <ul>
-   * <li>algoid - hexadecimal string of OID of asymmetric key algorithm</li>
-   * <li>algparam - hexadecimal string of OID of ECC curve name or null</li>
-   * <li>keyhex - hexadecimal string of key in the certificate</li>
-   * </ul>
+   *
+   * * algoid - hexadecimal string of OID of asymmetric key algorithm
+   * * algparam - hexadecimal string of OID of ECC curve name or null
+   * * keyhex - hexadecimal string of key in the certificate
+   *
    * NOTE: X509v1 certificate is also supported since x509.js 1.1.9.
    */
-  static getPublicKeyInfoPropOfCertPEM(sCertPEM: string): Hash;
+  static getPublicKeyInfoPropOfCertPEM(sCertPEM: string): string;
 }
 
-export declare namespace KJUR {
+export namespace KJUR {
+  export namespace crypto {
+
+  }
 }
 
 /**
@@ -794,7 +1232,7 @@ export declare function b64utob64(s: string): string;
  * @param s Base64URL encoded string
  * @return hexadecimal string
  */
-export declare function b64utohex(s: string): string
+export declare function b64utohex(s: string): string;
 
 /**
  * convert a Base64URL encoded string to a ASCII string.
@@ -802,28 +1240,28 @@ export declare function b64utohex(s: string): string
  * @param s Base64URL encoded string
  * @return ASCII string
  */
-export declare function b64utos(s: string): string
+export declare function b64utos(s: string): string;
 
 /**
  * convert a Base64URL encoded string to a UTF-8 encoded string including CJK or Latin.
  * @param s Base64URL encoded string
  * @return UTF-8 encoded string
  */
-export declare function b64utoutf8(s: string): string
+export declare function b64utoutf8(s: string): string;
 
 /**
  * convert an array of bytes(Number) to hexadecimal string.
  * @param a array of bytes
  * @return hexadecimal string
  */
-export declare function BAtohex(a: Array<number>): string
+export declare function BAtohex(a: Array<number>): string;
 
 /**
  * convert an array of character codes to a string
  * @param a array of character codes
  * @return s
  */
-export declare function BAtos(a: Array<number>): string
+export declare function BAtos(a: Array<number>): string;
 
 /**
  * Date object to zulu time string
@@ -844,7 +1282,7 @@ export declare function BAtos(a: Array<number>): string
  * datetozulu(d, true) → "170520235959Z"
  * datetozulu(d, false, true) → "20170520235959.67Z"
  */
-export declare function datetozulu(d: Date, flagUTCTime: boolean, flagMilli: boolean): string
+export declare function datetozulu(d: Date, flagUTCTime: boolean, flagMilli: boolean): string;
 
 /**
  * convert UTFa hexadecimal string to a URLComponent string such like "%67%68".
@@ -855,7 +1293,7 @@ export declare function datetozulu(d: Date, flagUTCTime: boolean, flagMilli: boo
  * @param s hexadecimal string
  * @return URIComponent string such like "%67%68"
  */
-export declare function encodeURIComponentAll(s: string): string
+export declare function encodeURIComponentAll(s: string): string;
 
 /**
  * convert a hexadecimal string to an ArrayBuffer
@@ -877,7 +1315,7 @@ export declare function hextoArrayBuffer(hex: string): ArrayBuffer;
  * NOTE: If leading "0" is omitted and odd number length for
  * hexadecimal leading "0" is automatically added.
  */
-export declare function hextob64(s: string): string
+export declare function hextob64(s: string): string;
 
 /**
  * convert a hexadecimal string to Base64 encoded string with new lines
@@ -893,7 +1331,7 @@ export declare function hextob64(s: string): string
  * MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4 // new line
  * OTAxMjM0NTY3ODkwCg==
  */
-export declare function hextob64nl(s: string): string
+export declare function hextob64nl(s: string): string;
 
 /**
  * convert a hexadecimal string to a Base64URL encoded string.
@@ -904,7 +1342,7 @@ export declare function hextob64nl(s: string): string
  * NOTE: If leading "0" is omitted and odd number length for
  * hexadecimal leading "0" is automatically added.
  */
-export declare function hextob64u(s: string): string
+export declare function hextob64u(s: string): string;
 
 /**
  * get PEM string from hexadecimal data and header string
@@ -920,7 +1358,7 @@ export declare function hextob64u(s: string): string
  * YWFh
  * -----END PRIVATE KEY-----
  */
-export declare function hextopem(dataHex: string, pemHeader: string): string
+export declare function hextopem(dataHex: string, pemHeader: string): string;
 
 /**
  * canonicalize hexadecimal string of positive integer
@@ -939,7 +1377,7 @@ export declare function hextopem(dataHex: string, pemHeader: string): string
  * hextoposhex("1234") → "1234"
  * hextoposhex("12345") → "012345"
  */
-export declare function hextoposhex(s: string): string
+export declare function hextoposhex(s: string): string;
 
 /**
  * convert a hexadecimal encoded string to raw string including non printable characters.
@@ -948,14 +1386,14 @@ export declare function hextoposhex(s: string): string
  * @example
  * hextorstr("610061") → "a\x00a"
  */
-export declare function hextorstr(s: string): string
+export declare function hextorstr(s: string): string;
 
 /**
  * convert a hexadecimal string to a URLComponent string such like "%67%68".
  * @param s hexadecimal string
  * @return URIComponent string such like "%67%68"
  */
-export declare function hextouricmp(s: string): string
+export declare function hextouricmp(s: string): string;
 
 /**
  * convert a hexadecimal encoded string to a UTF-8 encoded string including CJK or Latin.
@@ -964,7 +1402,7 @@ export declare function hextouricmp(s: string): string
  * @param s hexadecimal encoded string
  * @return UTF-8 encoded string or null
  */
-export declare function hextoutf8(s: string): string
+export declare function hextoutf8(s: string): string;
 
 /**
  * convert string of integer array to hexadecimal string.
@@ -981,7 +1419,7 @@ export declare function hextoutf8(s: string): string
  * intarystrtohex(" [123, 34, 101, 34, 58] ")
  * → 7b2265223a (i.e. '{"e":' as string)
  */
-export declare function intarystrtohex(s: string): string
+export declare function intarystrtohex(s: string): string;
 
 /**
  * convert all UNIX new line("\r\n") to DOS new line("\n") in
@@ -989,7 +1427,7 @@ export declare function intarystrtohex(s: string): string
  * @param s string
  * @return converted string
  */
-export declare function newline_toDos(s: string): string
+export declare function newline_toDos(s: string): string;
 
 /**
  * convert all DOS new line("\r\n") to UNIX new line("\n") in
@@ -997,7 +1435,7 @@ export declare function newline_toDos(s: string): string
  * @param s string
  * @return converted string
  */
-export declare function newline_toUnix(s: string): string
+export declare function newline_toUnix(s: string): string;
 
 /**
  * get hexadecimal string from PEM format data
@@ -1018,7 +1456,7 @@ export declare function newline_toUnix(s: string): string
  * pemtohex("-----BEGIN CERTIFICATE...", "CERTIFICATE") → "3082..."
  * pemtohex(" \r\n-----BEGIN DSA PRIVATE KEY...") → "3082..."
  */
-export declare function pemtohex(s: string, sHead: string): string
+export declare function pemtohex(s: string, sHead: string): string;
 
 /**
  * read file and return file contents
@@ -1027,7 +1465,7 @@ export declare function pemtohex(s: string, sHead: string): string
  * @description
  * This function only works in Node.js.
  */
-export declare function readFile(binFile: string): string
+export declare function readFile(binFile: string): string;
 
 /**
  * read binary file and return file contents as hexadecimal string
@@ -1036,7 +1474,7 @@ export declare function readFile(binFile: string): string
  * @description
  * This function only works in Node.js.
  */
-export declare function readFileHexByBin(binFile: string): string
+export declare function readFileHexByBin(binFile: string): string;
 
 /**
  * read file and return file contents as utf-8 string
@@ -1045,7 +1483,7 @@ export declare function readFileHexByBin(binFile: string): string
  * @description
  * This function only works in Node.js.
  */
-export declare function readFileUTF8(utf8File: string): string
+export declare function readFileUTF8(utf8File: string): string;
 
 /**
  * convert a raw string including non printable characters to hexadecimal encoded string.
@@ -1054,7 +1492,7 @@ export declare function readFileUTF8(utf8File: string): string
  * @example
  * rstrtohex("a\x00a") → "610061"
  */
-export declare function rstrtohex(s: string): string
+export declare function rstrtohex(s: string): string;
 
 /**
  * save raw string to file
@@ -1080,7 +1518,7 @@ export declare function saveFileBinByHex(binFile: string, hexString: string): vo
  * @param s ASCII string
  * @return Base64 encoded string
  */
-export declare function stob64(s: string): string
+export declare function stob64(s: string): string;
 
 /**
  * convert a ASCII string to a Base64URL encoded string.
@@ -1088,14 +1526,14 @@ export declare function stob64(s: string): string
  * @param s ASCII string
  * @return Base64URL encoded string
  */
-export declare function stob64u(s: string): string
+export declare function stob64u(s: string): string;
 
 /**
  * convert a string to an array of character codes
  * @param s
  * @return {Array of Numbers}
  */
-export declare function stoBA(s: string): string
+export declare function stoBA(s: string): string;
 
 /**
  * convert a ASCII string to a hexadecimal string of ASCII codes.
@@ -1103,7 +1541,7 @@ export declare function stoBA(s: string): string
  * @param s ASCII string
  * @return hexadecimal string
  */
-export declare function stohex(s: string): string
+export declare function stohex(s: string): string;
 
 /**
  * find index of string where two string differs
@@ -1123,28 +1561,28 @@ export declare function strdiffidx(s1: string, s2: string): number;
  * @param s URIComponent string such like "%67%68"
  * @return hexadecimal string
  */
-export declare function uricmptohex(s: string): string
+export declare function uricmptohex(s: string): string;
 
 /**
  * convert a UTF-8 encoded string including CJK or Latin to a Base64 encoded string.
  * @param s UTF-8 encoded string
  * @return Base64 encoded string
  */
-export declare function utf8tob64(s: string): string
+export declare function utf8tob64(s: string): string;
 
 /**
  * convert a UTF-8 encoded string including CJK or Latin to a Base64URL encoded string.
  * @param s UTF-8 encoded string
  * @return Base64URL encoded string
  */
-export declare function utf8tob64u(s: string): string
+export declare function utf8tob64u(s: string): string;
 
 /**
  * convert a UTF-8 encoded string including CJK or Latin to a hexadecimal encoded string.
  * @param s UTF-8 encoded string
  * @return hexadecimal encoded string
  */
-export declare function utf8tohex(s: string): string
+export declare function utf8tohex(s: string): string;
 
 /**
  * GeneralizedTime or UTCTime string to Date object
