@@ -1,5 +1,11 @@
 declare namespace jsrsasign {
-  export class X509 {
+  interface X509Extension {
+    oid: string;
+    critical: boolean;
+    vidx: number;
+  }
+
+  class X509 {
     hex: string;
     static readonly version: string;
 
@@ -184,7 +190,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(pemCert);
      * x.verifySignature(pubKey) → true, false or raising exception
      */
-    verifySignature(pubKey: PublicKey): boolean;
+    verifySignature(pubKey: any): boolean;
 
     /**
      * set array of X.509v3 extesion information such as extension OID, criticality and value index.
@@ -244,7 +250,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtBasicConstraints() → { cA: true, pathLen: 3 };
      */
-    getExtBasicConstraints(): AssociativeArray;
+    getExtBasicConstraints(): Array<any>;
 
     /**
      * get KeyUsage extension value as binary string in the certificate
@@ -310,7 +316,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtAuthorityKeyIdentifier() → { kid: "1234abcd..." }
      */
-    getExtAuthorityKeyIdentifier(): AuthorityKey | null;
+    getExtAuthorityKeyIdentifier(): { kid: string } | null;
 
     /**
      * get extKeyUsage value as array of name string in the certificate
@@ -327,7 +333,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtExtKeyUsageName() → ["serverAuth", "clientAuth", "0.1.2.3.4.5"]
      */
-    getExtExtKeyUsageName(): Array<ExtendedKey.usageId> | Oid
+    getExtExtKeyUsageName(): Array<string> | any
 
     /**
      * get subjectAltName value as array of string in the certificate

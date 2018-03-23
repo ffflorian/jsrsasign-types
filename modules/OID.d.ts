@@ -1,6 +1,6 @@
 declare namespace jsrsasign {
   /** static object for cryptographic function utilities */
-  export const OID: {
+  const OID: {
     /** key value of hexadecimal OID and its name (ex. '2a8648ce3d030107' and 'secp256r1') */
     oidhex2name: {
       '2a864886f70d010101': string;

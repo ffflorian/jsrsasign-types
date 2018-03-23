@@ -15,7 +15,7 @@ declare namespace jsrsasign {
    * However it is planning to implement also symmetric ciphers near in the future.
    * @example
    */
-  export class Cipher {
+  class Cipher {
     constructor(params)
 
     /**

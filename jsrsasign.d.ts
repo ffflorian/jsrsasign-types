@@ -1,11 +1,11 @@
 declare namespace jsrsasign {
-  export interface RSAPublicKey {
+  interface RSAPublicKey {
     n_hex: string;
     e_hex: string;
   }
 
-  export type EncryptionAlgorithms = 'DES-CBC' | 'DES-EDE3-CBC' | 'AES-128-CBC' | 'AES-192-CBC' | 'AES-256-CBC';
-  export type PrivateKeyOutputFormatType = 'PKCS1PRV' | 'PKCS5PRV' | 'PKCS8PRV';
+  type EncryptionAlgorithms = 'DES-CBC' | 'DES-EDE3-CBC' | 'AES-128-CBC' | 'AES-192-CBC' | 'AES-256-CBC';
+  type PrivateKeyOutputFormatType = 'PKCS1PRV' | 'PKCS5PRV' | 'PKCS8PRV';
 
   /**
    * convert an ArrayBuffer to a hexadecimal string
@@ -21,7 +21,7 @@ declare namespace jsrsasign {
    * view.setUint8(2, 0x01);
    * ArrayBuffertohex(buffer) → "fafb01"
    */
-  export function ArrayBuffertohex(buffer: ArrayBuffer): string;
+  function ArrayBuffertohex(buffer: ArrayBuffer): string;
 
   /**
    * convert a Base64 encoded string with new lines to a hexadecimal string
@@ -40,7 +40,7 @@ declare namespace jsrsasign {
    * →
    * "123456789012345678901234567890123456789012345678901234567890"
    */
-  export function b64nltohex(s: string): string;
+  function b64nltohex(s: string): string;
 
   /**
    * convert a Base64 encoded string to a Base64URL encoded string.
@@ -49,14 +49,14 @@ declare namespace jsrsasign {
    * @example
    * b64tob64u("ab+c3f/==") → "ab-c3f_"
    */
-  export function b64tob64u(s: string): string;
+  function b64tob64u(s: string): string;
 
   /**
    * convert a Base64 encoded string to a UTF-8 encoded string including CJK or Latin.
    * @param s Base64 encoded string
    * @return UTF-8 encoded string
    */
-  export function b64toutf8(s: string): string;
+  function b64toutf8(s: string): string;
 
   /**
    * convert a Base64URL encoded string to a Base64 encoded string.
@@ -65,14 +65,14 @@ declare namespace jsrsasign {
    * @example
    * b64utob64("ab-c3f_") → "ab+c3f/=="
    */
-  export function b64utob64(s: string): string;
+  function b64utob64(s: string): string;
 
   /**
    * convert a Base64URL encoded string to a hexadecimal string.
    * @param s Base64URL encoded string
    * @return hexadecimal string
    */
-  export function b64utohex(s: string): string;
+  function b64utohex(s: string): string;
 
   /**
    * convert a Base64URL encoded string to a ASCII string.
@@ -80,28 +80,28 @@ declare namespace jsrsasign {
    * @param s Base64URL encoded string
    * @return ASCII string
    */
-  export function b64utos(s: string): string;
+  function b64utos(s: string): string;
 
   /**
    * convert a Base64URL encoded string to a UTF-8 encoded string including CJK or Latin.
    * @param s Base64URL encoded string
    * @return UTF-8 encoded string
    */
-  export function b64utoutf8(s: string): string;
+  function b64utoutf8(s: string): string;
 
   /**
    * convert an array of bytes(Number) to hexadecimal string.
    * @param a array of bytes
    * @return hexadecimal string
    */
-  export function BAtohex(a: Array<number>): string;
+  function BAtohex(a: Array<number>): string;
 
   /**
    * convert an array of character codes to a string
    * @param a array of character codes
    * @return s
    */
-  export function BAtos(a: Array<number>): string;
+  function BAtos(a: Array<number>): string;
 
   /**
    * Date object to zulu time string
@@ -122,7 +122,7 @@ declare namespace jsrsasign {
    * datetozulu(d, true) → "170520235959Z"
    * datetozulu(d, false, true) → "20170520235959.67Z"
    */
-  export function datetozulu(d: Date, flagUTCTime: boolean, flagMilli: boolean): string;
+  function datetozulu(d: Date, flagUTCTime: boolean, flagMilli: boolean): string;
 
   /**
    * convert UTFa hexadecimal string to a URLComponent string such like "%67%68".
@@ -133,7 +133,7 @@ declare namespace jsrsasign {
    * @param s hexadecimal string
    * @return URIComponent string such like "%67%68"
    */
-  export function encodeURIComponentAll(s: string): string;
+  function encodeURIComponentAll(s: string): string;
 
   /**
    * convert a hexadecimal string to an ArrayBuffer
@@ -144,7 +144,7 @@ declare namespace jsrsasign {
    * @example
    * hextoArrayBuffer("fffa01") → ArrayBuffer of [255, 250, 1]
    */
-  export function hextoArrayBuffer(hex: string): ArrayBuffer;
+  function hextoArrayBuffer(hex: string): ArrayBuffer;
 
   /**
    * convert a hexadecimal string to a Base64URL encoded string.
@@ -155,7 +155,7 @@ declare namespace jsrsasign {
    * NOTE: If leading "0" is omitted and odd number length for
    * hexadecimal leading "0" is automatically added.
    */
-  export function hextob64(s: string): string;
+  function hextob64(s: string): string;
 
   /**
    * convert a hexadecimal string to Base64 encoded string with new lines
@@ -171,7 +171,7 @@ declare namespace jsrsasign {
    * MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4 // new line
    * OTAxMjM0NTY3ODkwCg==
    */
-  export function hextob64nl(s: string): string;
+  function hextob64nl(s: string): string;
 
   /**
    * convert a hexadecimal string to a Base64URL encoded string.
@@ -182,7 +182,7 @@ declare namespace jsrsasign {
    * NOTE: If leading "0" is omitted and odd number length for
    * hexadecimal leading "0" is automatically added.
    */
-  export function hextob64u(s: string): string;
+  function hextob64u(s: string): string;
 
   /**
    * get PEM string from hexadecimal data and header string
@@ -198,7 +198,7 @@ declare namespace jsrsasign {
    * YWFh
    * -----END PRIVATE KEY-----
    */
-  export function hextopem(dataHex: string, pemHeader: string): string;
+  function hextopem(dataHex: string, pemHeader: string): string;
 
   /**
    * canonicalize hexadecimal string of positive integer
@@ -217,7 +217,7 @@ declare namespace jsrsasign {
    * hextoposhex("1234") → "1234"
    * hextoposhex("12345") → "012345"
    */
-  export function hextoposhex(s: string): string;
+  function hextoposhex(s: string): string;
 
   /**
    * convert a hexadecimal encoded string to raw string including non printable characters.
@@ -226,14 +226,14 @@ declare namespace jsrsasign {
    * @example
    * hextorstr("610061") → "a\x00a"
    */
-  export function hextorstr(s: string): string;
+  function hextorstr(s: string): string;
 
   /**
    * convert a hexadecimal string to a URLComponent string such like "%67%68".
    * @param s hexadecimal string
    * @return URIComponent string such like "%67%68"
    */
-  export function hextouricmp(s: string): string;
+  function hextouricmp(s: string): string;
 
   /**
    * convert a hexadecimal encoded string to a UTF-8 encoded string including CJK or Latin.
@@ -242,7 +242,7 @@ declare namespace jsrsasign {
    * @param s hexadecimal encoded string
    * @return UTF-8 encoded string or null
    */
-  export function hextoutf8(s: string): string;
+  function hextoutf8(s: string): string;
 
   /**
    * convert string of integer array to hexadecimal string.
@@ -259,7 +259,7 @@ declare namespace jsrsasign {
    * intarystrtohex(" [123, 34, 101, 34, 58] ")
    * → 7b2265223a (i.e. '{"e":' as string)
    */
-  export function intarystrtohex(s: string): string;
+  function intarystrtohex(s: string): string;
 
   /**
    * convert all UNIX new line("\r\n") to DOS new line("\n") in
@@ -267,7 +267,7 @@ declare namespace jsrsasign {
    * @param s string
    * @return converted string
    */
-  export function newline_toDos(s: string): string;
+  function newline_toDos(s: string): string;
 
   /**
    * convert all DOS new line("\r\n") to UNIX new line("\n") in
@@ -275,7 +275,7 @@ declare namespace jsrsasign {
    * @param s string
    * @return converted string
    */
-  export function newline_toUnix(s: string): string;
+  function newline_toUnix(s: string): string;
 
   /**
    * get hexadecimal string from PEM format data
@@ -296,7 +296,7 @@ declare namespace jsrsasign {
    * pemtohex("-----BEGIN CERTIFICATE...", "CERTIFICATE") → "3082..."
    * pemtohex(" \r\n-----BEGIN DSA PRIVATE KEY...") → "3082..."
    */
-  export function pemtohex(s: string, sHead: string): string;
+  function pemtohex(s: string, sHead: string): string;
 
   /**
    * read file and return file contents
@@ -305,7 +305,7 @@ declare namespace jsrsasign {
    * @description
    * This function only works in Node.js.
    */
-  export function readFile(binFile: string): string;
+  function readFile(binFile: string): string;
 
   /**
    * read binary file and return file contents as hexadecimal string
@@ -314,7 +314,7 @@ declare namespace jsrsasign {
    * @description
    * This function only works in Node.js.
    */
-  export function readFileHexByBin(binFile: string): string;
+  function readFileHexByBin(binFile: string): string;
 
   /**
    * read file and return file contents as utf-8 string
@@ -323,7 +323,7 @@ declare namespace jsrsasign {
    * @description
    * This function only works in Node.js.
    */
-  export function readFileUTF8(utf8File: string): string;
+  function readFileUTF8(utf8File: string): string;
 
   /**
    * convert a raw string including non printable characters to hexadecimal encoded string.
@@ -332,7 +332,7 @@ declare namespace jsrsasign {
    * @example
    * rstrtohex("a\x00a") → "610061"
    */
-  export function rstrtohex(s: string): string;
+  function rstrtohex(s: string): string;
 
   /**
    * save raw string to file
@@ -341,7 +341,7 @@ declare namespace jsrsasign {
    * @description
    * This function only works in Node.js.
    */
-  export function saveFile(binFile: string, rawString: string): void;
+  function saveFile(binFile: string, rawString: string): void;
 
   /**
    * save data represented by hexadecimal string to file
@@ -350,7 +350,7 @@ declare namespace jsrsasign {
    * @description
    * This function only works in Node.js.
    */
-  export function saveFileBinByHex(binFile: string, hexString: string): void;
+  function saveFileBinByHex(binFile: string, hexString: string): void;
 
   /**
    * convert a ASCII string to a Base64 encoded string.
@@ -358,7 +358,7 @@ declare namespace jsrsasign {
    * @param s ASCII string
    * @return Base64 encoded string
    */
-  export function stob64(s: string): string;
+  function stob64(s: string): string;
 
   /**
    * convert a ASCII string to a Base64URL encoded string.
@@ -366,14 +366,14 @@ declare namespace jsrsasign {
    * @param s ASCII string
    * @return Base64URL encoded string
    */
-  export function stob64u(s: string): string;
+  function stob64u(s: string): string;
 
   /**
    * convert a string to an array of character codes
    * @param s
    * @return {Array of Numbers}
    */
-  export function stoBA(s: string): string;
+  function stoBA(s: string): string;
 
   /**
    * convert a ASCII string to a hexadecimal string of ASCII codes.
@@ -381,7 +381,7 @@ declare namespace jsrsasign {
    * @param s ASCII string
    * @return hexadecimal string
    */
-  export function stohex(s: string): string;
+  function stohex(s: string): string;
 
   /**
    * find index of string where two string differs
@@ -394,35 +394,35 @@ declare namespace jsrsasign {
    * strdiffidx("abcdefg", "abcdef") -> 6
    * strdiffidx("abcdefgh", "abcdef") -> 6
    */
-  export function strdiffidx(s1: string, s2: string): number;
+  function strdiffidx(s1: string, s2: string): number;
 
   /**
    * convert a URLComponent string such like "%67%68" to a hexadecimal string.
    * @param s URIComponent string such like "%67%68"
    * @return hexadecimal string
    */
-  export function uricmptohex(s: string): string;
+  function uricmptohex(s: string): string;
 
   /**
    * convert a UTF-8 encoded string including CJK or Latin to a Base64 encoded string.
    * @param s UTF-8 encoded string
    * @return Base64 encoded string
    */
-  export function utf8tob64(s: string): string;
+  function utf8tob64(s: string): string;
 
   /**
    * convert a UTF-8 encoded string including CJK or Latin to a Base64URL encoded string.
    * @param s UTF-8 encoded string
    * @return Base64URL encoded string
    */
-  export function utf8tob64u(s: string): string;
+  function utf8tob64u(s: string): string;
 
   /**
    * convert a UTF-8 encoded string including CJK or Latin to a hexadecimal encoded string.
    * @param s UTF-8 encoded string
    * @return hexadecimal encoded string
    */
-  export function utf8tohex(s: string): string;
+  function utf8tohex(s: string): string;
 
   /**
    * GeneralizedTime or UTCTime string to Date object
@@ -441,7 +441,7 @@ declare namespace jsrsasign {
    * zulutodate("20071231235959Z").toUTCString()   → "Mon, 31 Dec 2007 23:59:59 GMT"
    * zulutodate(  "071231235959.34").getMilliseconds() → 340
    */
-  export function zulutodate(s: string): Date;
+  function zulutodate(s: string): Date;
 
   /**
    * GeneralizedTime or UTCTime string to milliseconds from Unix origin
@@ -462,7 +462,7 @@ declare namespace jsrsasign {
    * zulutomsec("20071231235959Z")     → 1199145599000 #Mon, 31 Dec 2007 23:59:59 GMT
    * zulutomsec("931231235959Z")       → -410227201000 #Mon, 31 Dec 1956 23:59:59 GMT
    */
-  export function zulutomsec(s: string): number;
+  function zulutomsec(s: string): number;
 
   /**
    * GeneralizedTime or UTCTime string to seconds from Unix origin
@@ -480,5 +480,5 @@ declare namespace jsrsasign {
    * zulutosec("071231235959.1Z") → 1199145599 #Mon, 31 Dec 2007 23:59:59 GMT
    * zulutosec("20071231235959Z") → 1199145599 #Mon, 31 Dec 2007 23:59:59 GMT
    */
-  export function zulutosec(s: string): number
+  function zulutosec(s: string): number
 }

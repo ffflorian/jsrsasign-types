@@ -1,5 +1,5 @@
 declare namespace jsrsasign {
-  export class BigInteger {
+  class BigInteger {
     static readonly ZERO: BigInteger;
     static readonly ONE: BigInteger;
 

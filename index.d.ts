@@ -14,7 +14,4 @@
 /// <reference path="./modules/Signature.d.ts" />
 /// <reference path="./modules/X509.d.ts" />
 
-export declare namespace jsrsasign {
-  //
-}
-
+export = jsrsasign;

@@ -63,7 +63,7 @@ declare namespace jsrsasign {
    * sig.updateString('aaa');
    * var isValid = sig.verify(sigValueHex);
    */
-  export class Signature {
+  class Signature {
     /** Current state of this signature object whether 'SIGN', 'VERIFY' or null */
     static readonly state: 'SIGN' | 'VERIFY' | null;
 
@@ -106,7 +106,7 @@ declare namespace jsrsasign {
      * @example
      * sig.init(sCertPEM)
      */
-    init(key: string | RSAKey | crypto.DSA | crypto.ECDSA, pass?: string): void;
+    init(key: string | RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA, pass?: string): void;
 
     /**
      * Updates the data to be signed or verified by a string
@@ -158,5 +158,5 @@ declare namespace jsrsasign {
      * var isValid = sig.verify('1fbcefdca4823a7(snip)')
      */
     verify(hSigVal): boolean;
-  };
+  }
 }

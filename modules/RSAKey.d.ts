@@ -1,6 +1,6 @@
 declare namespace jsrsasign {
   /** Tom Wu's RSA Key class and extension */
-  export class RSAKey {
+  class RSAKey {
     constructor();
     /**
      * static method to get array of hex field values from hexadecimal PKCS#5 RSA private key.
@@ -106,8 +106,8 @@ declare namespace jsrsasign {
     /**
      * verifies a sigature for a message string with RSA public key.
      * @param sMsg message string to be verified.
-     * @param hSig hexadecimal string of siganture.
-     *                 non-hexadecimal charactors including new lines will be ignored.
+     * @param hSig hexadecimal string of signature.
+     *             non-hexadecimal characters including new lines will be ignored.
      * @return returns 1 if valid, otherwise 0
      */
     verify(sMsg, hSig): any;

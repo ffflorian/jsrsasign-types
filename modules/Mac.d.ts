@@ -32,7 +32,7 @@ declare namespace jsrsasign {
    * var mac = new KJUR.crypto.Mac({alg: "HmacSHA256", "pass": {"b64":  "Mi02/+...a=="}});
    * var mac = new KJUR.crypto.Mac({alg: "HmacSHA256", "pass": {"b64u": "Mi02_-...a"}});
    */
-  export class Mac {
+  class Mac {
     constructor(params)
 
     setAlgAndProvider(alg, prov): void;

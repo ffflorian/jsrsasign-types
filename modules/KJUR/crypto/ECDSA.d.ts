@@ -195,6 +195,6 @@ declare namespace jsrsasign.KJUR.crypto {
      * KJUR.crypto.ECDSA.getName("NIST P-256") → "secp256r1"
      * KJUR.crypto.ECDSA.getName("P-521") → undefined // not supported
      */
-    static getName(s): string;
+    static getName(s: string): string;
   }
 }

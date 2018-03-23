@@ -27,7 +27,7 @@ declare namespace jsrsasign {
    * KJUR.crypto.MessageDigest.HASHLENGTH['sha1'] &rarr 20
    * KJUR.crypto.MessageDigest.HASHLENGTH['sha512'] &rarr 64
    */
-  export class MessageDigest {
+  class MessageDigest {
     /** static Array of resulted byte length of hash (ex. HASHLENGTH["sha1"] == 20) */
     static readonly HASHLENGTH: {
       md5: number;

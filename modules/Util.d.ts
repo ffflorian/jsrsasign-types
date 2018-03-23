@@ -1,6 +1,6 @@
 declare namespace jsrsasign {
   /** static object for cryptographic function utilities */
-  export const Util: {
+  const Util: {
     /** PKCS#1 DigestInfo heading hexadecimal bytes for each hash algorithms */
     DIGESTINFOHEAD: {
       md2: string,
