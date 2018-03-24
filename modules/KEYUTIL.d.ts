@@ -346,7 +346,7 @@ declare namespace jsrsasign {
     * var ecKeypair = KEYUTIL.generateKeypair("EC", "secp256r1");
     *
     */
-    static generateKeypair(alg: 'RSA' | 'EC', keylenOrCurve: number): RSAKey;
+    static generateKeypair(alg: 'RSA' | 'EC', keylenOrCurve: number): {prvKeyObj: RSAKey, pubKeyObj: RSAKey};
 
     /**
     * get PEM formatted private or public key file from a RSA/ECDSA/DSA key object
@@ -422,6 +422,6 @@ declare namespace jsrsasign {
     * // if you need RFC 7638 JWK thumprint as kid do like this:
     * jwkPub2.kid = KJUR.jws.JWS.getJWKthumbprint(jwkPub2);
     */
-    static getJWKFromKey(keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA): any
+    static getJWKFromKey(keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA): {}
   }
 }
