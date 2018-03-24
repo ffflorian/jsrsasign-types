@@ -1,8 +1,4 @@
 declare namespace jsrsasign.KJUR.asn1 {
-  class DERBoolean extends ASN1Object {
-    constructor()
-  }
-
   interface ASN1ObjectParam {
     obj: ASNObject;
   }
@@ -45,6 +41,10 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   interface TagParam {
     str: string;
+  }
+
+  class DERBoolean extends ASN1Object {
+    constructor();
   }
 
   /**
@@ -103,7 +103,7 @@ declare namespace jsrsasign.KJUR.asn1 {
   * * obj - specify `KJUR.asn1.ASN1Util.newObject`
   *   argument for "BitString encapsulates" structure.
   *
-  * NOTE1: 'params' can be omitted.<br/>
+  * NOTE1: 'params' can be omitted.
   * NOTE2: 'obj' parameter have been supported since
   * asn1 1.0.11, jsrsasign 6.1.1 (2016-Sep-25).
   *
@@ -140,7 +140,7 @@ declare namespace jsrsasign.KJUR.asn1 {
     setUnusedBitsAndHexValue(unusedBits: number, hValue: string): void;
 
     /**
-     * set ASN.1 DER BitString by binary string<br/>
+     * set ASN.1 DER BitString by binary string
      * @param binaryString binary value string (i.e. '10111')
      * @description
      * Its unused bits will be calculated automatically by length of
@@ -154,7 +154,7 @@ declare namespace jsrsasign.KJUR.asn1 {
     setByBinaryString(binaryString: string): void;
 
     /**
-     * set ASN.1 TLV value(V) by an array of boolean<br/>
+     * set ASN.1 TLV value(V) by an array of boolean
      * @param booleanArray array of boolean (ex. [true, false, true])
      * @description
      * NOTE: Trailing falses will be ignored in the ASN.1 DER Object.
@@ -184,7 +184,7 @@ declare namespace jsrsasign.KJUR.asn1 {
   * @param params associative array of parameters (ex. {'str': 'aaa'})
   * @extends KJUR.asn1.DERAbstractString
   * @description
-  * This class provides ASN.1 OctetString simple type.<br/>
+  * This class provides ASN.1 OctetString simple type.
   * Supported "params" attributes are:
   *
   * * str - to set a string as a value</li>
@@ -244,7 +244,7 @@ declare namespace jsrsasign.KJUR.asn1 {
     setValueHex(newHexString: string): void;
 
     /**
-     * set value by a OID string<br/>
+     * set value by a OID string
      * @param oidString OID string (ex. 2.5.4.13)
      * @example
      * o = new KJUR.asn1.DERObjectIdentifier();
@@ -319,7 +319,7 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   /**
   * class for ASN.1 DER NumericString
-  * @param {Array} params associative array of parameters (ex. {'str': 'aaa'})
+  * @param params associative array of parameters (ex. {'str': 'aaa'})
   */
   class DERNumericString extends DERAbstractString {
     constructor(params: StringParam);
@@ -351,10 +351,7 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   /**
   * class for ASN.1 DER UTCTime
-  * @name KJUR.asn1.DERUTCTime
-  * @class class for ASN.1 DER UTCTime
-  * @param {Array} params associative array of parameters (ex. {'str': '130430235959Z'})
-  * @extends KJUR.asn1.DERAbstractTime
+  * @param params associative array of parameters (ex. {'str': '130430235959Z'})
   * @description
   * As for argument 'params' for constructor, you can specify one of
   * following properties:
@@ -376,7 +373,7 @@ declare namespace jsrsasign.KJUR.asn1 {
     constructor(params?: StringParam | HexParam | DateParam | string)
 
     /**
-     * set value by a Date object<br/>
+     * set value by a Date object
      * @param dateObject Date object to set ASN.1 value(V)
      * @example
      * o = new KJUR.asn1.DERUTCTime();
@@ -389,35 +386,29 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   /**
   * class for ASN.1 DER GeneralizedTime
-  * @name KJUR.asn1.DERGeneralizedTime
-  * @class class for ASN.1 DER GeneralizedTime
-  * @param {Array} params associative array of parameters (ex. {'str': '20130430235959Z'})
-  * @property {Boolean} withMillis flag to show milliseconds or not
-  * @extends KJUR.asn1.DERAbstractTime
+  * @param params associative array of parameters (ex. {'str': '20130430235959Z'})
   * @description
-  * <br/>
   * As for argument 'params' for constructor, you can specify one of
   * following properties:
-  * <ul>
-  * <li>str - specify initial ASN.1 value(V) by a string (ex.'20130430235959Z')</li>
-  * <li>hex - specify initial ASN.1 value(V) by a hexadecimal string</li>
-  * <li>date - specify Date object.</li>
-  * <li>millis - specify flag to show milliseconds (from 1.0.6)</li>
-  * </ul>
+  *
+  * * str - specify initial ASN.1 value(V) by a string (ex.'20130430235959Z')
+  * * hex - specify initial ASN.1 value(V) by a hexadecimal string
+  * * date - specify Date object.
+  * * millis - specify flag to show milliseconds (from 1.0.6)
+  *
   * NOTE1: 'params' can be omitted.
   * NOTE2: 'withMillis' property is supported from asn1 1.0.6.
   */
   class DERGeneralizedTime extends DERAbstractTime {
+    withMillis: boolean;
+
     constructor(params: StringParam | HexParam | DateParam | string)
 
     /**
      * set value by a Date object
-     * @name setByDate
-     * @memberOf KJUR.asn1.DERGeneralizedTime#
-     * @function
-     * @param {Date} dateObject Date object to set ASN.1 value(V)
+     * @param dateObject Date object to set ASN.1 value(V)
      * @example
-     * When you specify UTC time, use 'Date.UTC' method like this:<br/>
+     * When you specify UTC time, use 'Date.UTC' method like this:
      * o1 = new DERUTCTime();
      * o1.setByDate(date);
      *
@@ -430,16 +421,13 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   /**
   * class for ASN.1 DER Sequence
-  * @name KJUR.asn1.DERSequence
-  * @class class for ASN.1 DER Sequence
-  * @extends KJUR.asn1.DERAbstractStructured
+  *
   * @description
-  * <br/>
   * As for argument 'params' for constructor, you can specify one of
   * following properties:
-  * <ul>
-  * <li>array - specify array of ASN1Object to set elements of content</li>
-  * </ul>
+  *
+  * * array - specify array of ASN1Object to set elements of content
+  *
   * NOTE: 'params' can be omitted.
   */
   class DERSequence extends DERAbstractStructured {
@@ -449,18 +437,15 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   /**
   * class for ASN.1 DER Set
-  * @name KJUR.asn1.DERSet
-  * @class class for ASN.1 DER Set
-  * @extends KJUR.asn1.DERAbstractStructured
+  *
   * @description
-  * <br/>
   * As for argument 'params' for constructor, you can specify one of
   * following properties:
-  * <ul>
-  * <li>array - specify array of ASN1Object to set elements of content</li>
-  * <li>sortflag - flag for sort (default: true). ASN.1 BER is not sorted in 'SET OF'.</li>
-  * </ul>
-  * NOTE1: 'params' can be omitted.<br/>
+  *
+  * * array - specify array of ASN1Object to set elements of content
+  * * sortflag - flag for sort (default: true). ASN.1 BER is not sorted in 'SET OF'.
+  *
+  * NOTE1: 'params' can be omitted.
   * NOTE2: sortflag is supported since 1.0.5.
   */
   class DERSet extends DERAbstractStructured {
@@ -469,23 +454,20 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   /**
   * class for ASN.1 DER TaggedObject
-  * @name KJUR.asn1.DERTaggedObject
-  * @class class for ASN.1 DER TaggedObject
-  * @extends KJUR.asn1.ASN1Object
+  *
   * @description
-  * <br/>
   * Parameter 'tagNoNex' is ASN.1 tag(T) value for this object.
   * For example, if you find '[1]' tag in a ASN.1 dump,
   * 'tagNoHex' will be 'a1'.
-  * <br/>
+  *
   * As for optional argument 'params' for constructor, you can specify *ANY* of
   * following properties:
-  * <ul>
-  * <li>explicit - specify true if this is explicit tag otherwise false
-  *     (default is 'true').</li>
-  * <li>tag - specify tag (default is 'a0' which means [0])</li>
-  * <li>obj - specify ASN1Object which is tagged</li>
-  * </ul>
+  *
+  * * explicit - specify true if this is explicit tag otherwise false
+  *   (default is 'true').
+  * * tag - specify tag (default is 'a0' which means [0])
+  * * obj - specify ASN1Object which is tagged
+  *
   * @example
   * d1 = new KJUR.asn1.DERUTF8String({'str':'a'});
   * d2 = new KJUR.asn1.DERTaggedObject({'obj': d1});
@@ -503,5 +485,110 @@ declare namespace jsrsasign.KJUR.asn1 {
     setASN1Object(isExplicitFlag: boolean, tagNoHex: string, asn1Object: ASN1Object): void;
 
     getFreshValueHex(): string;
+  }
+
+  /**
+   * base class for ASN.1 DER string classes
+   * @param params associative array of parameters (ex. {'str': 'aaa'})
+   * @extends KJUR.asn1.ASN1Object
+   * @description
+   *
+   * As for argument 'params' for constructor, you can specify one of
+   * following properties:
+   *
+   * * str - specify initial ASN.1 value(V) by a string
+   * * hex - specify initial ASN.1 value(V) by a hexadecimal string
+   *
+   * NOTE: 'params' can be omitted.
+   */
+  class DERAbstractString {
+    s: string;
+
+    constructor(params?: StringParam | HexParam);
+
+      /**
+       * get string value of this string object
+       * @return string value of this string object
+       */
+      getString(): string;
+
+      /**
+       * set value by a string
+       * @param newS value by a string to set
+       */
+      setString(newS: string): void;
+
+      /**
+       * set value by a hexadecimal string
+       * @param newHexString value by a hexadecimal string to set
+       */
+      setStringHex(newHexString: string): void;
+
+      getFreshValueHex(): string;
+  }
+
+  /**
+   * base class for ASN.1 DER Generalized/UTCTime class
+   * @param params associative array of parameters (ex. {'str': '130430235959Z'})
+   */
+  class DERAbstractTime extends ASN1Object {
+    constructor(params: StringParam);
+
+      /**
+       * format date string by Data object
+       * @param type 'utc' or 'gen'
+       * @param withMillis flag for with millisections or not
+       * @description
+       * 'withMillis' flag is supported from asn1 1.0.6.
+       */
+      private formatDate(dateObject: Date, type: 'utc' | 'gen', withMillis: boolean): string
+      private zeroPadding(s: string, len: number): string;
+
+      /**
+       * get string value of this string object
+       * @return string value of this time object
+       */
+      getString(): string;
+
+      /**
+       * set value by a string
+       * @param newS value by a string to set such like "130430235959Z"
+       */
+      setString(newS: string): void;
+
+      /**
+       * set value by a Date object
+       * @param year year of date (ex. 2013)
+       * @param month month of date between 1 and 12 (ex. 12)
+       * @param day day of month
+       * @param hour hours of date
+       * @param min minutes of date
+       * @param sec seconds of date
+       */
+      setByDateValue(year: number, month: number, day: number, hour: number, min: number, sec: number): void;
+
+      getFreshValueHex(): string;
+  }
+
+  /**
+   * base class for ASN.1 DER structured class
+   * @extends KJUR.asn1.ASN1Object
+   */
+  class DERAbstractStructured {
+    asn1Array: Array<ASN1Object>;
+
+    constructor(asn1Array?: ArrayParam<ASN1Object>);
+
+      /**
+       * set value by array of ASN1Object
+       * @param asn1ObjectArray array of ASN1Object to set
+       */
+      setByASN1ObjectArray(asn1ObjectArray: Array<ASN1Object>): string;
+
+      /**
+       * append an ASN1Object to internal array
+       * @param asn1Object object to add
+       */
+      appendASN1Object(asn1Object: ASN1Object): void;
   }
 }
