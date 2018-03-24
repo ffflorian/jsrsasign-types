@@ -149,15 +149,16 @@ declare namespace jsrsasign.KJUR.asn1 {
      */
     jsonToASN1HEX(param: ASNObject): string;
 
-  /**
-  * get dot noted oid number string from hexadecimal value of OID
-  * @param hex hexadecimal value of object identifier
-  * @return dot noted string of object identifier
-  * @description
-  * This static method converts from hexadecimal string representation of
-  * ASN.1 value of object identifier to oid number string.
-  * @example
-  * KJUR.asn1.ASN1Util.oidHexToInt('550406') → "2.5.4.6"
-  */
-  static oidHexToInt(hex: string): string;
+    /**
+    * get dot noted oid number string from hexadecimal value of OID
+    * @param hex hexadecimal value of object identifier
+    * @return dot noted string of object identifier
+    * @description
+    * This static method converts from hexadecimal string representation of
+    * ASN.1 value of object identifier to oid number string.
+    * @example
+    * KJUR.asn1.ASN1Util.oidHexToInt('550406') → "2.5.4.6"
+    */
+    static oidHexToInt(hex: string): string;
+  }
 }

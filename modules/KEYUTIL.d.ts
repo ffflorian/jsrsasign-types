@@ -120,7 +120,7 @@ declare namespace jsrsasign {
      * var pem3 =
      *   KEYUTIL.getEncryptedPKCS5PEMFromPrvKeyHex(plainKeyHex, "password", "AES-128-CBC", "1f3d02...");
      */
-    getEncryptedPKCS5PEMFromPrvKeyHex(pemHeadAlg, hPrvKey, passcode, sharedKeyAlgName, ivsaltHex);
+    getEncryptedPKCS5PEMFromPrvKeyHex(pemHeadAlg: string, hPrvKey: string, passcode: string, sharedKeyAlgName: string, ivsaltHex: string): string;
 
     /**
      * generate PBKDF2 key hexstring with specified passcode and information
@@ -168,7 +168,7 @@ declare namespace jsrsasign {
      * // key with PBKDF2 with TripleDES
      * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
      */
-    getPBKDF2KeyHexFromParam(info: any, passcode: string): any;
+    getPBKDF2KeyHexFromParam(info: any, passcode: string): string;
 
     /**
      * read PEM formatted encrypted PKCS#8 private key and returns hexadecimal string of plain PKCS#8 private key
@@ -186,7 +186,8 @@ declare namespace jsrsasign {
      * // key with PBKDF2 with TripleDES
      * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
      */
-    _getPlainPKCS8HexFromEncryptedPKCS8PEM(pkcs8PEM: string, passcode: string)
+    _getPlainPKCS8HexFromEncryptedPKCS8PEM(pkcs8PEM: string, passcode: string): string;
+
     /**
      * get RSAKey/ECDSA private key object from encrypted PEM PKCS#8 private key
      * @param pkcs8PEM string of PEM formatted PKCS#8 private key
@@ -322,7 +323,7 @@ declare namespace jsrsasign {
     * // 5. bare hexadecimal key
     * keyObj = KEYUTIL.getKey({n: "75ab..", e: "010001"});
     */
-    static getKey(param, passcode?: string, hextype?: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
+    static getKey(param: any, passcode?: string, hextype?: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
 
     /**
     * @param alg 'RSA' or 'EC'
@@ -373,7 +374,7 @@ declare namespace jsrsasign {
     * KEYUTIL.getPEM(privateKey, "PKCS8PRV", "pass") => generates PEM PKCS#8 encrypted private key
     *                                                      with PBKDF2_HmacSHA1_3DES
     */
-    static getPEM(keyObjOrHex: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA, formatType?: PrivateKeyOutputFormatType, passwd?: string, encAlg?: string, hexType?, ivsaltHex?): void;
+    static getPEM(keyObjOrHex: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA, formatType?: PrivateKeyOutputFormatType, passwd?: string, encAlg?: string, hexType?: string, ivsaltHex?: string): void;
 
     // -- PUBLIC METHODS FOR CSR --------------------------------------------------
 

@@ -15,10 +15,10 @@ declare namespace jsrsasign.KJUR.crypto {
    * * secp384r1, NIST P-384, P-384 (*)
    */
   class ECDSA {
-    getBigRandom(limit): BigInteger;
-    setNamedCurve(curveName): void;
-    setPrivateKeyHex(prvKeyHex): void;
-    setPublicKeyHex(pubKeyHex): void;
+    getBigRandom(limit: number): BigInteger;
+    setNamedCurve(curveName: string): void;
+    setPrivateKeyHex(prvKeyHex: string): void;
+    setPublicKeyHex(pubKeyHex: string): void;
 
     /**
      * get X and Y hexadecimal string value of public key
@@ -51,41 +51,41 @@ declare namespace jsrsasign.KJUR.crypto {
 
     /**
      * signing to message hash
-     * @param {String} hashHex hexadecimal string of hash value of signing message
-     * @param {String} privHex hexadecimal string of EC private key
+     * @param hashHex hexadecimal string of hash value of signing message
+     * @param privHex hexadecimal string of EC private key
      * @return hexadecimal string of ECDSA signature
      * @example
      * var ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1'});
      * var sigValue = ec.signHex(hash, prvKey);
      */
-    signHex(hashHex, privHex): string
+    signHex(hashHex: string, privHex: string): string
 
-    sign(hash, priv): Array<number>
+    sign(hash: string, priv: any): Array<number>
 
-    verifyWithMessageHash(hashHex, sigHex): boolean;
+    verifyWithMessageHash(hashHex: string, sigHex: string): boolean;
 
     /**
      * verifying signature with message hash and public key
-     * @param {String} hashHex hexadecimal string of hash value of signing message
-     * @param {String} sigHex hexadecimal string of signature value
-     * @param {String} pubkeyHex hexadecimal string of public key
+     * @param hashHex hexadecimal string of hash value of signing message
+     * @param sigHex hexadecimal string of signature value
+     * @param pubkeyHex hexadecimal string of public key
      * @return true if the signature is valid, otherwise false
      * @example
      * var ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1'});
      * var result = ec.verifyHex(msgHashHex, sigHex, pubkeyHex);
      */
-    verifyHex(hashHex, sigHex, pubkeyHex)
+    verifyHex(hashHex: string, sigHex: string, pubkeyHex: string): boolean;
 
-    verify(hash, sig, pubkey): boolean;
+    verify(hash: string, sig: string, pubkey: string): boolean;
 
-    verifyRaw(e, r, s, Q): boolean;
+    verifyRaw(e: any, r: any, s: any, Q: any): boolean;
 
     /**
      * Serialize a signature into DER format.
      *
      * Takes two BigIntegers representing r and s and returns a byte array.
      */
-    serializeSig(r, s): Array<number>
+    serializeSig(r: BigInteger, s: BigInteger): Array<number>
 
     /**
      * Parses a byte array containing a DER-encoded signature.
@@ -97,38 +97,38 @@ declare namespace jsrsasign.KJUR.crypto {
      *   s: BigInteger
      * }
      */
-    parseSig(sig): { r: BigInteger, s: BigInteger };
+    parseSig(sig: string): { r: BigInteger, s: BigInteger };
 
-    parseSigCompact(sig): any;
+    parseSigCompact(sig: string): {r: BigInteger, s: BigInteger, i: number};
 
     /**
      * read an ASN.1 hexadecimal string of PKCS#1/5 plain ECC private key
-     * @param {String} h hexadecimal string of PKCS#1/5 ECC private key
+     * @param h hexadecimal string of PKCS#1/5 ECC private key
      */
-    readPKCS5PrvKeyHex(h): void;
+    readPKCS5PrvKeyHex(h: string): void;
 
     /**
      * read an ASN.1 hexadecimal string of PKCS#8 plain ECC private key
-     * @param {String} h hexadecimal string of PKCS#8 ECC private key
+     * @param h hexadecimal string of PKCS#8 ECC private key
      */
-    readPKCS8PrvKeyHex(h): void;
+    readPKCS8PrvKeyHex(h: string): void;
 
     /**
      * read an ASN.1 hexadecimal string of PKCS#8 ECC public key
-     * @param {String} h hexadecimal string of PKCS#8 ECC public key
+     * @param h hexadecimal string of PKCS#8 ECC public key
      */
-    readPKCS8PubKeyHex(h): void;
+    readPKCS8PubKeyHex(h: string): void;
 
     /**
      * read an ASN.1 hexadecimal string of X.509 ECC public key certificate
-     * @param {String} h hexadecimal string of X.509 ECC public key certificate
-     * @param {Integer} nthPKI nth index of publicKeyInfo. (DEFAULT: 6 for X509v3)
+     * @param h hexadecimal string of X.509 ECC public key certificate
+     * @param nthPKI nth index of publicKeyInfo. (DEFAULT: 6 for X509v3)
      */
-    readCertPubKeyHex(h, nthPKI): void;
+    readCertPubKeyHex(h: string, nthPKI: number): void;
 
     /**
      * parse ASN.1 DER encoded ECDSA signature
-     * @param {String} sigHex hexadecimal string of ECDSA signature value
+     * @param sigHex hexadecimal string of ECDSA signature value
      * @return associative array of signature field r and s of BigInteger
      * @example
      * var ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1'});
@@ -136,11 +136,11 @@ declare namespace jsrsasign.KJUR.crypto {
      * var biR = sig.r; // BigInteger object for 'r' field of signature.
      * var biS = sig.s; // BigInteger object for 's' field of signature.
      */
-    static parseSigHex(sigHex): { r: BigInteger, s: BigInteger };
+    static parseSigHex(sigHex: string): { r: BigInteger, s: BigInteger };
 
     /**
      * parse ASN.1 DER encoded ECDSA signature
-     * @param {String} sigHex hexadecimal string of ECDSA signature value
+     * @param sigHex hexadecimal string of ECDSA signature value
      * @return associative array of signature field r and s in hexadecimal
      * @example
      * var ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1'});
@@ -148,41 +148,41 @@ declare namespace jsrsasign.KJUR.crypto {
      * var hR = sig.r; // hexadecimal string for 'r' field of signature.
      * var hS = sig.s; // hexadecimal string for 's' field of signature.
      */
-    static parseSigHexInHexRS(sigHex): { r: BigInteger, s: BigInteger };
+    static parseSigHexInHexRS(sigHex: string): { r: BigInteger, s: BigInteger };
 
     /**
      * convert hexadecimal ASN.1 encoded signature to concatinated signature
-     * @param {String} asn1Hex hexadecimal string of ASN.1 encoded ECDSA signature value
+     * @param asn1Hex hexadecimal string of ASN.1 encoded ECDSA signature value
      * @return r-s concatinated format of ECDSA signature value
      */
-    static asn1SigToConcatSig(asn1Sig): string
+    static asn1SigToConcatSig(asn1Sig: string): string
 
     /**
      * convert hexadecimal concatinated signature to ASN.1 encoded signature
-     * @param {String} concatSig r-s concatinated format of ECDSA signature value
+     * @param concatSig r-s concatinated format of ECDSA signature value
      * @return hexadecimal string of ASN.1 encoded ECDSA signature value
      */
-    static concatSigToASN1Sig(concatSig): string
+    static concatSigToASN1Sig(concatSig: string): string
 
     /**
      * convert hexadecimal R and S value of signature to ASN.1 encoded signature
-     * @param {String} hR hexadecimal string of R field of ECDSA signature value
-     * @param {String} hS hexadecimal string of S field of ECDSA signature value
+     * @param hR hexadecimal string of R field of ECDSA signature value
+     * @param hS hexadecimal string of S field of ECDSA signature value
      * @return hexadecimal string of ASN.1 encoded ECDSA signature value
      */
-    static hexRSSigToASN1Sig(hR, hS): string
+    static hexRSSigToASN1Sig(hR: string, hS: string): string
 
     /**
      * convert R and S BigInteger object of signature to ASN.1 encoded signature
-     * @param {BigInteger} biR BigInteger object of R field of ECDSA signature value
-     * @param {BigInteger} biS BIgInteger object of S field of ECDSA signature value
+     * @param biR BigInteger object of R field of ECDSA signature value
+     * @param biS BIgInteger object of S field of ECDSA signature value
      * @return hexadecimal string of ASN.1 encoded ECDSA signature value
      */
-    static biRSSigToASN1Sig(biR, biS): string
+    static biRSSigToASN1Sig(biR: BigInteger, biS: BigInteger): string
 
     /**
      * static method to get normalized EC curve name from curve name or hexadecimal OID value
-     * @param {String} s curve name (ex. P-256) or hexadecimal OID value (ex. 2a86...)
+     * @param s curve name (ex. P-256) or hexadecimal OID value (ex. 2a86...)
      * @return normalized EC curve name (ex. secp256r1)
      * @description
      * This static method returns normalized EC curve name

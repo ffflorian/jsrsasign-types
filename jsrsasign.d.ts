@@ -370,10 +370,8 @@ declare namespace jsrsasign {
 
   /**
    * convert a string to an array of character codes
-   * @param s
-   * @return {Array of Numbers}
    */
-  function stoBA(s: string): string;
+  function stoBA(s: string): Array<number>;
 
   /**
    * convert a ASCII string to a hexadecimal string of ASCII codes.

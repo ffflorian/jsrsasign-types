@@ -1,4 +1,4 @@
-declare namespace jsrsasign {
+declare namespace jsrsasign.KJUR.crypto {
   /**
    * Signature class which is very similar to java.security.Signature class
    * @param params parameters for constructor
@@ -139,7 +139,7 @@ declare namespace jsrsasign {
      * @example
      * var hSigValue = sig.signString('aaa')
      */
-    signString(str): string;
+    signString(str: string): string;
 
     /**
      * performs final update on the sign using hexadecimal string, then returns the signature bytes of all data updates as a hexadecimal string
@@ -148,15 +148,15 @@ declare namespace jsrsasign {
      * @example
      * var hSigValue = sig.signHex('1fdc33')
      */
-    signHex(hex): string;
+    signHex(hex: string): string;
 
     /**
      * verifies the passed-in signature.
-     * @param str string to final update
+     * @param hSigVal string to final update
      * @return true if the signature was verified, otherwise false
      * @example
      * var isValid = sig.verify('1fbcefdca4823a7(snip)')
      */
-    verify(hSigVal): boolean;
+    verify(hSigVal: string): boolean;
   }
 }

@@ -1,4 +1,4 @@
-declare namespace jsrsasign {
+declare namespace jsrsasign.KJUR.crypto {
   /**
    * Cipher class to encrypt and decrypt data
    * @param params parameters for constructor
@@ -16,7 +16,7 @@ declare namespace jsrsasign {
    * @example
    */
   class Cipher {
-    constructor(params)
+    constructor(param: any)
 
     /**
      * encrypt raw string by specified key and algorithm

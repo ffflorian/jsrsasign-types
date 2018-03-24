@@ -1,4 +1,4 @@
-declare namespace jsrsasign {
+declare namespace jsrsasign.KJUR.crypto {
   /**
    * Mac(Message Authentication Code) class which is very similar to java.security.Mac class
    * @param params parameters for constructor
@@ -33,9 +33,9 @@ declare namespace jsrsasign {
    * var mac = new KJUR.crypto.Mac({alg: "HmacSHA256", "pass": {"b64u": "Mi02_-...a"}});
    */
   class Mac {
-    constructor(params)
+    constructor(params: any);
 
-    setAlgAndProvider(alg, prov): void;
+    setAlgAndProvider(alg: any, prov: any): void;
 
     /**
      * update digest by specified string
@@ -43,7 +43,7 @@ declare namespace jsrsasign {
      * @example
      * mac.updateString('New York');
      */
-    updateString(str): void;
+    updateString(str: string): void;
 
     /**
      * update digest by specified hexadecimal string
@@ -51,7 +51,7 @@ declare namespace jsrsasign {
      * @example
      * mac.updateHex('0afe36');
      */
-    updateHex(hex): void;
+    updateHex(hex: string): void;
 
     /**
      * completes hash calculation and returns hash result
@@ -66,7 +66,7 @@ declare namespace jsrsasign {
      * @example
      * mac.digestString('aaa')
      */
-    doFinalString(str): void;
+    doFinalString(str: string): void;
 
     /**
      * performs final update on the digest using hexadecimal string,
@@ -75,7 +75,7 @@ declare namespace jsrsasign {
      * @example
      * mac.digestHex('0f2abd')
      */
-    doFinalHex(hex): void;
+    doFinalHex(hex: string): void;
 
     /**
      * set password for Mac
@@ -112,6 +112,6 @@ declare namespace jsrsasign {
      * // set password by explicit Base64URL string
      * mac.setPassword({"b64u": "Mb-c3f_"});
      */
-    setPassword(pass): void;
+    setPassword(pass: string): void;
   }
 }

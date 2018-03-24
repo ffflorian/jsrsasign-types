@@ -1,4 +1,4 @@
-declare namespace jsrsasign {
+declare namespace jsrsasign.KJUR.crypto {
   /** static object for cryptographic function utilities */
   const OID: {
     /** key value of hexadecimal OID and its name (ex. '2a8648ce3d030107' and 'secp256r1') */

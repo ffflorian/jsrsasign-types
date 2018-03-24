@@ -56,7 +56,7 @@ declare namespace jsrsasign.KJUR.crypto {
     /**
      * sign to hashed message by this DSA private key object
      * @param sHashHex hexadecimal string of hashed message
-     * @return {String} hexadecimal string of ASN.1 encoded DSA signature value
+     * @return hexadecimal string of ASN.1 encoded DSA signature value
      */
     signWithMessageHash(sHashHex: string): string;
 
@@ -64,16 +64,16 @@ declare namespace jsrsasign.KJUR.crypto {
      * verify signature by this DSA public key object
      * @param sHashHex hexadecimal string of hashed message
      * @param hSigVal hexadecimal string of ASN.1 encoded DSA signature value
-     * @return {Boolean} true if the signature is valid otherwise false.
+     * @return true if the signature is valid otherwise false.
      */
-    verifyWithMessageHash(sHashHex, hSigVal): boolean;
+    verifyWithMessageHash(sHashHex: string, hSigVal: string): boolean;
 
     /**
      * parse hexadecimal ASN.1 DSA signature value
      * @param hSigVal hexadecimal string of ASN.1 encoded DSA signature value
-     * @return {Array} array [r, s] of DSA signature value. Both r and s are BigInteger.
+     * @return array [r, s] of DSA signature value. Both r and s are BigInteger.
      */
-    parseASN1Signature(hSigVal): Array<any>;
+    parseASN1Signature(hSigVal: string): [BigInteger, BigInteger];
 
     /**
      * read an ASN.1 hexadecimal string of PKCS#1/5 plain DSA private key

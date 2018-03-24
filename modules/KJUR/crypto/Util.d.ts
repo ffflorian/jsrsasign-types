@@ -1,4 +1,4 @@
-declare namespace jsrsasign {
+declare namespace jsrsasign.KJUR.crypto {
   /** static object for cryptographic function utilities */
   const Util: {
     /** PKCS#1 DigestInfo heading hexadecimal bytes for each hash algorithms */
@@ -71,7 +71,7 @@ declare namespace jsrsasign {
      * @param alg hash algorithm name (ex. 'sha1')
      * @return hexadecimal string DigestInfo ASN.1 structure
      */
-    getDigestInfoHex(hHash, alg): string;
+    getDigestInfoHex(hHash: string, alg: string): string;
 
     /**
      * get PKCS#1 padded hexadecimal DigestInfo
@@ -80,7 +80,7 @@ declare namespace jsrsasign {
      * @param keySize key bit length (ex. 1024)
      * @return hexadecimal string of PKCS#1 padded DigestInfo
      */
-    getPaddedDigestInfoHex(hHash, alg, keySize): string;
+    getPaddedDigestInfoHex(hHash: string, alg: string, keySize: number): string;
 
     /**
      * get hexadecimal hash of string with specified algorithm
@@ -88,7 +88,7 @@ declare namespace jsrsasign {
      * @param alg hash algorithm name
      * @return hexadecimal string of hash value
      */
-    hashString(s, alg): string;
+    hashString(s: string, alg: string): string;
 
     /**
      * get hexadecimal hash of hexadecimal string with specified algorithm
@@ -96,30 +96,30 @@ declare namespace jsrsasign {
      * @param alg hash algorithm name
      * @return hexadecimal string of hash value
      */
-    hashHex(sHex, alg): string;
+    hashHex(sHex: string, alg: string): string;
 
     /**
      * get hexadecimal SHA1 hash of string
      * @param s input string to be hashed
      * @return hexadecimal string of hash value
      */
-    sha1(s): string;
+    sha1(s: string): string;
 
     /**
      * get hexadecimal SHA256 hash of string
      * @param s input string to be hashed
      * @return hexadecimal string of hash value
      */
-    sha256(s): string;
+    sha256(s: string): string;
 
-    sha256Hex(s): string;
+    sha256Hex(s: string): string;
 
     /**
      * get hexadecimal SHA512 hash of string
      * @param s input string to be hashed
      * @return hexadecimal string of hash value
      */
-    sha512(s): string;
+    sha512(s: string): string;
 
     /**
      * get hexadecimal MD5 hash of string
@@ -128,7 +128,7 @@ declare namespace jsrsasign {
      * @example
      * Util.md5('aaa') → 47bce5c74f589f4867dbd57e9ca9f808
      */
-    md5(s): string;
+    md5(s: string): string;
 
     /**
      * get hexadecimal RIPEMD160 hash of string
@@ -137,7 +137,7 @@ declare namespace jsrsasign {
      * @example
      * KJUR.crypto.Util.ripemd160("aaa") → 08889bd7b151aa174c21f33f59147fa65381edea
      */
-    ripemd160(s): string;
+    ripemd160(s: string): string;
 
     /**
      * get hexadecimal string of random value from with specified byte length
@@ -147,7 +147,7 @@ declare namespace jsrsasign {
      * KJUR.crypto.Util.getRandomHexOfNbytes(3) → "6314af", "000000" or "001fb4"
      * KJUR.crypto.Util.getRandomHexOfNbytes(128) → "8fbc..." in 1024bits
      */
-    getRandomHexOfNbytes(n): string;
+    getRandomHexOfNbytes(n: number): string;
 
     /**
      * get BigInteger object of random value from with specified byte length
@@ -157,7 +157,7 @@ declare namespace jsrsasign {
      * KJUR.crypto.Util.getRandomBigIntegerOfNbytes(3) → 6314af of BigInteger
      * KJUR.crypto.Util.getRandomBigIntegerOfNbytes(128) → 8fbc... of BigInteger
      */
-    getRandomBigIntegerOfNbytes(n): BigInteger;
+    getRandomBigIntegerOfNbytes(n: number): BigInteger;
 
     /**
      * get hexadecimal string of random value from with specified bit length
@@ -167,7 +167,7 @@ declare namespace jsrsasign {
      * KJUR.crypto.Util.getRandomHexOfNbits(24) → "6314af", "000000" or "001fb4"
      * KJUR.crypto.Util.getRandomHexOfNbits(1024) → "8fbc..." in 1024bits
      */
-    getRandomHexOfNbits(n): string;
+    getRandomHexOfNbits(n: number): string;
 
     /**
      * get BigInteger object of random value from with specified bit length
@@ -177,7 +177,7 @@ declare namespace jsrsasign {
      * KJUR.crypto.Util.getRandomBigIntegerOfNbits(24) → 6314af of BigInteger
      * KJUR.crypto.Util.getRandomBigIntegerOfNbits(1024) → 8fbc... of BigInteger
      */
-    getRandomBigIntegerOfNbits(n): BigInteger;
+    getRandomBigIntegerOfNbits(n: number): BigInteger;
 
     /**
      * get BigInteger object of random value from zero to max value
@@ -191,7 +191,7 @@ declare namespace jsrsasign {
      * biMax = new BigInteger("3fa411...", 16);
      * KJUR.crypto.Util.getRandomBigIntegerZeroToMax(biMax) → 8fbc... of BigInteger
      */
-    getRandomBigIntegerZeroToMax(biMax): BigInteger;
+    getRandomBigIntegerZeroToMax(biMax: number): BigInteger;
 
     /**
      * get BigInteger object of random value from min value to max value
@@ -207,6 +207,6 @@ declare namespace jsrsasign {
      * biMax = new BigInteger("3fa411...", 16);
      * KJUR.crypto.Util.getRandomBigIntegerMinToMax(biMin, biMax) → 32f1... of BigInteger
      */
-    getRandomBigIntegerMinToMax(biMin, biMax): BigInteger;
+    getRandomBigIntegerMinToMax(biMin: number, biMax: number): BigInteger;
   }
 }

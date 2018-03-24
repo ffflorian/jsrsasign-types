@@ -173,7 +173,7 @@ declare namespace jsrsasign {
      * @example
      * var x = new X509();
      * x.readCertPEM(sCertPEM);
-     * x.getSignatureValueHex() &rarr "8a4c47913..."
+     * x.getSignatureValueHex() → "8a4c47913..."
      */
     getSignatureValueHex(): string;
 
@@ -333,7 +333,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtExtKeyUsageName() → ["serverAuth", "clientAuth", "0.1.2.3.4.5"]
      */
-    getExtExtKeyUsageName(): Array<string> | any
+    getExtExtKeyUsageName(): Array<string> | any;
 
     /**
      * get subjectAltName value as array of string in the certificate

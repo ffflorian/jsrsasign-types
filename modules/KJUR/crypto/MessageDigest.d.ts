@@ -1,4 +1,4 @@
-declare namespace jsrsasign {
+declare namespace jsrsasign.KJUR.crypto {
   /**
    * MessageDigest class which is very similar to java.security.MessageDigest class
    * @description
@@ -24,8 +24,8 @@ declare namespace jsrsasign {
    * var mdHex = md.digest()
    *
    * // HASHLENGTH property
-   * KJUR.crypto.MessageDigest.HASHLENGTH['sha1'] &rarr 20
-   * KJUR.crypto.MessageDigest.HASHLENGTH['sha512'] &rarr 64
+   * KJUR.crypto.MessageDigest.HASHLENGTH['sha1'] → 20
+   * KJUR.crypto.MessageDigest.HASHLENGTH['sha512'] → 64
    */
   class MessageDigest {
     /** static Array of resulted byte length of hash (ex. HASHLENGTH["sha1"] == 20) */
@@ -39,7 +39,7 @@ declare namespace jsrsasign {
       ripemd160: number;
     };
 
-    constructor(params);
+    constructor(params: any);
 
     /**
      * set hash algorithm and provider
@@ -65,7 +65,7 @@ declare namespace jsrsasign {
      * // for RIPEMD160
      * md.setAlgAndProvider('ripemd160', 'cryptojs');
      */
-    setAlgAndProvider(alg, prov): void;
+    setAlgAndProvider(alg: any, prov: any): void;
 
     /**
      * update digest by specified string
@@ -74,7 +74,7 @@ declare namespace jsrsasign {
      * @example
      * md.updateString('New York');
      */
-    updateString(str): void;
+    updateString(str: string): void;
 
     /**
      * update digest by specified hexadecimal string
@@ -83,7 +83,7 @@ declare namespace jsrsasign {
      * @example
      * md.updateHex('0afe36');
      */
-    updateHex(hex): void;
+    updateHex(hex: string): void;
 
     /**
      * completes hash calculation and returns hash result
@@ -100,7 +100,7 @@ declare namespace jsrsasign {
      * @example
      * md.digestString('aaa')
      */
-    digestString(str): void;
+    digestString(str: string): void;
 
     /**
      * performs final update on the digest using hexadecimal string, then completes the digest computation
@@ -109,7 +109,7 @@ declare namespace jsrsasign {
      * @example
      * md.digestHex('0f2abd')
      */
-    digestHex(hex): void;
+    digestHex(hex: string): void;
 
     /**
      * get canonical hash algorithm name
@@ -120,10 +120,10 @@ declare namespace jsrsasign {
      * "SHA-1", "SHA1", "MD5", "sha512" to lower case name without hyphens
      * such as "sha1".
      * @example
-     * KJUR.crypto.MessageDigest.getCanonicalAlgName("SHA-1") &rarr "sha1"
-     * KJUR.crypto.MessageDigest.getCanonicalAlgName("MD5")   &rarr "md5"
+     * KJUR.crypto.MessageDigest.getCanonicalAlgName("SHA-1") → "sha1"
+     * KJUR.crypto.MessageDigest.getCanonicalAlgName("MD5")   → "md5"
      */
-    static getCanonicalAlgName(alg): string;
+    static getCanonicalAlgName(alg: string): string;
 
     /**
      * get resulted hash byte length for specified algorithm name
@@ -132,9 +132,9 @@ declare namespace jsrsasign {
      * @description
      * This static method returns resulted byte length for specified algorithm name such as "SHA-1".
      * @example
-     * KJUR.crypto.MessageDigest.getHashLength("SHA-1") &rarr 20
-     * KJUR.crypto.MessageDigest.getHashLength("sha1") &rarr 20
+     * KJUR.crypto.MessageDigest.getHashLength("SHA-1") → 20
+     * KJUR.crypto.MessageDigest.getHashLength("sha1") → 20
      */
-    static getHashLength(alg): number;
+    static getHashLength(alg: string): number;
   }
 }

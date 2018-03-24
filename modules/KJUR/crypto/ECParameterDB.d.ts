@@ -1,4 +1,14 @@
 declare namespace jsrsasign.KJUR.crypto {
+  interface ECParameter {
+    name: string;
+    keylen: number;
+    curve: any; // ECCurveFp
+    G: any; // ECPointFp
+    n: BigInteger;
+    h: BigInteger;
+    oid: string | undefined;
+    info: string | undefined;
+  }
   /**
    * static object for elliptic curve names and parameters
    * @description
@@ -24,13 +34,13 @@ declare namespace jsrsasign.KJUR.crypto {
     /**
      * get curve inforamtion associative array for curve name or alias
      * @param nameOrAlias curve name or alias name
-     * @return {Array} associative array of curve parameters
+     * @return associative array of curve parameters
      * @example
      * var param = KJUR.crypto.ECParameterDB.getByName('prime256v1');
      * var keylen = param['keylen'];
      * var n = param['n'];
      */
-    static getByName(nameOrAlias: string): any;
+    static getByName(nameOrAlias: string): ECParameter;
 
     /**
      * register new curve
@@ -60,6 +70,6 @@ declare namespace jsrsasign.KJUR.crypto {
       aliasList: Array<string>,
       oid: string,
       info: string
-    );
+    ): void;
   }
 }

@@ -172,7 +172,7 @@ declare namespace jsrsasign.KJUR.asn1 {
      * This static method may be useful to initialize boolean array.
      * @example
      * o = new KJUR.asn1.DERBitString();
-     * o.newFalseArray(3) &rarr; [false, false, false]
+     * o.newFalseArray(3) → [false, false, false]
      */
     static newFalseArray(nLength: number): Array<false>;
 
