@@ -323,7 +323,7 @@ declare namespace jsrsasign {
      * // 5. bare hexadecimal key
      * keyObj = KEYUTIL.getKey({n: "75ab..", e: "010001"});
      */
-    static getKey(param: any, passcode?: string, hextype?: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
+    static getKey(param: any, passcode?: string | null, hextype?: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
     /**
      * @param alg 'RSA' or 'EC'

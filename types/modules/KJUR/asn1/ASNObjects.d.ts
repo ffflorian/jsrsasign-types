@@ -31,6 +31,10 @@ declare namespace jsrsasign.KJUR.asn1 {
     int: number;
   }
 
+  interface NameParam {
+    name: string;
+  }
+
   interface ObjectIdentifierParam {
     oid: string;
   }
@@ -41,6 +45,10 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   interface TagParam {
     str: string;
+  }
+
+  interface TypeParam {
+    type: string;
   }
 
   class DERBoolean extends ASN1Object {
@@ -233,7 +241,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * NOTE: 'params' can be omitted.
    */
   class DERObjectIdentifier extends ASN1Object {
-    constructor(params?: ObjectIdentifierParam | HexParam)
+    constructor(params?: ObjectIdentifierParam | HexParam | NameParam)
 
     /**
      * set value by a hexadecimal string
