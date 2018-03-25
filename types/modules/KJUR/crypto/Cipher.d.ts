@@ -4,20 +4,18 @@ declare namespace jsrsasign.KJUR.crypto {
    * @param params parameters for constructor
    * @description
    * Here is supported canonicalized cipher algorithm names and its standard names:
-   * * RSA - RSA/ECB/PKCS1Padding (default for RSAKey)
-   * * RSAOAEP - RSA/ECB/OAEPWithSHA-1AndMGF1Padding
-   * * RSAOAEP224 - RSA/ECB/OAEPWithSHA-224AndMGF1Padding(*)
-   * * RSAOAEP256 - RSA/ECB/OAEPWithSHA-256AndMGF1Padding
-   * * RSAOAEP384 - RSA/ECB/OAEPWithSHA-384AndMGF1Padding(*)
-   * * RSAOAEP512 - RSA/ECB/OAEPWithSHA-512AndMGF1Padding(*)
+   * - RSA - RSA/ECB/PKCS1Padding (default for RSAKey)
+   * - RSAOAEP - RSA/ECB/OAEPWithSHA-1AndMGF1Padding
+   * - RSAOAEP224 - RSA/ECB/OAEPWithSHA-224AndMGF1Padding(*)
+   * - RSAOAEP256 - RSA/ECB/OAEPWithSHA-256AndMGF1Padding
+   * - RSAOAEP384 - RSA/ECB/OAEPWithSHA-384AndMGF1Padding(*)
+   * - RSAOAEP512 - RSA/ECB/OAEPWithSHA-512AndMGF1Padding(*)
    * NOTE: (*) is not supported in Java JCE.
    * Currently this class supports only RSA encryption and decryption.
    * However it is planning to implement also symmetric ciphers near in the future.
    * @example
    */
-  class Cipher {
-    constructor(param: any)
-
+  namespace Cipher {
     /**
      * encrypt raw string by specified key and algorithm
      * @param s input string to encrypt
@@ -30,7 +28,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * KJUR.crypto.Cipher.encrypt("aaa", pubRSAKeyObj) → "1abc2d..."
      * KJUR.crypto.Cipher.encrypt("aaa", pubRSAKeyObj, "RSAOAEP") → "23ab02..."
      */
-    static encrypt(s: string, keyObj: RSAKey | string, algName: string): string;
+    function encrypt(s: string, keyObj: RSAKey | string, algName: string): string;
 
     /**
      * decrypt encrypted hexadecimal string with specified key and algorithm
@@ -44,7 +42,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * KJUR.crypto.Cipher.decrypt("aaa", prvRSAKeyObj) → "1abc2d..."
      * KJUR.crypto.Cipher.decrypt("aaa", prvRSAKeyObj, "RSAOAEP) → "23ab02..."
      */
-    static decrypt(hex: string, keyObj: RSAKey | string, algName: string): string;
+    function decrypt(hex: string, keyObj: RSAKey | string, algName: string): string;
 
     /**
      * get canonicalized encrypt/decrypt algorithm name by key and short/long algorithm name
@@ -53,17 +51,17 @@ declare namespace jsrsasign.KJUR.crypto {
      * @return canonicalized algorithm name for encryption/decryption
      * @description
      * Here is supported canonicalized cipher algorithm names and its standard names:
-     * * RSA - RSA/ECB/PKCS1Padding (default for RSAKey)
-     * * RSAOAEP - RSA/ECB/OAEPWithSHA-1AndMGF1Padding
-     * * RSAOAEP224 - RSA/ECB/OAEPWithSHA-224AndMGF1Padding(*)
-     * * RSAOAEP256 - RSA/ECB/OAEPWithSHA-256AndMGF1Padding
-     * * RSAOAEP384 - RSA/ECB/OAEPWithSHA-384AndMGF1Padding(*)
-     * * RSAOAEP512 - RSA/ECB/OAEPWithSHA-512AndMGF1Padding(*)
+     * - RSA - RSA/ECB/PKCS1Padding (default for RSAKey)
+     * - RSAOAEP - RSA/ECB/OAEPWithSHA-1AndMGF1Padding
+     * - RSAOAEP224 - RSA/ECB/OAEPWithSHA-224AndMGF1Padding(*)
+     * - RSAOAEP256 - RSA/ECB/OAEPWithSHA-256AndMGF1Padding
+     * - RSAOAEP384 - RSA/ECB/OAEPWithSHA-384AndMGF1Padding(*)
+     * - RSAOAEP512 - RSA/ECB/OAEPWithSHA-512AndMGF1Padding(*)
      * NOTE: (*) is not supported in Java JCE.
      * @example
      * KJUR.crypto.Cipher.getAlgByKeyAndName(objRSAKey) → "RSA"
      * KJUR.crypto.Cipher.getAlgByKeyAndName(objRSAKey, "RSAOAEP") → "RSAOAEP"
      */
-    static getAlgByKeyAndName(keyObj: RSAKey | string, algName: string): string;
+    function getAlgByKeyAndName(keyObj: RSAKey | string, algName: string): string;
   }
 }

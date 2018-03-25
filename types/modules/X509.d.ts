@@ -198,9 +198,9 @@ declare namespace jsrsasign {
      * This method will set an array of X.509v3 extension information having
      * following parameters:
      *
-     * * oid - extension OID (ex. 2.5.29.19)
-     * * critical - true or false
-     * * vidx - string index for extension value
+     * - oid - extension OID (ex. 2.5.29.19)
+     * - critical - true or false
+     * - vidx - string index for extension value
      *
      * @example
      * x = new X509();
@@ -235,22 +235,22 @@ declare namespace jsrsasign {
      * @description
      * This method will get basic constraints extension value as object with following paramters.
      *
-     * * cA - CA flag whether CA or not
-     * * pathLen - maximum intermediate certificate length
+     * - cA - CA flag whether CA or not
+     * - pathLen - maximum intermediate certificate length
      *
      * There are use cases for return values:
      *
-     * * {cA:true, pathLen:3} - cA flag is true and pathLen is 3
-     * * {cA:true} - cA flag is true and no pathLen
-     * * {} - basic constraints has no value in case of end entity certificate
-     * * undefined - there is no basic constraints extension
+     * - {cA:true, pathLen:3} - cA flag is true and pathLen is 3
+     * - {cA:true} - cA flag is true and no pathLen
+     * - {} - basic constraints has no value in case of end entity certificate
+     * - undefined - there is no basic constraints extension
      *
      * @example
      * x = new X509();
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtBasicConstraints() → { cA: true, pathLen: 3 };
      */
-    getExtBasicConstraints(): Array<any>;
+    getExtBasicConstraints(): any[];
 
     /**
      * get KeyUsage extension value as binary string in the certificate
@@ -333,7 +333,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtExtKeyUsageName() → ["serverAuth", "clientAuth", "0.1.2.3.4.5"]
      */
-    getExtExtKeyUsageName(): Array<string> | any;
+    getExtExtKeyUsageName(): string[];
 
     /**
      * get subjectAltName value as array of string in the certificate
@@ -344,11 +344,11 @@ declare namespace jsrsasign {
      * If there is this in the certificate, it returns undefined;
      * Type of GeneralName will be shown as following:
      *
-     * * "MAIL" - [1]rfc822Name
-     * * "DNS"  - [2]dNSName
-     * * "DN"   - [4]directoryName
-     * * "URI"  - [6]uniformResourceIdentifier
-     * * "IP"   - [7]iPAddress
+     * - "MAIL" - [1]rfc822Name
+     * - "DNS"  - [2]dNSName
+     * - "DN"   - [4]directoryName
+     * - "URI"  - [6]uniformResourceIdentifier
+     * - "IP"   - [7]iPAddress
      *
      * @example
      * x = new X509();
@@ -360,7 +360,7 @@ declare namespace jsrsasign {
      *  ["IP",   "192.168.1.1"],
      *  ["DN",   "/C=US/O=TEST1"]]
      */
-    getExtSubjectAltName2(): Array<Array<string>> | undefined;
+    getExtSubjectAltName2(): string[][] | undefined;
 
     /**
      * get array of string for fullName URIs in cRLDistributionPoints(CDP) in the certificate
@@ -378,7 +378,7 @@ declare namespace jsrsasign {
      * x.getExtCRLDistributionPointsURI() →
      * ["http://example.com/aaa.crl", "http://example.org/aaa.crl"]
      */
-    getExtCRLDistributionPointsURI(): Array<any> | undefined;
+    getExtCRLDistributionPointsURI(): any[] | undefined;
 
     /**
      * get AuthorityInfoAccess extension value in the certificate as associative array
@@ -387,8 +387,8 @@ declare namespace jsrsasign {
      * This method will get authority info access value
      * as associate array which has following properties:
      *
-     * * ocsp - array of string for OCSP responder URL
-     * * caissuer - array of string for caIssuer value (i.e. CA certificates URL)
+     * - ocsp - array of string for OCSP responder URL
+     * - caissuer - array of string for caIssuer value (i.e. CA certificates URL)
      *
      * If there is this in the certificate, it returns undefined;
      * @example
@@ -398,7 +398,7 @@ declare namespace jsrsasign {
      * { ocsp:     ["http://ocsp.foo.com"],
      *   caissuer: ["http://rep.foo.com/aaa.p8m"] }
      */
-    getExtAIAInfo(): Array<any> | undefined;
+    getExtAIAInfo(): any[] | undefined;
 
     /**
      * get CertificatePolicies extension value in the certificate as array
@@ -407,9 +407,9 @@ declare namespace jsrsasign {
      * This method will get certificate policies value
      * as an array of JSON object which has following properties:
      *
-     * * id -
-     * * cps - URI of certification practice statement
-     * * unotice - string of UserNotice explicitText
+     * - id -
+     * - cps - URI of certification practice statement
+     * - unotice - string of UserNotice explicitText
      *
      * If there is this extension in the certificate,
      * it returns undefined;
@@ -421,7 +421,7 @@ declare namespace jsrsasign {
      *    cps: "http://example.com/cps",
      *    unotice: "explicit text" }]
      */
-    getExtCertificatePolicies(): Array<any> | undefined;
+    getExtCertificatePolicies(): any[] | undefined;
 
     /**
      * read PEM formatted X.509 certificate from string.
@@ -544,9 +544,9 @@ declare namespace jsrsasign {
      * @description
      * Resulted associative array has following properties:
      *
-     * * algoid - hexadecimal string of OID of asymmetric key algorithm
-     * * algparam - hexadecimal string of OID of ECC curve name or null
-     * * keyhex - hexadecimal string of key in the certificate
+     * - algoid - hexadecimal string of OID of asymmetric key algorithm
+     * - algparam - hexadecimal string of OID of ECC curve name or null
+     * - keyhex - hexadecimal string of key in the certificate
      *
      * NOTE: X509v1 certificate is also supported since x509.js 1.1.9.
      */

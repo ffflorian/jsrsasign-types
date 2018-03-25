@@ -1,9 +1,4 @@
 declare namespace jsrsasign {
-  interface RSAPublicKey {
-    n_hex: string;
-    e_hex: string;
-  }
-
   type EncryptionAlgorithms = 'DES-CBC' | 'DES-EDE3-CBC' | 'AES-128-CBC' | 'AES-192-CBC' | 'AES-256-CBC';
   type PrivateKeyOutputFormatType = 'PKCS1PRV' | 'PKCS5PRV' | 'PKCS8PRV';
 
@@ -94,14 +89,14 @@ declare namespace jsrsasign {
    * @param a array of bytes
    * @return hexadecimal string
    */
-  function BAtohex(a: Array<number>): string;
+  function BAtohex(a: number[]): string;
 
   /**
    * convert an array of character codes to a string
    * @param a array of character codes
    * @return s
    */
-  function BAtos(a: Array<number>): string;
+  function BAtos(a: number[]): string;
 
   /**
    * Date object to zulu time string
@@ -208,9 +203,9 @@ declare namespace jsrsasign {
    * This method canonicalize a hexadecimal string of positive integer
    * for two's complement representation.
    * Canonicalized hexadecimal string of positive integer will be:
-   * * Its length is always even.
-   * * If odd length it will be padded with leading zero.
-   * * If it is even length and its first character is "8" or greater,
+   * - Its length is always even.
+   * - If odd length it will be padded with leading zero.
+   * - If it is even length and its first character is "8" or greater,
    * it will be padded with "00" to make it positive integer.
    * @example
    * hextoposhex("abcd") → "00abcd"
@@ -371,7 +366,7 @@ declare namespace jsrsasign {
   /**
    * convert a string to an array of character codes
    */
-  function stoBA(s: string): Array<number>;
+  function stoBA(s: string): number[];
 
   /**
    * convert a ASCII string to a hexadecimal string of ASCII codes.
@@ -478,5 +473,5 @@ declare namespace jsrsasign {
    * zulutosec("071231235959.1Z") → 1199145599 #Mon, 31 Dec 2007 23:59:59 GMT
    * zulutosec("20071231235959Z") → 1199145599 #Mon, 31 Dec 2007 23:59:59 GMT
    */
-  function zulutosec(s: string): number
+  function zulutosec(s: string): number;
 }

@@ -1,7 +1,6 @@
 declare namespace jsrsasign.KJUR.crypto {
   /**
    * class for EC key generation,  ECDSA signing and verifcation
-   * @class class for EC key generation,  ECDSA signing and verifcation
    * @description
    * CAUTION: Most of the case, you don't need to use this class except
    * for generating an EC key pair. Please use `KJUR.crypto.Signature` class instead.
@@ -10,9 +9,9 @@ declare namespace jsrsasign.KJUR.crypto {
    * (See https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/src/ecdsa.js)
    * Currently this class supports following named curves and their aliases.
    *
-   * * secp256r1, NIST P-256, P-256, prime256v1 (*)
-   * * secp256k1 (*)
-   * * secp384r1, NIST P-384, P-384 (*)
+   * - secp256r1, NIST P-256, P-256, prime256v1 (*)
+   * - secp256k1 (*)
+   * - secp384r1, NIST P-384, P-384 (*)
    */
   class ECDSA {
     getBigRandom(limit: number): BigInteger;
@@ -27,7 +26,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1', 'pub': pubHex});
      * ec.getPublicKeyXYHex() → { x: '01bacf...', y: 'c3bc22...' }
      */
-    getPublicKeyXYHex(): Array<any>
+    getPublicKeyXYHex(): any[];
 
     /**
      * get NIST curve short name such as "P-256" or "P-384"
@@ -36,7 +35,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1', 'pub': pubHex});
      * ec.getShortPCurveName() → "P-256";
      */
-    getShortNISTPCurveName(): string
+    getShortNISTPCurveName(): string;
 
     /**
      * generate a EC key pair
@@ -47,7 +46,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * var pubhex = keypair.ecpubhex; // hexadecimal string of EC public key
      * var prvhex = keypair.ecprvhex; // hexadecimal string of EC private key (=d)
      */
-    generateKeyPairHex(): Array<any>
+    generateKeyPairHex(): any[];
 
     /**
      * signing to message hash
@@ -58,9 +57,9 @@ declare namespace jsrsasign.KJUR.crypto {
      * var ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1'});
      * var sigValue = ec.signHex(hash, prvKey);
      */
-    signHex(hashHex: string, privHex: string): string
+    signHex(hashHex: string, privHex: string): string;
 
-    sign(hash: string, priv: any): Array<number>
+    sign(hash: string, priv: any): number[];
 
     verifyWithMessageHash(hashHex: string, sigHex: string): boolean;
 
@@ -85,7 +84,7 @@ declare namespace jsrsasign.KJUR.crypto {
      *
      * Takes two BigIntegers representing r and s and returns a byte array.
      */
-    serializeSig(r: BigInteger, s: BigInteger): Array<number>
+    serializeSig(r: BigInteger, s: BigInteger): number[];
 
     /**
      * Parses a byte array containing a DER-encoded signature.
@@ -155,14 +154,14 @@ declare namespace jsrsasign.KJUR.crypto {
      * @param asn1Hex hexadecimal string of ASN.1 encoded ECDSA signature value
      * @return r-s concatinated format of ECDSA signature value
      */
-    static asn1SigToConcatSig(asn1Sig: string): string
+    static asn1SigToConcatSig(asn1Sig: string): string;
 
     /**
      * convert hexadecimal concatinated signature to ASN.1 encoded signature
      * @param concatSig r-s concatinated format of ECDSA signature value
      * @return hexadecimal string of ASN.1 encoded ECDSA signature value
      */
-    static concatSigToASN1Sig(concatSig: string): string
+    static concatSigToASN1Sig(concatSig: string): string;
 
     /**
      * convert hexadecimal R and S value of signature to ASN.1 encoded signature
@@ -170,7 +169,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * @param hS hexadecimal string of S field of ECDSA signature value
      * @return hexadecimal string of ASN.1 encoded ECDSA signature value
      */
-    static hexRSSigToASN1Sig(hR: string, hS: string): string
+    static hexRSSigToASN1Sig(hR: string, hS: string): string;
 
     /**
      * convert R and S BigInteger object of signature to ASN.1 encoded signature
@@ -178,7 +177,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * @param biS BIgInteger object of S field of ECDSA signature value
      * @return hexadecimal string of ASN.1 encoded ECDSA signature value
      */
-    static biRSSigToASN1Sig(biR: BigInteger, biS: BigInteger): string
+    static biRSSigToASN1Sig(biR: BigInteger, biS: BigInteger): string;
 
     /**
      * static method to get normalized EC curve name from curve name or hexadecimal OID value

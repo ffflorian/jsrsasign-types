@@ -208,5 +208,5 @@ declare namespace jsrsasign.KJUR.crypto {
      * KJUR.crypto.Util.getRandomBigIntegerMinToMax(biMin, biMax) → 32f1... of BigInteger
      */
     getRandomBigIntegerMinToMax(biMin: number, biMax: number): BigInteger;
-  }
+  };
 }

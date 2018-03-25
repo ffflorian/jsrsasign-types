@@ -1,8 +1,8 @@
 declare namespace jsrsasign.KJUR.crypto {
   /** static object for cryptographic function utilities */
-  const OID: {
+  namespace OID {
     /** key value of hexadecimal OID and its name (ex. '2a8648ce3d030107' and 'secp256r1') */
-    oidhex2name: {
+    const oidhex2name: {
       '2a864886f70d010101': string;
       '2a8648ce380401': string;
       '2a8648ce380403': string;
@@ -15,6 +15,6 @@ declare namespace jsrsasign.KJUR.crypto {
       '2b81040023': string;
       '608648016503040301': string;
       '608648016503040302': string;
-    }
+    };
   }
 }

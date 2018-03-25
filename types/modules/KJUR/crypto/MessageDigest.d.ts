@@ -3,14 +3,14 @@ declare namespace jsrsasign.KJUR.crypto {
    * MessageDigest class which is very similar to java.security.MessageDigest class
    * @description
    * Currently this supports following algorithm and providers combination:
-   * * md5 - cryptojs
-   * * sha1 - cryptojs
-   * * sha224 - cryptojs
-   * * sha256 - cryptojs
-   * * sha384 - cryptojs
-   * * sha512 - cryptojs
-   * * ripemd160 - cryptojs
-   * * sha256 - sjcl (NEW from crypto.js 1.0.4)
+   * - md5 - cryptojs
+   * - sha1 - cryptojs
+   * - sha224 - cryptojs
+   * - sha256 - cryptojs
+   * - sha384 - cryptojs
+   * - sha512 - cryptojs
+   * - ripemd160 - cryptojs
+   * - sha256 - sjcl (NEW from crypto.js 1.0.4)
    *
    * @example
    * // CryptoJS provider sample
@@ -48,13 +48,13 @@ declare namespace jsrsasign.KJUR.crypto {
      * @description
      * This methods set an algorithm and a cryptographic provider.
      * Here is acceptable algorithm names ignoring cases and hyphens:
-     * * MD5
-     * * SHA1
-     * * SHA224
-     * * SHA256
-     * * SHA384
-     * * SHA512
-     * * RIPEMD160
+     * - MD5
+     * - SHA1
+     * - SHA224
+     * - SHA256
+     * - SHA384
+     * - SHA512
+     * - RIPEMD160
      * NOTE: Since jsrsasign 6.2.0 crypto 1.1.10, this method ignores
      * upper or lower cases. Also any hyphens (i.e. "-") will be ignored
      * so that "SHA1" or "SHA-1" will be acceptable.

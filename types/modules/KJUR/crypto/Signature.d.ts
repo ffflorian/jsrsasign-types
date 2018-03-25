@@ -4,38 +4,38 @@ declare namespace jsrsasign.KJUR.crypto {
    * @param params parameters for constructor
    * @description
    * As for params of constructor's argument, it can be specify following attributes:
-   * * alg - signature algorithm name (ex. {MD5,SHA1,SHA224,SHA256,SHA384,SHA512,RIPEMD160}with{RSA,ECDSA,DSA})
-   * * provider - currently 'cryptojs/jsrsa' only
+   * - alg - signature algorithm name (ex. {MD5,SHA1,SHA224,SHA256,SHA384,SHA512,RIPEMD160}with{RSA,ECDSA,DSA})
+   * - provider - currently 'cryptojs/jsrsa' only
    * <h4>SUPPORTED ALGORITHMS AND PROVIDERS</h4>
    * This Signature class supports following signature algorithm and provider names:
-   * * MD5withRSA - cryptojs/jsrsa
-   * * SHA1withRSA - cryptojs/jsrsa
-   * * SHA224withRSA - cryptojs/jsrsa
-   * * SHA256withRSA - cryptojs/jsrsa
-   * * SHA384withRSA - cryptojs/jsrsa
-   * * SHA512withRSA - cryptojs/jsrsa
-   * * RIPEMD160withRSA - cryptojs/jsrsa
-   * * MD5withECDSA - cryptojs/jsrsa
-   * * SHA1withECDSA - cryptojs/jsrsa
-   * * SHA224withECDSA - cryptojs/jsrsa
-   * * SHA256withECDSA - cryptojs/jsrsa
-   * * SHA384withECDSA - cryptojs/jsrsa
-   * * SHA512withECDSA - cryptojs/jsrsa
-   * * RIPEMD160withECDSA - cryptojs/jsrsa
-   * * MD5withRSAandMGF1 - cryptojs/jsrsa
-   * * SHA1withRSAandMGF1 - cryptojs/jsrsa
-   * * SHA224withRSAandMGF1 - cryptojs/jsrsa
-   * * SHA256withRSAandMGF1 - cryptojs/jsrsa
-   * * SHA384withRSAandMGF1 - cryptojs/jsrsa
-   * * SHA512withRSAandMGF1 - cryptojs/jsrsa
-   * * RIPEMD160withRSAandMGF1 - cryptojs/jsrsa
-   * * SHA1withDSA - cryptojs/jsrsa
-   * * SHA224withDSA - cryptojs/jsrsa
-   * * SHA256withDSA - cryptojs/jsrsa
+   * - MD5withRSA - cryptojs/jsrsa
+   * - SHA1withRSA - cryptojs/jsrsa
+   * - SHA224withRSA - cryptojs/jsrsa
+   * - SHA256withRSA - cryptojs/jsrsa
+   * - SHA384withRSA - cryptojs/jsrsa
+   * - SHA512withRSA - cryptojs/jsrsa
+   * - RIPEMD160withRSA - cryptojs/jsrsa
+   * - MD5withECDSA - cryptojs/jsrsa
+   * - SHA1withECDSA - cryptojs/jsrsa
+   * - SHA224withECDSA - cryptojs/jsrsa
+   * - SHA256withECDSA - cryptojs/jsrsa
+   * - SHA384withECDSA - cryptojs/jsrsa
+   * - SHA512withECDSA - cryptojs/jsrsa
+   * - RIPEMD160withECDSA - cryptojs/jsrsa
+   * - MD5withRSAandMGF1 - cryptojs/jsrsa
+   * - SHA1withRSAandMGF1 - cryptojs/jsrsa
+   * - SHA224withRSAandMGF1 - cryptojs/jsrsa
+   * - SHA256withRSAandMGF1 - cryptojs/jsrsa
+   * - SHA384withRSAandMGF1 - cryptojs/jsrsa
+   * - SHA512withRSAandMGF1 - cryptojs/jsrsa
+   * - RIPEMD160withRSAandMGF1 - cryptojs/jsrsa
+   * - SHA1withDSA - cryptojs/jsrsa
+   * - SHA224withDSA - cryptojs/jsrsa
+   * - SHA256withDSA - cryptojs/jsrsa
    * Here are supported elliptic cryptographic curve names and their aliases for ECDSA:
-   * * secp256k1
-   * * secp256r1, NIST P-256, P-256, prime256v1
-   * * secp384r1, NIST P-384, P-384
+   * - secp256k1
+   * - secp256r1, NIST P-256, P-256, prime256v1
+   * - secp384r1, NIST P-384, P-384
    * NOTE1: DSA signing algorithm is also supported since crypto 1.1.5.
    * <h4>EXAMPLES</h4>
    * @example
@@ -88,25 +88,25 @@ declare namespace jsrsasign.KJUR.crypto {
      * using `KEYUTIL.getKey` method.
      * As for 'key',  following argument type are supported:
      * __signing__
-     * * PEM formatted PKCS#8 encrypted RSA/ECDSA private key concluding "BEGIN ENCRYPTED PRIVATE KEY"
-     * * PEM formatted PKCS#5 encrypted RSA/DSA private key concluding "BEGIN RSA/DSA PRIVATE KEY" and ",ENCRYPTED"
-     * * PEM formatted PKCS#8 plain RSA/ECDSA private key concluding "BEGIN PRIVATE KEY"
-     * * PEM formatted PKCS#5 plain RSA/DSA private key concluding "BEGIN RSA/DSA PRIVATE KEY" without ",ENCRYPTED"
-     * * RSAKey object of private key
-     * * KJUR.crypto.ECDSA object of private key
-     * * KJUR.crypto.DSA object of private key
+     * - PEM formatted PKCS#8 encrypted RSA/ECDSA private key concluding "BEGIN ENCRYPTED PRIVATE KEY"
+     * - PEM formatted PKCS#5 encrypted RSA/DSA private key concluding "BEGIN RSA/DSA PRIVATE KEY" and ",ENCRYPTED"
+     * - PEM formatted PKCS#8 plain RSA/ECDSA private key concluding "BEGIN PRIVATE KEY"
+     * - PEM formatted PKCS#5 plain RSA/DSA private key concluding "BEGIN RSA/DSA PRIVATE KEY" without ",ENCRYPTED"
+     * - RSAKey object of private key
+     * - KJUR.crypto.ECDSA object of private key
+     * - KJUR.crypto.DSA object of private key
      *
      * __verification__
-     * * PEM formatted PKCS#8 RSA/EC/DSA public key concluding "BEGIN PUBLIC KEY"
-     * * PEM formatted X.509 certificate with RSA/EC/DSA public key concluding
+     * - PEM formatted PKCS#8 RSA/EC/DSA public key concluding "BEGIN PUBLIC KEY"
+     * - PEM formatted X.509 certificate with RSA/EC/DSA public key concluding
      *   "BEGIN CERTIFICATE", "BEGIN X509 CERTIFICATE" or "BEGIN TRUSTED CERTIFICATE".
-     * * RSAKey object of public key
-     * * KJUR.crypto.ECDSA object of public key
-     * * KJUR.crypto.DSA object of public key
+     * - RSAKey object of public key
+     * - KJUR.crypto.ECDSA object of public key
+     * - KJUR.crypto.DSA object of public key
      * @example
      * sig.init(sCertPEM)
      */
-    init(key: string | RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA, pass?: string): void;
+    init(key: string | RSAKey | DSA | ECDSA, pass?: string): void;
 
     /**
      * Updates the data to be signed or verified by a string

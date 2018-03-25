@@ -102,23 +102,23 @@ declare namespace jsrsasign.KJUR.asn1 {
      * ```
      * 'TYPE-OF-ASN1OBJ' can be one of following symbols:
      *
-     * * 'bool' - DERBoolean
-     * * 'int' - DERInteger
-     * * 'bitstr' - DERBitString
-     * * 'octstr' - DEROctetString
-     * * 'null' - DERNull
-     * * 'oid' - DERObjectIdentifier
-     * * 'enum' - DEREnumerated
-     * * 'utf8str' - DERUTF8String
-     * * 'numstr' - DERNumericString
-     * * 'prnstr' - DERPrintableString
-     * * 'telstr' - DERTeletexString
-     * * 'ia5str' - DERIA5String
-     * * 'utctime' - DERUTCTime
-     * * 'gentime' - DERGeneralizedTime
-     * * 'seq' - DERSequence
-     * * 'set' - DERSet
-     * * 'tag' - DERTaggedObject
+     * - 'bool' - DERBoolean
+     * - 'int' - DERInteger
+     * - 'bitstr' - DERBitString
+     * - 'octstr' - DEROctetString
+     * - 'null' - DERNull
+     * - 'oid' - DERObjectIdentifier
+     * - 'enum' - DEREnumerated
+     * - 'utf8str' - DERUTF8String
+     * - 'numstr' - DERNumericString
+     * - 'prnstr' - DERPrintableString
+     * - 'telstr' - DERTeletexString
+     * - 'ia5str' - DERIA5String
+     * - 'utctime' - DERUTCTime
+     * - 'gentime' - DERGeneralizedTime
+     * - 'seq' - DERSequence
+     * - 'set' - DERSet
+     * - 'tag' - DERTaggedObject
      *
      * @example
      * newObject({'prnstr': 'aaa'});
@@ -139,6 +139,7 @@ declare namespace jsrsasign.KJUR.asn1 {
 
     /**
      * get encoded hexadecimal string of ASN1Object specifed by JSON parameters
+     *
      * @param param JSON parameter to generate ASN1Object
      * @return hexadecimal string of ASN1Object
      * @description
@@ -150,15 +151,16 @@ declare namespace jsrsasign.KJUR.asn1 {
     jsonToASN1HEX(param: ASNObject): string;
 
     /**
-    * get dot noted oid number string from hexadecimal value of OID
-    * @param hex hexadecimal value of object identifier
-    * @return dot noted string of object identifier
-    * @description
-    * This static method converts from hexadecimal string representation of
-    * ASN.1 value of object identifier to oid number string.
-    * @example
-    * KJUR.asn1.ASN1Util.oidHexToInt('550406') → "2.5.4.6"
-    */
+     * get dot noted oid number string from hexadecimal value of OID
+     *
+     * @param hex hexadecimal value of object identifier
+     * @return dot noted string of object identifier
+     * @description
+     * This static method converts from hexadecimal string representation of
+     * ASN.1 value of object identifier to oid number string.
+     * @example
+     * KJUR.asn1.ASN1Util.oidHexToInt('550406') → "2.5.4.6"
+     */
     static oidHexToInt(hex: string): string;
   }
 }

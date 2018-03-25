@@ -17,20 +17,20 @@ declare namespace jsrsasign.KJUR.crypto {
    * the name marked (*) are available for `KJUR.crypto.ECDSA` and
    * `KJUR.crypto.Signature` classes.
    *
-   * * secp128r1
-   * * secp160r1
-   * * secp160k1
-   * * secp192r1
-   * * secp192k1
-   * * secp224r1
-   * * secp256r1, NIST P-256, P-256, prime256v1 (*)
-   * * secp256k1 (*)
-   * * secp384r1, NIST P-384, P-384 (*)
-   * * secp521r1, NIST P-521, P-521
+   * - secp128r1
+   * - secp160r1
+   * - secp160k1
+   * - secp192r1
+   * - secp192k1
+   * - secp224r1
+   * - secp256r1, NIST P-256, P-256, prime256v1 (*)
+   * - secp256k1 (*)
+   * - secp384r1, NIST P-384, P-384 (*)
+   * - secp521r1, NIST P-521, P-521
    *
    * You can register new curves by using the 'regist' method.
    */
-  class ECParameterDB {
+  namespace ECParameterDB {
     /**
      * get curve inforamtion associative array for curve name or alias
      * @param nameOrAlias curve name or alias name
@@ -40,7 +40,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * var keylen = param['keylen'];
      * var n = param['n'];
      */
-    static getByName(nameOrAlias: string): ECParameter;
+    function getByName(nameOrAlias: string): ECParameter;
 
     /**
      * register new curve
@@ -57,7 +57,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * @param oid Object Identifier for the curve
      * @param info information string for the curve
      */
-    static regist(
+    function regist(
       name: string,
       keylen: number,
       pHex: string,
@@ -67,7 +67,7 @@ declare namespace jsrsasign.KJUR.crypto {
       hHex: string,
       gxHex: string,
       gyHex: string,
-      aliasList: Array<string>,
+      aliasList: string[],
       oid: string,
       info: string
     ): void;

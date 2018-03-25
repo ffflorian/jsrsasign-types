@@ -5,12 +5,12 @@ declare namespace jsrsasign.KJUR.crypto {
    * @description
    *
    * Currently this supports following algorithm and providers combination:
-   * * hmacmd5 - cryptojs
-   * * hmacsha1 - cryptojs
-   * * hmacsha224 - cryptojs
-   * * hmacsha256 - cryptojs
-   * * hmacsha384 - cryptojs
-   * * hmacsha512 - cryptojs
+   * - hmacmd5 - cryptojs
+   * - hmacsha1 - cryptojs
+   * - hmacsha224 - cryptojs
+   * - hmacsha256 - cryptojs
+   * - hmacsha384 - cryptojs
+   * - hmacsha512 - cryptojs
    * NOTE: HmacSHA224 and HmacSHA384 issue was fixed since jsrsasign 4.1.4.
    * Please use 'ext/cryptojs-312-core-fix*.js' instead of 'core.js' of original CryptoJS
    * to avoid those issue.
@@ -83,13 +83,13 @@ declare namespace jsrsasign.KJUR.crypto {
      * @description
      * This method will set password for (H)Mac internally.
      * Argument 'pass' can be specified as following:
-     * * even length string of 0..9, a..f or A-F: implicitly specified as hexadecimal string
-     * * not above string: implicitly specified as raw string
-     * * {rstr: "\x65\x70"}: explicitly specified as raw string
-     * * {hex: "6570"}: explicitly specified as hexacedimal string
-     * * {utf8: "秘密"}: explicitly specified as UTF8 string
-     * * {b64: "Mi78..=="}: explicitly specified as Base64 string
-     * * {b64u: "Mi7-_"}: explicitly specified as Base64URL string
+     * - even length string of 0..9, a..f or A-F: implicitly specified as hexadecimal string
+     * - not above string: implicitly specified as raw string
+     * - {rstr: "\x65\x70"}: explicitly specified as raw string
+     * - {hex: "6570"}: explicitly specified as hexacedimal string
+     * - {utf8: "秘密"}: explicitly specified as UTF8 string
+     * - {b64: "Mi78..=="}: explicitly specified as Base64 string
+     * - {b64u: "Mi7-_"}: explicitly specified as Base64URL string
      * It is *STRONGLY RECOMMENDED* that explicit representation of password argument
      * to avoid ambiguity. For example string  "6161" can mean a string "6161" or
      * a hexadecimal string of "aa" (i.e. \x61\x61).

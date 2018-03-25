@@ -1,7 +1,6 @@
 declare namespace jsrsasign.KJUR.crypto {
   /**
    * class for DSA signing and verification
-   * @class class for DSA signing and verifcation
    * @description
    *
    * CAUTION: Most of the case, you don't need to use this class.

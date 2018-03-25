@@ -1,8 +1,8 @@
-// Type definitions for jsrsasign v8.0.6
+//  Type definitions for jsrsasign 8.0.6
 // Project: https://github.com/kjur/jsrsasign
 // Definitions by: Florian Keller <https://github.com/ffflorian>
-
-import BigInteger = require('bigi');
+// Definitions: https://github.com/ffflorian/jsrsasign-types
+// TypeScript version: 2.7
 
 /// <reference path="./jsrsasign.d.ts" />
 /// <reference path="./modules/BigInteger.d.ts" />
@@ -14,3 +14,4 @@ import BigInteger = require('bigi');
 /// <reference path="./modules/X509.d.ts" />
 
 export = jsrsasign;
+export as namespace jsrsasign;

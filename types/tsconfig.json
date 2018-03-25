@@ -9,10 +9,12 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "paths": { "mylib": ["."] },
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "types": [],
     "typeRoots": ["../"]
-  }
+  },
+  "exclude": [
+    "../node_modules"
+  ]
 }

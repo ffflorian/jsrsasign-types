@@ -9,7 +9,7 @@ declare namespace jsrsasign {
      * @example
      * RSAKey.getHexValueArrayOfChildrenFromHex("3082...") → ["00", "3b42...", ...]
      */
-    static getHexValueArrayOfChildrenFromHex(sPEMPrivateKey: string): Array<any>;
+    static getHexValueArrayOfChildrenFromHex(sPEMPrivateKey: string): any[];
 
     /**
      * static method to get array of field positions from hexadecimal PKCS#5 RSA private key.
@@ -18,7 +18,7 @@ declare namespace jsrsasign {
      * @example
      * RSAKey.getPosArrayOfChildrenFromHex("3082...") → [8, 32, ...]
      */
-    static getPosArrayOfChildrenFromHex(sPEMPrivateKey: string): Array<any>;
+    static getPosArrayOfChildrenFromHex(sPEMPrivateKey: string): any[];
 
     /**
      * read an ASN.1 hexadecimal string of X.509 RSA public key certificate

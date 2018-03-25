@@ -16,7 +16,6 @@ declare namespace jsrsasign.KJUR.asn1 {
     /** hexadecimal string of ASN.1 TLV value(V) */
     hV: string;
 
-
     /**
      * get hexadecimal ASN.1 TLV length(L) bytes from TLV value(V)
      * @return hexadecimal string of ASN.1 TLV length(L)
