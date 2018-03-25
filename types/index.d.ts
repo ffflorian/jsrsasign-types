@@ -2,6 +2,8 @@
 // Project: https://github.com/kjur/jsrsasign
 // Definitions by: Florian Keller <https://github.com/ffflorian>
 
+/// <reference types="bigi" />
+
 /// <reference path="./jsrsasign.d.ts" />
 /// <reference path="./modules/BigInteger.d.ts" />
 /// <reference path="./modules/ECCurveFp.d.ts" />

@@ -1,0 +1,19 @@
+{
+  "author": "Florian Keller <github@floriankeller.de>",
+  "dependencies": {
+    "bigi": "1.4.2",
+    "typescript": "2.7.2"
+  },
+  "devDependencies": {
+    "dtslint": "0.2.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "jsrsasign-types",
+  "repository": "git@github.com:ffflorian/jsrsasign-types",
+  "scripts": {
+    "test": "dtslint ./types/"
+  },
+  "types": "types/index.d.ts",
+  "version": "1.0.0"
+}
