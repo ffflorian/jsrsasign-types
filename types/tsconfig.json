@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "../",
     "forceConsistentCasingInFileNames": true,
     "lib": ["es6"],
     "module": "commonjs",
     "noEmit": true,
     "noImplicitAny": true,
-    "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": { "mylib": ["."] },
+    "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "types": []
+    "types": [],
+    "typeRoots": ["../"]
   }
 }

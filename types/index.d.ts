@@ -2,7 +2,7 @@
 // Project: https://github.com/kjur/jsrsasign
 // Definitions by: Florian Keller <https://github.com/ffflorian>
 
-/// <reference types="bigi" />
+import BigInteger = require('bigi');
 
 /// <reference path="./jsrsasign.d.ts" />
 /// <reference path="./modules/BigInteger.d.ts" />
