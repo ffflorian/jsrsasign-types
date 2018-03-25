@@ -42,7 +42,6 @@ declare namespace jsrsasign.KJUR.asn1.cms {
     /**
      * verify SignedData specified by JSON parameters
      *
-     * @memberOf KJUR.asn1.cms.CMSUtil
      * @param param JSON parameter to verify CMS SignedData
      * @return JSON data as the result of validation
      * @description

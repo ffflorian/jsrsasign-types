@@ -136,7 +136,6 @@ declare namespace jsrsasign.KJUR.asn1 {
       constructor(params?: string | { hasis: boolean; cert: string })
       /**
        * set value by PEM string of certificate
-       * @memberOf KJUR.asn1.cades.OtherCertID
        * @param certPEM PEM string of certificate
        * @description
        * This method will set value by a PEM string of a certificate.
@@ -169,16 +168,13 @@ declare namespace jsrsasign.KJUR.asn1 {
       constructor(params?: string | { alg: string; hash: string } | { alg: string; cert: string } | { cert: string });
       /**
        * set value by PEM string of certificate
-       * @memberOf KJUR.asn1.cades.OtherHash
        * @param certPEM PEM string of certificate
-       * @return unspecified
        * @description
        * This method will set value by a PEM string of a certificate.
        * An algorithm used to hash certificate data will
        * be defined by 'alg' property and 'sha256' is default.
        */
       setByCertPEM(certPEM: string): void;
-
       getEncodedHex(): string;
     }
   }

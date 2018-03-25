@@ -220,7 +220,6 @@ declare namespace jsrsasign.KJUR.asn1 {
 
       /**
        * set ContentType/MessageDigest/DigestAlgorithms for SignerInfo/SignedData
-       * @memberOf KJUR.asn1.cms.SignerInfo
        * @param params JSON parameter to set content related field
        * @description
        * This method will specify following fields by a parameters:
