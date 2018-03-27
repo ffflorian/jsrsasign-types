@@ -1,4 +1,3 @@
-/// <reference path="./cms/index.d.ts" />
 /// <reference path="./CAdESUtil.d.ts" />
 /// <reference path="./OtherCertID.d.ts" />
 /// <reference path="./OtherHashAlgAndValue.d.ts" />
