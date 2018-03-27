@@ -3,8 +3,7 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
    * Utility class for OCSP
    * @description
    * This class provides utility static methods for OCSP.
-   * - `KJUR.asn1.ocsp.OCSPUtil.getRequestHex`
-   *   generates hexadecimal string of OCSP request
+   * - `KJUR.asn1.ocsp.OCSPUtil.getRequestHex` - generates hexadecimal string of OCSP request
    *
    */
   namespace OCSPUtil {
@@ -38,10 +37,10 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
      * returns JSON object of its parsed result.
      * Its result has following properties:
      *
-     * -responseStatus - integer of responseStatus
-     * -certStatus - string of certStatus (ex. good, revoked or unknown)
-     * -thisUpdate - string of thisUpdate in Zulu(ex. 20151231235959Z)
-     * -nextUpdate - string of nextUpdate in Zulu(ex. 20151231235959Z)
+     * - responseStatus - integer of responseStatus
+     * - certStatus - string of certStatus (ex. good, revoked or unknown)
+     * - thisUpdate - string of thisUpdate in Zulu(ex. 20151231235959Z)
+     * - nextUpdate - string of nextUpdate in Zulu(ex. 20151231235959Z)
      *
      * @example
      * info = KJUR.asn1.ocsp.OCSPUtil.getOCSPResponseInfo("3082...");
