@@ -1,6 +1,6 @@
 declare namespace jsrsasign.KJUR.asn1 {
   interface ASN1ObjectParam {
-    obj: ASNObject;
+    obj: ASN1Object;
   }
 
   interface BigIntegerParam {

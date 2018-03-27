@@ -209,7 +209,7 @@ declare namespace jsrsasign {
      * x.aExtInfo →
      * [ { oid: "2.5.29,19", critical: true, vidx: 2504 }, ... ]
      */
-    parseExt(): void;
+    parseExt(params: {oid: string; critical: boolean; vidx: number}): void;
 
     /**
      * get a X.509v3 extesion information such as extension OID, criticality and value index for specified oid or name.
@@ -250,7 +250,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtBasicConstraints() → { cA: true, pathLen: 3 };
      */
-    getExtBasicConstraints(): any[];
+    getExtBasicConstraints(): {cA: boolean; pathLen: number};
 
     /**
      * get KeyUsage extension value as binary string in the certificate
