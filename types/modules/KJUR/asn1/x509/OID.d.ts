@@ -28,24 +28,24 @@ declare namespace jsrsasign.KJUR.asn1.x509 {
   const OID: {
     /** for short attribute type name and oid (ex. 'C' and '2.5.4.6') */
     readonly atype2oidList: {
-      CN: string;
-      L: string;
-      ST: string;
-      O: string;
-      OU: string;
+      businessCategory: string;
       C: string;
-      STREET: string;
+      CN: string;
       DC: string;
-      UID: string;
-      SN: string;
       DN: string;
       E: string;
-      businessCategory: string;
-      postalCode: string;
-      serialNumber: string;
+      jurisdictionOfIncorporationC: string;
       jurisdictionOfIncorporationL: string;
       jurisdictionOfIncorporationSP: string;
-      jurisdictionOfIncorporationC: string;
+      L: string;
+      O: string;
+      OU: string;
+      postalCode: string;
+      serialNumber: string;
+      SN: string;
+      ST: string;
+      STREET: string;
+      UID: string;
     };
 
     /** for oid name and oid (ex. 'keyUsage' and '2.5.29.15') */

@@ -450,6 +450,8 @@ declare namespace jsrsasign {
      * // if you need RFC 7638 JWK thumprint as kid do like this:
      * jwkPub2.kid = KJUR.jws.JWS.getJWKthumbprint(jwkPub2);
      */
-    static getJWKFromKey(keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA): {};
+    static getJWKFromKey(
+      keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
+    ): KJUR.jws.JWS.JsonWebKey;
   }
 }

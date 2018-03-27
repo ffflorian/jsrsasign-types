@@ -7,10 +7,10 @@ declare namespace jsrsasign.KJUR.crypto {
       md5: string;
       ripemd160: string;
       sha1: string;
+      sha224: string;
       sha256: string;
       sha384: string;
       sha512: string;
-      sha224: string;
     };
 
     /** associative array of default provider name for each hash and signature algorithms */
@@ -57,12 +57,12 @@ declare namespace jsrsasign.KJUR.crypto {
 
     CRYPTOJSMESSAGEDIGESTNAME: {
       md5: string;
+      ripemd160: string;
       sha1: string;
       sha224: string;
       sha256: string;
       sha384: string;
       sha512: string;
-      ripemd160: string;
     };
 
     /**
