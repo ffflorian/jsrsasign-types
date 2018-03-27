@@ -101,7 +101,11 @@ declare namespace jsrsasign {
      *        DEFAULT is -1. (NOTE: OpenSSL's default is -2.)
      * @return returns hexadecimal string of signature value.
      */
-    static signWithMessageHashPSS(hHash: string, hashAlg: string, sLen: number): string;
+    static signWithMessageHashPSS(
+      hHash: string,
+      hashAlg: string,
+      sLen: number
+    ): string;
 
     /**
      * verifies a sigature for a message string with RSA public key.
@@ -126,7 +130,12 @@ declare namespace jsrsasign {
      *        DEFAULT is -1. (NOTE: OpenSSL's default is -2.)
      * @return returns true if valid, otherwise false
      */
-    static verifyPSS(sMsg: string, hSig: string, hashAlg: string, sLen: number): boolean;
+    static verifyPSS(
+      sMsg: string,
+      hSig: string,
+      hashAlg: string,
+      sLen: number
+    ): boolean;
 
     /**
      * verifies a sigature for a message string with RSA public key.
@@ -151,6 +160,11 @@ declare namespace jsrsasign {
      *        DEFAULT is -1 (NOTE: OpenSSL's default is -2.)
      * @return returns true if valid, otherwise false
      */
-    static verifyWithMessageHashPSS(hHash: string, hSig: string, hashAlg: string, sLen: number): boolean;
+    static verifyWithMessageHashPSS(
+      hHash: string,
+      hSig: string,
+      hashAlg: string,
+      sLen: number
+    ): boolean;
   }
 }

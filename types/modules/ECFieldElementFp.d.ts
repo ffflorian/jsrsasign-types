@@ -1,4 +1,3 @@
 declare namespace jsrsasign {
-  class ECFieldElementFp {
-  }
+  class ECFieldElementFp {}
 }

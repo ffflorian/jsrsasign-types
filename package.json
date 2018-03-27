@@ -6,13 +6,15 @@
   },
   "devDependencies": {
     "dtslint": "0.2.0",
-    "jsrsasign": "8.0.7"
+    "jsrsasign": "8.0.7",
+    "prettier": "1.11.1"
   },
   "license": "MIT",
   "main": "index.js",
   "name": "jsrsasign-types",
-  "repository": "git@github.com:ffflorian/jsrsasign-types",
+  "repository": "https://github.com/ffflorian/jsrsasign-types",
   "scripts": {
+    "prettier": "prettier --ignore-path .gitignore --write types/**/*.ts",
     "test": "dtslint types"
   },
   "version": "1.0.0"
