@@ -14,7 +14,7 @@
   "name": "jsrsasign-types",
   "repository": "https://github.com/ffflorian/jsrsasign-types",
   "scripts": {
-    "prettier": "prettier --ignore-path .gitignore --write types/**/*.ts",
+    "prettier": "prettier --ignore-path .gitignore --write 'types/**/*.d.ts'",
     "test": "dtslint types"
   },
   "version": "1.0.0"

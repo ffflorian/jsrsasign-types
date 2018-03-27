@@ -9,7 +9,5 @@
 /// <reference path="./Util.d.ts" />
 
 declare namespace jsrsasign.KJUR {
-  namespace crypto {
-    //
-  }
+  namespace crypto {  }
 }

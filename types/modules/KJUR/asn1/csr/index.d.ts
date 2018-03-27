@@ -25,5 +25,6 @@ declare namespace jsrsasign.KJUR.asn1 {
    * get your certificate signing request (CSR/PKCS#10) file.
    */
   namespace csr {
+    //
   }
 }

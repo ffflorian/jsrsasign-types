@@ -22,12 +22,16 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
    * o = new KJUR.asn1.ocsp.Request({namehash: "1a...", keyhash: "ad...", serial: "1234", alg: "sha256"});
    */
   class Request extends ASN1Object {
-    constructor(params?: CertificateRequest | {
-      alg: string;
-      keyhash: string;
-      namehash: string;
-      serial: string;
-    });
+    constructor(
+      params?:
+        | CertificateRequest
+        | {
+            alg: string;
+            keyhash: string;
+            namehash: string;
+            serial: string;
+          }
+    );
 
     getEncodedHex(): string;
   }

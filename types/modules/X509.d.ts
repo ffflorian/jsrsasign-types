@@ -316,7 +316,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(sCertPEM); // parseExt() will also be called internally.
      * x.getExtAuthorityKeyIdentifier() → { kid: "1234abcd..." }
      */
-    getExtAuthorityKeyIdentifier(): { kid: string } | null;
+    getExtAuthorityKeyIdentifier(): {kid: string} | null;
 
     /**
      * get extKeyUsage value as array of name string in the certificate
@@ -526,9 +526,7 @@ declare namespace jsrsasign {
      * @param h hexadecimal string of X.509 certificate for RSA/ECDSA/DSA public key
      * @return returns RSAKey/KJUR.crypto.{ECDSA,DSA} object of public key
      */
-    static getPublicKeyFromCertHex(
-      h: string
-    ): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
+    static getPublicKeyFromCertHex(h: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
     /**
      * get RSA/DSA/ECDSA public key object from PEM certificate string
@@ -537,9 +535,7 @@ declare namespace jsrsasign {
      * @description
      * NOTE: DSA is also supported since x509 1.1.2.
      */
-    static getPublicKeyFromCertPEM(
-      sCertPEM: string
-    ): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
+    static getPublicKeyFromCertPEM(sCertPEM: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
     /**
      * get public key information from PEM certificate

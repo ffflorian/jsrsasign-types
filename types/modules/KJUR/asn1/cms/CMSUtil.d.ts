@@ -23,20 +23,26 @@ declare namespace jsrsasign.KJUR.asn1.cms {
      *   }]
      * });
      */
-    function newSignedData(param?: {
+    function SignedData(param?: {
       content: StringParam;
       certs: string[];
       signerInfos: Array<{
         hashAlg: string;
         sAttr: {
           SigningTime: TypeParam | StringParam;
-          SigningCertificateV2: ArrayParam<string> | { array: string[]; hashalg: string } | SigningCertificateV2;
-          SignaturePolicyIdentifier: { oid: string; hash: { alg: string; hash: string } | cades.SignaturePolicyIdentifier };
-        },
+          SigningCertificateV2:
+            | ArrayParam<string>
+            | {array: string[]; hashalg: string}
+            | SigningCertificateV2;
+          SignaturePolicyIdentifier: {
+            oid: string;
+            hash: {alg: string; hash: string} | cades.SignaturePolicyIdentifier;
+          };
+        };
         signerCert: string;
-        sigAlg: string,
+        sigAlg: string;
         signerPrvKey: string;
-      }>
+      }>;
     }): SignedData;
 
     /**
@@ -63,10 +69,12 @@ declare namespace jsrsasign.KJUR.asn1.cms {
      *   ]
      * }
      */
-    function verifySignedData(param?: { cms: string }): {
-      isValid: boolean,
-      parse: any
-      signerInfos: [any]
+    function verifySignedData(param?: {
+      cms: string;
+    }): {
+      isValid: boolean;
+      parse: any;
+      signerInfos: [any];
     };
   }
 }

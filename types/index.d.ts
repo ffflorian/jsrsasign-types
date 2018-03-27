@@ -2,7 +2,7 @@
 // Project: https://github.com/kjur/jsrsasign
 // Definitions by: Florian Keller <https://github.com/ffflorian>
 // Definitions: https://github.com/ffflorian/jsrsasign-types
-// TypeScript version: 2.7
+// TypeScript Version: 2.7
 
 /// <reference path="./jsrsasign.d.ts" />
 /// <reference path="./modules/BigInteger.d.ts" />

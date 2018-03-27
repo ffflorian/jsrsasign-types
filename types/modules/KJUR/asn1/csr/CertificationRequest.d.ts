@@ -23,7 +23,7 @@ declare namespace jsrsasign.KJUR.asn1.csr {
    * //   attributes    [0] Attributes{{ CRIAttributes }} }
    */
   class CertificationRequest extends ASN1Object {
-    constructor(params?: { 'csrinfo': CertificationRequestInfo });
+    constructor(params?: {csrinfo: CertificationRequestInfo});
 
     /**
      * sign CertificationRequest and set signature value internally

@@ -17,7 +17,9 @@ declare namespace jsrsasign.KJUR.asn1.cades {
    * o = new KJUR.asn1.cades.OtherHash({cert: certPEM});
    */
   class OtherHash extends ASN1Object {
-    constructor(params?: string | { alg: string; hash: string } | { alg: string; cert: string } | { cert: string });
+    constructor(
+      params?: string | {alg: string; hash: string} | {alg: string; cert: string} | {cert: string}
+    );
     /**
      * set value by PEM string of certificate
      * @param certPEM PEM string of certificate

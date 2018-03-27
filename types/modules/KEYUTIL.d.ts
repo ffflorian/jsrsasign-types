@@ -201,10 +201,7 @@ declare namespace jsrsasign {
      * // key with PBKDF2 with TripleDES
      * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
      */
-    _getPlainPKCS8HexFromEncryptedPKCS8PEM(
-      pkcs8PEM: string,
-      passcode: string
-    ): string;
+    _getPlainPKCS8HexFromEncryptedPKCS8PEM(pkcs8PEM: string, passcode: string): string;
 
     /**
      * get RSAKey/ECDSA private key object from encrypted PEM PKCS#8 private key
@@ -212,10 +209,7 @@ declare namespace jsrsasign {
      * @param passcode passcode string to decrypt key
      * @return RSAKey or KJUR.crypto.ECDSA private key object
      */
-    getKeyFromEncryptedPKCS8PEM(
-      pkcs8PEM: string,
-      passcode: string
-    ): RSAKey | KJUR.crypto.ECDSA;
+    getKeyFromEncryptedPKCS8PEM(pkcs8PEM: string, passcode: string): RSAKey | KJUR.crypto.ECDSA;
 
     /**
      * parse hexadecimal string of plain PKCS#8 private key
@@ -236,18 +230,14 @@ declare namespace jsrsasign {
      * @param pkcs8PEM string of plain PEM formatted PKCS#8 private key
      * @return RSAKey or KJUR.crypto.ECDSA private key object
      */
-    getKeyFromPlainPrivatePKCS8PEM(
-      prvKeyPEM: string
-    ): RSAKey | KJUR.crypto.ECDSA;
+    getKeyFromPlainPrivatePKCS8PEM(prvKeyPEM: string): RSAKey | KJUR.crypto.ECDSA;
 
     /**
      * get RSAKey/DSA/ECDSA private key object from HEX plain PEM PKCS#8 private key
      * @param prvKeyHex hexadecimal string of plain PKCS#8 private key
      * @return RSAKey or KJUR.crypto.{DSA,ECDSA} private key object
      */
-    getKeyFromPlainPrivatePKCS8Hex(
-      prvKeyHex: string
-    ): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
+    getKeyFromPlainPrivatePKCS8Hex(prvKeyHex: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
     /**
      * get RSAKey/DSA/ECDSA public key object from hexadecimal string of PKCS#8 public key
@@ -377,9 +367,9 @@ declare namespace jsrsasign {
      *
      */
     static generateKeypair(
-      alg: "RSA" | "EC",
+      alg: 'RSA' | 'EC',
       keylenOrCurve: number
-    ): { prvKeyObj: RSAKey; pubKeyObj: RSAKey };
+    ): {prvKeyObj: RSAKey; pubKeyObj: RSAKey};
 
     /**
      * get PEM formatted private or public key file from a RSA/ECDSA/DSA key object
@@ -420,18 +410,14 @@ declare namespace jsrsasign {
      * @param csrPEM PEM formatted PKCS#10 CSR string
      * @return RSAKey/DSA/ECDSA public key object
      */
-    static getKeyFromCSRPEM(
-      csrPEM: string
-    ): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
+    static getKeyFromCSRPEM(csrPEM: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
     /**
      * get RSAKey/DSA/ECDSA public key object from hexadecimal string of PKCS#10 CSR
      * @param csrHex hexadecimal string of PKCS#10 CSR
      * @return RSAKey/DSA/ECDSA public key object
      */
-    static getKeyFromCSRHex(
-      csrHex: string
-    ): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
+    static getKeyFromCSRHex(csrHex: string): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;
 
     /**
      * parse hexadecimal string of PKCS#10 CSR (certificate signing request)
@@ -464,8 +450,6 @@ declare namespace jsrsasign {
      * // if you need RFC 7638 JWK thumprint as kid do like this:
      * jwkPub2.kid = KJUR.jws.JWS.getJWKthumbprint(jwkPub2);
      */
-    static getJWKFromKey(
-      keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA
-    ): {};
+    static getJWKFromKey(keyObj: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA): {};
   }
 }

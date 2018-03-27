@@ -24,6 +24,6 @@ declare namespace jsrsasign.KJUR.asn1.cades {
    * });
    */
   class SignaturePolicyIdentifier extends cms.Attribute {
-    constructor(params?: { oid: string; hash: { alg: string; hash: string } });
+    constructor(params?: {oid: string; hash: {alg: string; hash: string}});
   }
 }

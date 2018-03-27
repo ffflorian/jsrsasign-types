@@ -17,6 +17,7 @@ declare namespace jsrsasign.KJUR.asn1 {
 
   interface DateParam {
     date: Date;
+    withMillis?: boolean;
   }
 
   interface ExplicitParam {
@@ -241,7 +242,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * NOTE: 'params' can be omitted.
    */
   class DERObjectIdentifier extends ASN1Object {
-    constructor(params?: ObjectIdentifierParam | HexParam | NameParam)
+    constructor(params?: ObjectIdentifierParam | HexParam | NameParam);
 
     /**
      * set value by a hexadecimal string
@@ -289,7 +290,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * new KJUR.asn1.DEREnumerated({hex: '1fad'});
    */
   class DEREnumerated extends ASN1Object {
-    constructor(params?: IntegerParam | HexParam | number)
+    constructor(params?: IntegerParam | HexParam | number);
 
     /**
      * set value by Tom Wu's BigInteger object
@@ -376,7 +377,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * d4 = new KJUR.asn1.DERUTCTime('130430125959Z');
    */
   class DERUTCTime extends DERAbstractTime {
-    constructor(params?: StringParam | HexParam | DateParam | string)
+    constructor(params?: StringParam | HexParam | DateParam | string);
 
     /**
      * set value by a Date object
@@ -408,7 +409,7 @@ declare namespace jsrsasign.KJUR.asn1 {
   class DERGeneralizedTime extends DERAbstractTime {
     withMillis: boolean;
 
-    constructor(params: StringParam | HexParam | DateParam | string)
+    constructor(params: StringParam | HexParam | DateParam | string);
 
     /**
      * set value by a Date object
@@ -455,7 +456,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * NOTE2: sortflag is supported since 1.0.5.
    */
   class DERSet extends DERAbstractStructured {
-    constructor(params?: ArrayParam<ASN1Object>)
+    constructor(params?: ArrayParam<ASN1Object>);
   }
 
   /**
@@ -480,7 +481,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * hex = d2.getEncodedHex();
    */
   class DERTaggedObject extends ASN1Object {
-    constructor(params?: TagParam | ExplicitParam | ASN1ObjectParam)
+    constructor(params?: TagParam | ExplicitParam | ASN1ObjectParam);
 
     /**
      * set value by an ASN1Object
@@ -511,25 +512,25 @@ declare namespace jsrsasign.KJUR.asn1 {
 
     constructor(params?: StringParam | HexParam);
 
-      /**
-       * get string value of this string object
-       * @return string value of this string object
-       */
-      getString(): string;
+    /**
+     * get string value of this string object
+     * @return string value of this string object
+     */
+    getString(): string;
 
-      /**
-       * set value by a string
-       * @param newS value by a string to set
-       */
-      setString(newS: string): void;
+    /**
+     * set value by a string
+     * @param newS value by a string to set
+     */
+    setString(newS: string): void;
 
-      /**
-       * set value by a hexadecimal string
-       * @param newHexString value by a hexadecimal string to set
-       */
-      setStringHex(newHexString: string): void;
+    /**
+     * set value by a hexadecimal string
+     * @param newHexString value by a hexadecimal string to set
+     */
+    setStringHex(newHexString: string): void;
 
-      getFreshValueHex(): string;
+    getFreshValueHex(): string;
   }
 
   /**
@@ -539,40 +540,47 @@ declare namespace jsrsasign.KJUR.asn1 {
   class DERAbstractTime extends ASN1Object {
     constructor(params: StringParam);
 
-      /**
-       * format date string by Data object
-       * @param type 'utc' or 'gen'
-       * @param withMillis flag for with millisections or not
-       * @description
-       * 'withMillis' flag is supported from asn1 1.0.6.
-       */
-      private formatDate(dateObject: Date, type: 'utc' | 'gen', withMillis: boolean): string;
-      private zeroPadding(s: string, len: number): string;
+    /**
+     * format date string by Data object
+     * @param type 'utc' or 'gen'
+     * @param withMillis flag for with millisections or not
+     * @description
+     * 'withMillis' flag is supported from asn1 1.0.6.
+     */
+    private formatDate(dateObject: Date, type: 'utc' | 'gen', withMillis: boolean): string;
+    private zeroPadding(s: string, len: number): string;
 
-      /**
-       * get string value of this string object
-       * @return string value of this time object
-       */
-      getString(): string;
+    /**
+     * get string value of this string object
+     * @return string value of this time object
+     */
+    getString(): string;
 
-      /**
-       * set value by a string
-       * @param newS value by a string to set such like "130430235959Z"
-       */
-      setString(newS: string): void;
+    /**
+     * set value by a string
+     * @param newS value by a string to set such like "130430235959Z"
+     */
+    setString(newS: string): void;
 
-      /**
-       * set value by a Date object
-       * @param year year of date (ex. 2013)
-       * @param month month of date between 1 and 12 (ex. 12)
-       * @param day day of month
-       * @param hour hours of date
-       * @param min minutes of date
-       * @param sec seconds of date
-       */
-      setByDateValue(year: number, month: number, day: number, hour: number, min: number, sec: number): void;
+    /**
+     * set value by a Date object
+     * @param year year of date (ex. 2013)
+     * @param month month of date between 1 and 12 (ex. 12)
+     * @param day day of month
+     * @param hour hours of date
+     * @param min minutes of date
+     * @param sec seconds of date
+     */
+    setByDateValue(
+      year: number,
+      month: number,
+      day: number,
+      hour: number,
+      min: number,
+      sec: number
+    ): void;
 
-      getFreshValueHex(): string;
+    getFreshValueHex(): string;
   }
 
   /** base class for ASN.1 DER structured class */
@@ -581,16 +589,16 @@ declare namespace jsrsasign.KJUR.asn1 {
 
     constructor(asn1Array?: ArrayParam<ASN1Object>);
 
-      /**
-       * set value by array of ASN1Object
-       * @param asn1ObjectArray array of ASN1Object to set
-       */
-      setByASN1ObjectArray(asn1ObjectArray: ASN1Object[]): string;
+    /**
+     * set value by array of ASN1Object
+     * @param asn1ObjectArray array of ASN1Object to set
+     */
+    setByASN1ObjectArray(asn1ObjectArray: ASN1Object[]): string;
 
-      /**
-       * append an ASN1Object to internal array
-       * @param asn1Object object to add
-       */
-      appendASN1Object(asn1Object: ASN1Object): void;
+    /**
+     * append an ASN1Object to internal array
+     * @param asn1Object object to add
+     */
+    appendASN1Object(asn1Object: ASN1Object): void;
   }
 }

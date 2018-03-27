@@ -23,7 +23,9 @@ declare namespace jsrsasign.KJUR.asn1.cades {
      * info = KJUR.asn1.cades.CAdESUtil.parseSignedDataForAddingUnsigned(beshex);
      * sd = info.obj;
      */
-    function parseSignedDataForAddingUnsigned(hex: string): {
+    function parseSignedDataForAddingUnsigned(
+      hex: string
+    ): {
       version: string;
       algs: string;
       certs: string;
@@ -56,14 +58,18 @@ declare namespace jsrsasign.KJUR.asn1.cades {
      * future version. That's way this version provides support
      * for CAdES-T and not for CAdES-C.
      */
-    function parseSignerInfoForAddingUnsigned(hex: string, iSI: number, nth: number): {
+    function parseSignerInfoForAddingUnsigned(
+      hex: string,
+      iSI: number,
+      nth: number
+    ): {
       version: string;
       si: string;
       digalg: string;
       sattrs: string;
       sigalg: string;
       sigval: string;
-      obj: cms.SignerInfo
+      obj: cms.SignerInfo;
     };
   }
 }

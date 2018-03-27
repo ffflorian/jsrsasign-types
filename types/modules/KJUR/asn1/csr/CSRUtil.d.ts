@@ -71,12 +71,12 @@ declare namespace jsrsasign.KJUR.asn1.csr {
      * });
      */
     function newCSRPEM(param?: {
-        subject: any,
-        ext?: any[],
-        sbjpubkey: any,
-        sigalg: string,
-        sbjprvkey: any,
-      }): string;
+      subject: any;
+      ext?: any[];
+      sbjpubkey: any;
+      sigalg: string;
+      sbjprvkey: any;
+    }): string;
 
     /**
      * get field values from CSR/PKCS#10 PEM string

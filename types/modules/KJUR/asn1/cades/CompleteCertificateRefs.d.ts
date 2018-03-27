@@ -12,7 +12,7 @@ declare namespace jsrsasign.KJUR.asn1.cades {
    * o = new KJUR.asn1.cades.CompleteCertificateRefs([certPEM1,certPEM2]);
    */
   class CompleteCertificateRefs extends cms.Attribute {
-    constructor(params?: { length: number });
+    constructor(params?: {length: number});
 
     /**
      * set value by array

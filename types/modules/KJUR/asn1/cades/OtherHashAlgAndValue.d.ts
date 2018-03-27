@@ -11,6 +11,6 @@ declare namespace jsrsasign.KJUR.asn1.cades {
    * ```
    */
   class OtherHashAlgAndValue extends ASN1Object {
-    constructor(params?: { alg: string; hash: string });
+    constructor(params?: {alg: string; hash: string});
   }
 }

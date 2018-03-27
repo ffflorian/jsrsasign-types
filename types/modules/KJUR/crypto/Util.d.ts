@@ -3,14 +3,14 @@ declare namespace jsrsasign.KJUR.crypto {
   const Util: {
     /** PKCS#1 DigestInfo heading hexadecimal bytes for each hash algorithms */
     DIGESTINFOHEAD: {
-      md2: string,
-      md5: string,
-      ripemd160: string,
-      sha1: string,
-      sha256: string,
-      sha384: string,
-      sha512: string,
-      sha224: string,
+      md2: string;
+      md5: string;
+      ripemd160: string;
+      sha1: string;
+      sha256: string;
+      sha384: string;
+      sha512: string;
+      sha224: string;
     };
 
     /** associative array of default provider name for each hash and signature algorithms */

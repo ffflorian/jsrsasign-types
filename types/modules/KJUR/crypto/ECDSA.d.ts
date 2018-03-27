@@ -96,9 +96,9 @@ declare namespace jsrsasign.KJUR.crypto {
      *   s: BigInteger
      * }
      */
-    parseSig(sig: string): { r: BigInteger, s: BigInteger };
+    parseSig(sig: string): {r: BigInteger; s: BigInteger};
 
-    parseSigCompact(sig: string): {r: BigInteger, s: BigInteger, i: number};
+    parseSigCompact(sig: string): {r: BigInteger; s: BigInteger; i: number};
 
     /**
      * read an ASN.1 hexadecimal string of PKCS#1/5 plain ECC private key
@@ -135,7 +135,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * var biR = sig.r; // BigInteger object for 'r' field of signature.
      * var biS = sig.s; // BigInteger object for 's' field of signature.
      */
-    static parseSigHex(sigHex: string): { r: BigInteger, s: BigInteger };
+    static parseSigHex(sigHex: string): {r: BigInteger; s: BigInteger};
 
     /**
      * parse ASN.1 DER encoded ECDSA signature
@@ -147,7 +147,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * var hR = sig.r; // hexadecimal string for 'r' field of signature.
      * var hS = sig.s; // hexadecimal string for 's' field of signature.
      */
-    static parseSigHexInHexRS(sigHex: string): { r: BigInteger, s: BigInteger };
+    static parseSigHexInHexRS(sigHex: string): {r: BigInteger; s: BigInteger};
 
     /**
      * convert hexadecimal ASN.1 encoded signature to concatinated signature

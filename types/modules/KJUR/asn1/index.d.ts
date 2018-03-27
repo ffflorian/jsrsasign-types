@@ -11,8 +11,8 @@ declare namespace jsrsasign.KJUR {
    *
    * This is ITU-T X.690 ASN.1 DER encoder class library and
    * class structure and methods is very similar to
-   * org.bouncycastle.asn1 package of
-   * well known BouncyCaslte Cryptography Library.
+   * `org.bouncycastle.asn1` package of
+   * well known BouncyCastle Cryptography Library.
    *
    * __PROVIDING ASN.1 PRIMITIVES__
    *
