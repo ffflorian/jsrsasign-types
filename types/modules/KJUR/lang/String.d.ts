@@ -8,16 +8,13 @@ declare namespace lang {
    *
    * This class provides static methods for string utility.
    *
-   * <b>STRING TYPE CHECKERS</b>
-   *
+   * __STRING TYPE CHECKERS__
    *
    * - `KJUR.lang.String.isInteger` - check whether argument is an integer
    * - `KJUR.lang.String.isHex` - check whether argument is a hexadecimal string
    * - `KJUR.lang.String.isBase64` - check whether argument is a Base64 encoded string
    * - `KJUR.lang.String.isBase64URL` - check whether argument is a Base64URL encoded string
    * - `KJUR.lang.String.isIntegerArray` - check whether argument is an array of integers
-   *
-   *
    */
   namespace String {
     /**
