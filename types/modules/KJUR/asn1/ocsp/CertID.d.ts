@@ -14,14 +14,14 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
    * @param params associative array of parameters
    * @description
    * CertID ASN.1 class is defined in
-   * <a href="https://tools.ietf.org/html/rfc6960#section-4.1.1">RFC 6960 4.1.1</a>.
-   *
+   * [RFC 6960 4.1.1](https://tools.ietf.org/html/rfc6960#section-4.1.1).
+   * ```
    * CertID ::= SEQUENCE {
    *   hashAlgorithm   AlgorithmIdentifier,
    *   issuerNameHash  OCTET STRING, -- Hash of issuer's DN
    *   issuerKeyHash   OCTET STRING, -- Hash of issuer's public key
    *   serialNumber    CertificateSerialNumber }
-   *
+   * ```
    * @example
    * // default constructor
    * o = new KJUR.asn1.ocsp.CertID();

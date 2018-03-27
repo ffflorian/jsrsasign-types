@@ -326,7 +326,7 @@ declare namespace jsrsasign {
      * - JWT plain RSA private key with P/Q/DP/DQ/COEFF
      * - JWT plain RSA private key without P/Q/DP/DQ/COEFF (since jsrsasign 5.0.0)
      *
-     * NOTE1: <a href="https://tools.ietf.org/html/rfc7517">RFC 7517 JSON Web Key(JWK)</a> support for RSA/ECC private/public key from jsrsasign 4.8.1.
+     * NOTE1: [RFC 7517 JSON Web Key(JWK)](https://tools.ietf.org/html/rfc7517) support for RSA/ECC private/public key from jsrsasign 4.8.1.
      * NOTE2: X509v1 support is added since jsrsasign 5.0.11.
      *
      * @example

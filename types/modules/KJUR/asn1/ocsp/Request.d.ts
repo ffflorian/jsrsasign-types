@@ -4,13 +4,13 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
    * @param params associative array of parameters
    * @description
    * Request ASN.1 class is defined in
-   * <a href="https://tools.ietf.org/html/rfc6960#section-4.1.1">RFC 6960 4.1.1</a>.
+   * [RFC 6960 4.1.1](https://tools.ietf.org/html/rfc6960#section-4.1.1).
    * singleRequestExtensions is not supported yet in this version such as nonce.
-   *
+   * ```
    * Request ::= SEQUENCE {
    *   reqCert                  CertID,
    *   singleRequestExtensions  [0] EXPLICIT Extensions OPTIONAL }
-   *
+   * ```
    * @example
    * // default constructor
    * o = new KJUR.asn1.ocsp.Request();

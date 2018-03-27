@@ -53,7 +53,7 @@ declare namespace jsrsasign.KJUR.asn1.cms {
      *
      * @example
      * KJUR.asn1.cms.CMSUtil.verifySignedData({ cms: "3082058a..." })
-     * &rarr;
+     * →
      * {
      *   isValid: true,
      *   parse: ... // parsed data

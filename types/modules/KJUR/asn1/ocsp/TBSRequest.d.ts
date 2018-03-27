@@ -4,14 +4,14 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
    * @param params associative array of parameters
    * @description
    * TBSRequest ASN.1 class is defined in
-   * <a href="https://tools.ietf.org/html/rfc6960#section-4.1.1">RFC 6960 4.1.1</a>.
-   *
+   * [RFC 6960 4.1.1](https://tools.ietf.org/html/rfc6960#section-4.1.1).
+   * ```
    * TBSRequest ::= SEQUENCE {
    *   version            [0] EXPLICIT Version DEFAULT v1,
    *   requestorName      [1] EXPLICIT GeneralName OPTIONAL,
    *   requestList            SEQUENCE OF Request,
    *   requestExtensions  [2] EXPLICIT Extensions OPTIONAL }
-   *
+   * ```
    * @example
    * // default constructor
    * o = new KJUR.asn1.ocsp.TBSRequest();
