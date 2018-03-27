@@ -1,5 +1,4 @@
 declare namespace jsrsasign.KJUR.asn1.cades {
-
   /**
    * class for OtherCertID ASN.1 object
    * @param params associative array of parameters
