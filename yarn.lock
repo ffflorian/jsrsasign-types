@@ -199,9 +199,9 @@ jsonfile@^2.1.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsrsasign@8.0.7:
-  version "8.0.7"
-  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.7.tgz#44a8e57def3e7794da8bb8deb42e8e6363d759bd"
+jsrsasign@8.0.6:
+  version "8.0.6"
+  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.6.tgz#4586f00823e302e599a244a47be20c61aadd0fcf"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -316,9 +316,9 @@ tsutils@^2.12.1:
   dependencies:
     tslib "^1.8.1"
 
-typescript@2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
+typescript@2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.8.1.tgz#6160e4f8f195d5ba81d4876f9c0cc1fbc0820624"
 
 typescript@next:
   version "2.9.0-dev.20180325"
