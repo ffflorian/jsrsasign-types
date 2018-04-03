@@ -9,6 +9,9 @@
     "jsrsasign": "8.0.6",
     "prettier": "1.11.1"
   },
+  "greenkeeper": {
+    "ignore": [ "jsrsasign" ]
+  },
   "license": "MIT",
   "main": "index.js",
   "name": "jsrsasign-types",
