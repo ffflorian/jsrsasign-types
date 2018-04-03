@@ -199,9 +199,9 @@ jsonfile@^2.1.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsrsasign@8.0.6:
-  version "8.0.6"
-  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.6.tgz#4586f00823e302e599a244a47be20c61aadd0fcf"
+jsrsasign@8.0.8:
+  version "8.0.8"
+  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.8.tgz#a93f3ceeb206afa1016180db937818527e50e675"
 
 minimatch@^3.0.4:
   version "3.0.4"
