@@ -1,7 +1,7 @@
 {
   "author": "Florian Keller <github@floriankeller.de>",
   "dependencies": {
-    "@types/bigi": "1.4.0",
+    "@types/bigi": "1.4.1",
     "typescript": "2.8.1"
   },
   "devDependencies": {
