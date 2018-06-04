@@ -2,7 +2,7 @@
   "author": "Florian Keller <github@floriankeller.de>",
   "dependencies": {
     "@types/bigi": "1.4.1",
-    "typescript": "2.8.3"
+    "typescript": "2.9.1"
   },
   "devDependencies": {
     "dtslint": "0.3.0",
