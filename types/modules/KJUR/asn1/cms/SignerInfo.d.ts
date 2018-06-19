@@ -58,9 +58,9 @@ declare namespace jsrsasign.KJUR.asn1.cms {
     sign(
       keyParam:
         | RSAKey
-        | KJUR.crypto.ECDSA
-        | KJUR.crypto.DSA
-        | KJUR.jws.JWS.JsonWebKey
+        | crypto.ECDSA
+        | crypto.DSA
+        | jws.JWS.JsonWebKey
         | {n: string; e: string}
         | string,
       sigAlg: string

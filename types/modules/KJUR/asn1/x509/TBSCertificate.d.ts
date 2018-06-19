@@ -93,9 +93,9 @@ declare namespace jsrsasign.KJUR.asn1.x509 {
     setSubjectPublicKeyByGetKey(
       keyParam:
         | RSAKey
-        | KJUR.crypto.ECDSA
-        | KJUR.crypto.DSA
-        | KJUR.jws.JWS.JsonWebKey
+        | crypto.ECDSA
+        | crypto.DSA
+        | jws.JWS.JsonWebKey
         | {n: string; e: string}
         | string
     ): void;

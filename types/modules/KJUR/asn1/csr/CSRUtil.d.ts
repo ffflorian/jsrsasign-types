@@ -73,24 +73,24 @@ declare namespace jsrsasign.KJUR.asn1.csr {
     function newCSRPEM(param?: {
       subject:
         | StringParam & {certissuer?: string; certsubject?: string}
-        | KJUR.asn1.x509.X500NameParam & {certissuer?: string; certsubject?: string}
+        | x509.X500NameParam & {certissuer?: string; certsubject?: string}
         | {ldapstr: string} & {certissuer?: string; certsubject?: string};
       ext?: Array<{
         subjectAltName: ArrayParam<{dns: string}>;
       }>;
       sbjpubkey:
         | RSAKey
-        | KJUR.crypto.ECDSA
-        | KJUR.crypto.DSA
-        | KJUR.jws.JWS.JsonWebKey
+        | crypto.ECDSA
+        | crypto.DSA
+        | jws.JWS.JsonWebKey
         | {n: string; e: string}
         | string;
       sigalg: string;
       sbjprvkey:
         | RSAKey
-        | KJUR.crypto.ECDSA
-        | KJUR.crypto.DSA
-        | KJUR.jws.JWS.JsonWebKey
+        | crypto.ECDSA
+        | crypto.DSA
+        | jws.JWS.JsonWebKey
         | {n: string; e: string}
         | string;
     }): string;

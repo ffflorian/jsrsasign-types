@@ -45,9 +45,9 @@ declare namespace jsrsasign.KJUR.asn1.csr {
     setSubjectPublicKeyByGetKey(
       keyParam:
         | RSAKey
-        | KJUR.crypto.ECDSA
-        | KJUR.crypto.DSA
-        | KJUR.jws.JWS.JsonWebKey
+        | crypto.ECDSA
+        | crypto.DSA
+        | jws.JWS.JsonWebKey
         | {n: string; e: string}
         | string
     ): void;
@@ -70,7 +70,7 @@ declare namespace jsrsasign.KJUR.asn1.csr {
       name: string,
       extParams:
         | {ca: boolean; critical: boolean}
-        | asn1.BinParam
+        | BinParam
         | x509.UriParam
         | ArrayParam<{name: string}>
         | {kid: string}
