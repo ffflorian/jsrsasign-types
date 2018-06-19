@@ -59,7 +59,7 @@ declare namespace jsrsasign.KJUR.crypto {
      */
     signHex(hashHex: string, privHex: string): string;
 
-    sign(hash: string, priv: any): number[];
+    sign(hash: string, priv: string | BigInteger): number[];
 
     verifyWithMessageHash(hashHex: string, sigHex: string): boolean;
 
@@ -77,7 +77,12 @@ declare namespace jsrsasign.KJUR.crypto {
 
     verify(hash: string, sig: string, pubkey: string): boolean;
 
-    verifyRaw(e: any, r: any, s: any, Q: any): boolean;
+    verifyRaw(
+      e: string | BigInteger,
+      r: string | BigInteger,
+      s: string | BigInteger,
+      Q: string | BigInteger
+    ): boolean;
 
     /**
      * Serialize a signature into DER format.

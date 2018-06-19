@@ -2,8 +2,8 @@ declare namespace jsrsasign.KJUR.crypto {
   interface ECParameter {
     name: string;
     keylen: number;
-    curve: any; // ECCurveFp
-    G: any; // ECPointFp
+    curve: ECCurveFp;
+    G: ECPointFp;
     n: BigInteger;
     h: BigInteger;
     oid: string | undefined;

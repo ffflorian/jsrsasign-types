@@ -78,7 +78,7 @@ declare namespace jsrsasign.KJUR.asn1.x509 {
      * tbsc.setSubjectPublicKey(keyobj);
      * @see KJUR.asn1.x509.SubjectPublicKeyInfo
      */
-    setSubjectPublicKey(param: any): void;
+    setSubjectPublicKey(param?: RSAKey | crypto.DSA | crypto.ECDSA): void;
 
     /**
      * set subject public key info by RSA/ECDSA/DSA key parameter
@@ -90,7 +90,15 @@ declare namespace jsrsasign.KJUR.asn1.x509 {
      * @see KJUR.asn1.x509.SubjectPublicKeyInfo
      * @see KEYUTIL.getKey
      */
-    setSubjectPublicKeyByGetKey(keyParam: any): void;
+    setSubjectPublicKeyByGetKey(
+      keyParam:
+        | RSAKey
+        | KJUR.crypto.ECDSA
+        | KJUR.crypto.DSA
+        | KJUR.jws.JWS.JsonWebKey
+        | {n: string; e: string}
+        | string
+    ): void;
 
     /**
      * append X.509v3 extension to this object

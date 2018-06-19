@@ -33,9 +33,9 @@ declare namespace jsrsasign.KJUR.crypto {
    * var mac = new KJUR.crypto.Mac({alg: "HmacSHA256", "pass": {"b64u": "Mi02_-...a"}});
    */
   class Mac {
-    constructor(params: any);
+    constructor(params: {alg: string; pass: {[type: string]: string}});
 
-    setAlgAndProvider(alg: any, prov: any): void;
+    setAlgAndProvider(alg: string, prov: string): void;
 
     /**
      * update digest by specified string

@@ -10,7 +10,7 @@ declare namespace jsrsasign.KJUR.asn1.tsp {
       hashAlg: string;
       sigAlg: string;
       signerCert: string;
-      signerPrvKey: any;
+      signerPrvKey: string;
     });
     getTSTHex(msgHex: string, hashAlg: string): string;
   }

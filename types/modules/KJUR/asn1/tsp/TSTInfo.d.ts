@@ -22,21 +22,21 @@ declare namespace jsrsasign.KJUR.asn1.tsp {
    *     messageImprint: {hashAlg: 'sha256', hashMsgHex: '1abc...'},
    *     genTime:   {withMillis: true},     // OPTION
    *     accuracy:  {micros: 500},          // OPTION
-   *     ordering:  true,                   // OPITON
+   *     ordering:  true,                   // OPTION
    *     nonce:     {hex: '52fab1...'},     // OPTION
-   *     tsa:       {str: '/C=US/O=TSA1'}   // OPITON
+   *     tsa:       {str: '/C=US/O=TSA1'}   // OPTION
    * });
    */
   class TSTInfo extends ASN1Object {
     constructor(params: {
-      policy: string;
-      messageImprint: any;
-      genTime?: StringParam | HexParam | DateParam | string;
       accuracy?: {seconds: number; millis: number; micros: number};
-      ordering?: boolean;
+      genTime?: StringParam | HexParam | DateParam | string;
+      messageImprint: {hashAlg: string; hashMsgHex: string};
       nonce?: IntegerParam | BigIntegerParam | HexParam | number;
+      ordering?: boolean;
+      policy: string;
       serialNumber?: IntegerParam | BigIntegerParam | HexParam | number;
-      tsa?: any;
+      tsa?: StringParam;
     });
 
     getEncodedHex(): string;

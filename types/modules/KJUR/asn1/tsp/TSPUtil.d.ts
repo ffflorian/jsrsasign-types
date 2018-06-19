@@ -12,7 +12,7 @@ declare namespace jsrsasign.KJUR.asn1.tsp {
       hashAlg: string;
       sigAlg: string;
       signerCert: string;
-      signerPrvKey: any;
+      signerPrvKey: string;
       tstInfo: TSTInfo;
     }): cms.SignedData;
   }

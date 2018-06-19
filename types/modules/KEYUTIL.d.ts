@@ -235,7 +235,9 @@ declare namespace jsrsasign {
      * - keyidx - string starting index of key in pkcs8PrvHex
      *
      */
-    parsePlainPrivatePKCS8Hex(pkcs8PrvHex: string): any;
+    parsePlainPrivatePKCS8Hex(
+      pkcs8PrvHex: string
+    ): {algoid: string; algparam: string; keyidx: string};
 
     /**
      * get RSAKey/ECDSA private key object from PEM plain PEM PKCS#8 private key
@@ -269,7 +271,7 @@ declare namespace jsrsasign {
      * - e - hexadecimal string of public exponent
      *
      */
-    parsePublicRawRSAKeyHex(pubRawRSAHex: string): any;
+    parsePublicRawRSAKeyHex(pubRawRSAHex: string): {e: string; n: string};
 
     /**
      * parse hexadecimal string of PKCS#8 RSA/EC/DSA public key
@@ -283,7 +285,7 @@ declare namespace jsrsasign {
      * - key - hexadecimal string of public key
      *
      */
-    parsePublicPKCS8Hex(pkcs8PubHex: string): any;
+    parsePublicPKCS8Hex(pkcs8PubHex: string): {algoid: string; algparam: string; key: string};
 
     /**
      * get private or public key object from any arguments
@@ -447,7 +449,7 @@ declare namespace jsrsasign {
      * - p8pubkeyhex - hexadecimal string of subject public key in PKCS#8
      *
      */
-    static parseCSRHex(csrHex: string): any;
+    static parseCSRHex(csrHex: string): {p8pubkeyhex: string};
 
     /**
      * convert from RSAKey/KJUR.crypto.ECDSA public/private key object to RFC 7517 JSON Web Key(JWK)

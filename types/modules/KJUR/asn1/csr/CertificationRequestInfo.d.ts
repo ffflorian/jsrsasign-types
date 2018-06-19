@@ -42,7 +42,15 @@ declare namespace jsrsasign.KJUR.asn1.csr {
      * @see KJUR.asn1.x509.SubjectPublicKeyInfo
      * @see KEYUTIL.getKey
      */
-    setSubjectPublicKeyByGetKey(keyParam: any): void;
+    setSubjectPublicKeyByGetKey(
+      keyParam:
+        | RSAKey
+        | KJUR.crypto.ECDSA
+        | KJUR.crypto.DSA
+        | KJUR.jws.JWS.JsonWebKey
+        | {n: string; e: string}
+        | string
+    ): void;
 
     /**
      * append X.509v3 extension to this object by name and parameters
@@ -58,7 +66,16 @@ declare namespace jsrsasign.KJUR.asn1.csr {
      * o.appendExtensionByName('AuthorityKeyIdentifier', {kid: '1234ab..'});
      * o.appendExtensionByName('AuthorityInfoAccess', {array: [{accessMethod:{oid:...},accessLocation:{uri:...}}]});
      */
-    appendExtensionByName(name: string, extParams: any): void;
+    appendExtensionByName(
+      name: string,
+      extParams:
+        | {ca: boolean; critical: boolean}
+        | asn1.BinParam
+        | x509.UriParam
+        | ArrayParam<{name: string}>
+        | {kid: string}
+        | ArrayParam<{accessMethod: {oid: string}; accessLocation: x509.UriParam}>
+    ): void;
 
     getEncodedHex(): string;
   }

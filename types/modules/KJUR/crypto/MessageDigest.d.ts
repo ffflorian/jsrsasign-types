@@ -39,7 +39,7 @@ declare namespace jsrsasign.KJUR.crypto {
       ripemd160: number;
     };
 
-    constructor(params: any);
+    constructor(params: {alg?: string; prov?: string});
 
     /**
      * set hash algorithm and provider
@@ -65,7 +65,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * // for RIPEMD160
      * md.setAlgAndProvider('ripemd160', 'cryptojs');
      */
-    setAlgAndProvider(alg: any, prov: any): void;
+    setAlgAndProvider(alg: string, prov: string): void;
 
     /**
      * update digest by specified string

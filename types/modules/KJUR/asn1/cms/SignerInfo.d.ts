@@ -55,7 +55,16 @@ declare namespace jsrsasign.KJUR.asn1.cms {
       hashAlg: string;
     }): void;
 
-    sign(keyParam: any, sigAlg: string): void;
+    sign(
+      keyParam:
+        | RSAKey
+        | KJUR.crypto.ECDSA
+        | KJUR.crypto.DSA
+        | KJUR.jws.JWS.JsonWebKey
+        | {n: string; e: string}
+        | string,
+      sigAlg: string
+    ): void;
 
     addUnsigned(attr: Attribute): void;
 
