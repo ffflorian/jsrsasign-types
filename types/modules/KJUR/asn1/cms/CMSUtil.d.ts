@@ -73,8 +73,11 @@ declare namespace jsrsasign.KJUR.asn1.cms {
       cms: string;
     }): {
       isValid: boolean;
-      parse: any;
-      signerInfos: [any];
+      parse: {
+        certsIdx: number;
+        signerInfos: any[];
+      };
+      signerInfos: any[];
     };
   }
 }

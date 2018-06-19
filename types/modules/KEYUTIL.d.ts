@@ -1,4 +1,16 @@
 declare namespace jsrsasign {
+  interface PKCS8Info {
+    /** hexadecimal string of encrypted private key */
+    ciphertext: string;
+    /** encryption algorithm name (currently TripleDES only) */
+    encryptionSchemeAlg: string;
+    /** initial vector for encryption algorithm */
+    encryptionSchemeIV: string;
+    /** iteration count */
+    pkbdf2Iter: string;
+    /** hexadecimal string of PBKDF2 salt */
+    pbkdf2Salt: string;
+  }
   /**
    * class for RSA/ECC/DSA key utility
    * @description
@@ -160,7 +172,7 @@ declare namespace jsrsasign {
      * // key with PBKDF2 with TripleDES
      * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
      */
-    parseHexOfEncryptedPKCS8(passcode: string): any;
+    parseHexOfEncryptedPKCS8(passcode: string): PKCS8Info;
 
     /**
      * generate PBKDF2 key hexstring with specified passcode and information
@@ -183,7 +195,7 @@ declare namespace jsrsasign {
      * // key with PBKDF2 with TripleDES
      * % openssl pkcs8 -in plain_p5.pem -topk8 -v2 -des3 -out encrypted_p8.pem
      */
-    getPBKDF2KeyHexFromParam(info: any, passcode: string): string;
+    getPBKDF2KeyHexFromParam(info: PKCS8Info, passcode: string): string;
 
     /**
      * read PEM formatted encrypted PKCS#8 private key and returns hexadecimal string of plain PKCS#8 private key
@@ -339,7 +351,13 @@ declare namespace jsrsasign {
      * keyObj = KEYUTIL.getKey({n: "75ab..", e: "010001"});
      */
     static getKey(
-      param: any,
+      param:
+        | RSAKey
+        | KJUR.crypto.ECDSA
+        | KJUR.crypto.DSA
+        | KJUR.jws.JWS.JsonWebKey
+        | {n: string; e: string}
+        | string,
       passcode?: string | null,
       hextype?: string
     ): RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA;

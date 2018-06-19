@@ -182,7 +182,7 @@ declare namespace jsrsasign.KJUR.asn1 {
      * o = new KJUR.asn1.DERBitString();
      * o.newFalseArray(3) → [false, false, false]
      */
-    static newFalseArray(nLength: number): Array<false>;
+    static newFalseArray(nLength: number): false[];
 
     getFreshValueHex(): string;
   }

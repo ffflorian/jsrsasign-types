@@ -221,7 +221,11 @@ declare namespace jsrsasign.KJUR.jws {
      * var pubkey = KEYUTIL.getKey('-----BEGIN CERT...');
      * var isValid = KJUR.jws.JWS.verify('eyJh...', pubkey);
      */
-    function verify(sJWS: string, key: string, acceptAlgs: string[] | {b64: string} | {hex: string} | {utf8: string}): boolean;
+    function verify(
+      sJWS: string,
+      key: string,
+      acceptAlgs: string[] | {b64: string} | {hex: string} | {utf8: string}
+    ): boolean;
 
     /**
      * parse header and payload of JWS signature
@@ -374,7 +378,7 @@ declare namespace jsrsasign.KJUR.jws {
      * KJUR.jws.JWS.includedArray(['a', 'b'], ['b', 'c', 'a']) => true
      * KJUR.jws.JWS.includedArray(['a', 'b'], ['b', 'c']) => false
      */
-    function includedArray(a1: any[], a2: any[]): boolean;
+    function includedArray(a1: string[], a2: string[]): boolean;
 
     /**
      * check whether item is included by array
@@ -388,7 +392,7 @@ declare namespace jsrsasign.KJUR.jws {
      * KJUR.jws.JWS.inArray('a', ['b', 'c', 'a']) => true
      * KJUR.jws.JWS.inArray('a', ['b', 'c']) => false
      */
-    function inArray(item: any, a: any[]): boolean;
+    function inArray(item: string, a: string[]): boolean;
 
     /** static associative array of general signature algorithm name from JWS algorithm name */
     const jwsalg2sigalg: {

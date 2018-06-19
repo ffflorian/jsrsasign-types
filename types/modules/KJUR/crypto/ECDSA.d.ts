@@ -26,7 +26,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * ec = new KJUR.crypto.ECDSA({'curve': 'secp256r1', 'pub': pubHex});
      * ec.getPublicKeyXYHex() → { x: '01bacf...', y: 'c3bc22...' }
      */
-    getPublicKeyXYHex(): any[];
+    getPublicKeyXYHex(): {x: string; y: string};
 
     /**
      * get NIST curve short name such as "P-256" or "P-384"
@@ -46,7 +46,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * var pubhex = keypair.ecpubhex; // hexadecimal string of EC public key
      * var prvhex = keypair.ecprvhex; // hexadecimal string of EC private key (=d)
      */
-    generateKeyPairHex(): any[];
+    generateKeyPairHex(): {ecprvhex: string; ecpubhex: string};
 
     /**
      * signing to message hash

@@ -378,7 +378,7 @@ declare namespace jsrsasign {
      * x.getExtCRLDistributionPointsURI() →
      * ["http://example.com/aaa.crl", "http://example.org/aaa.crl"]
      */
-    getExtCRLDistributionPointsURI(): any[] | undefined;
+    getExtCRLDistributionPointsURI(): string[] | undefined;
 
     /**
      * get AuthorityInfoAccess extension value in the certificate as associative array
@@ -398,7 +398,7 @@ declare namespace jsrsasign {
      * { ocsp:     ["http://ocsp.foo.com"],
      *   caissuer: ["http://rep.foo.com/aaa.p8m"] }
      */
-    getExtAIAInfo(): any[] | undefined;
+    getExtAIAInfo(): {caissuer: string[]; ocsp: string[]} | undefined;
 
     /**
      * get CertificatePolicies extension value in the certificate as array
@@ -421,7 +421,7 @@ declare namespace jsrsasign {
      *    cps: "http://example.com/cps",
      *    unotice: "explicit text" }]
      */
-    getExtCertificatePolicies(): any[] | undefined;
+    getExtCertificatePolicies(): {cps: string; id: string; unotice: string} | undefined;
 
     /**
      * read PEM formatted X.509 certificate from string.
