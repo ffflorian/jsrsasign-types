@@ -1,4 +1,6 @@
-# jsrsasign-types [![Dependabot badge](https://img.shields.io/badge/Dependabot-active-brightgreen.svg)](https://dependabot.com/)
+# jsrsasign-types [![Travis CI Build Status](https://api.travis-ci.org/ffflorian/jsrsasign-types.svg?branch=master)](https://travis-ci.org/ffflorian/jsrsasign-types) [![Dependabot badge](https://img.shields.io/badge/Dependabot-active-brightgreen.svg)](https://dependabot.com/)
+
+TypeScript definitions for [jsrsasign](https://github.com/kjur/jsrsasign).
 
  __ATTENTION__: This is work in progress and far from finished.
 
