@@ -190,7 +190,7 @@ declare namespace jsrsasign {
      * x.readCertPEM(pemCert);
      * x.verifySignature(pubKey) → true, false or raising exception
      */
-    verifySignature(pubKey: any): boolean;
+    verifySignature(pubKey: RSAKey | KJUR.crypto.DSA | KJUR.crypto.ECDSA): boolean;
 
     /**
      * set array of X.509v3 extesion information such as extension OID, criticality and value index.

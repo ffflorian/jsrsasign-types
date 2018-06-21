@@ -11,6 +11,22 @@ declare namespace jsrsasign {
     /** hexadecimal string of PBKDF2 salt */
     pbkdf2Salt: string;
   }
+
+  interface ECCPrivateKey {
+    curve: string;
+    d: string;
+  }
+
+  interface RSAPrivateKey {
+    n: string;
+    e: string;
+    d: string;
+    p: string;
+    q: string;
+    dp: string;
+    dq: string;
+    co: string;
+  }
   /**
    * class for RSA/ECC/DSA key utility
    * @description
@@ -355,6 +371,7 @@ declare namespace jsrsasign {
     static getKey(
       param:
         | RSAKey
+        | ECCPrivateKey
         | KJUR.crypto.ECDSA
         | KJUR.crypto.DSA
         | KJUR.jws.JWS.JsonWebKey

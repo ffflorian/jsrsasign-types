@@ -106,7 +106,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * @example
      * sig.init(sCertPEM)
      */
-    init(key: string | RSAKey | DSA | ECDSA, pass?: string): void;
+    init(key: string | RSAKey | DSA | ECDSA | ECCPrivateKey, pass?: string): void;
 
     /**
      * Updates the data to be signed or verified by a string
