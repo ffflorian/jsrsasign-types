@@ -7,7 +7,7 @@
   "devDependencies": {
     "dtslint": "0.3.0",
     "jsrsasign": "8.0.6",
-    "prettier": "1.15.3"
+    "prettier": "1.16.0"
   },
   "license": "MIT",
   "main": "index.js",
