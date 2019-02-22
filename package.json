@@ -5,7 +5,7 @@
     "typescript": "3.3.3333"
   },
   "devDependencies": {
-    "dtslint": "0.4.8",
+    "dtslint": "0.4.9",
     "jsrsasign": "8.0.6",
     "prettier": "1.16.4"
   },
