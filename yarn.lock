@@ -203,9 +203,9 @@ dts-critic@^1.0.1:
     request-promise-native "^1.0.5"
     yargs "^12.0.5"
 
-dtslint@0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.5.3.tgz#1a304abbf4e0b168e96a0ac88635663ebe33b5e7"
+dtslint@0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.5.4.tgz#b734d5bee56f3bf550a6a1714d1df911587c03df"
   dependencies:
     definitelytyped-header-parser "^1.0.1"
     dts-critic "^1.0.1"
