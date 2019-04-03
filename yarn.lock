@@ -207,16 +207,16 @@ dts-critic@^1.0.4:
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
-dtslint@0.5.9:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.5.9.tgz#462299c97f675a224758a3aafa2a519737584f9c"
+dtslint@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.6.0.tgz#d0d5721fda57bcd39a8254ac33d5dbab34585bb2"
   dependencies:
     definitelytyped-header-parser "^1.0.1"
     dts-critic "^1.0.4"
     fs-extra "^6.0.1"
     request "^2.88.0"
     strip-json-comments "^2.0.1"
-    tslint "^5.14.0"
+    tslint "5.14.0"
     typescript next
 
 ecc-jsbn@~0.1.1:
@@ -768,7 +768,7 @@ tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
-tslint@^5.14.0:
+tslint@5.14.0:
   version "5.14.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.14.0.tgz#be62637135ac244fc9b37ed6ea5252c9eba1616e"
   dependencies:
