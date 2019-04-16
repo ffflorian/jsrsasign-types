@@ -199,20 +199,20 @@ download-file-sync@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/download-file-sync/-/download-file-sync-1.0.4.tgz#d3e3c543f836f41039455b9034c72e355b036019"
 
-dts-critic@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-1.0.5.tgz#b96fbcfe1434a7afb6e09d41a7b70d713c83f67d"
+dts-critic@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-1.0.6.tgz#42ba0a85ff6544d3b65ec58cfae86d53be6203ed"
   dependencies:
     definitelytyped-header-parser "^1.0.1"
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
-dtslint@0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.6.1.tgz#c349ea9866fbb710de26ab99af2b1f8342a96032"
+dtslint@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.6.2.tgz#3b35332d5fa727544ea3f630224e67f3b84b8ea2"
   dependencies:
     definitelytyped-header-parser "^1.0.1"
-    dts-critic "^1.0.5"
+    dts-critic "^1.0.6"
     fs-extra "^6.0.1"
     request "^2.88.0"
     strip-json-comments "^2.0.1"
