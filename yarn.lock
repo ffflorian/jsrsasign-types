@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@ffflorian/prettier-config@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/@ffflorian/prettier-config/-/prettier-config-0.0.3.tgz#87be879c8d1d47ca698e9ce7d2be9af6b85ec917"
+  integrity sha512-EhlT3il2bb3GfTEDKxbmOjUpqzAJTc8ncRR4zJ2D2WtXyQiKqw/mINTVZFLh0MfAfFcc3TbLhfY2aHPnnxnvDw==
+
 "@types/bigi@1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@types/bigi/-/bigi-1.4.2.tgz#8dda60612e689e5769047568d0ce8b8fa83db953"

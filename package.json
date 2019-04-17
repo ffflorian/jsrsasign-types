@@ -5,6 +5,7 @@
     "typescript": "3.4.3"
   },
   "devDependencies": {
+    "@ffflorian/prettier-config": "0.0.3",
     "dtslint": "0.6.2",
     "jsrsasign": "8.0.6",
     "prettier": "1.17.0"
@@ -12,6 +13,7 @@
   "license": "MIT",
   "main": "index.js",
   "name": "jsrsasign-types",
+  "prettier": "@ffflorian/prettier-config",
   "repository": "https://github.com/ffflorian/jsrsasign-types",
   "scripts": {
     "lint": "yarn prettier --list-different",
