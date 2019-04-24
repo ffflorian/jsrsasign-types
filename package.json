@@ -2,7 +2,7 @@
   "author": "Florian Keller <github@floriankeller.de>",
   "dependencies": {
     "@types/bigi": "1.4.2",
-    "typescript": "3.4.4"
+    "typescript": "3.4.5"
   },
   "devDependencies": {
     "@ffflorian/prettier-config": "0.0.3",
