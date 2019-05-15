@@ -7,7 +7,7 @@
   "devDependencies": {
     "@ffflorian/prettier-config": "0.0.3",
     "@types/node": "~12",
-    "dtslint": "0.7.1",
+    "dtslint": "0.7.2",
     "jsrsasign": "8.0.6",
     "prettier": "1.17.1"
   },
