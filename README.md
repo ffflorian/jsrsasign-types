@@ -1,4 +1,4 @@
-# jsrsasign-types [![Travis CI Build Status](https://api.travis-ci.org/ffflorian/jsrsasign-types.svg?branch=master)](https://travis-ci.org/ffflorian/jsrsasign-types)  [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=ffflorian/jsrsasign-types)](https://dependabot.com)
+# jsrsasign-types [![Build Status](https://action-badges.now.sh/ffflorian/jsrsasign-types)](https://github.com/ffflorian/jsrsasign-types/actions/) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=ffflorian/jsrsasign-types)](https://dependabot.com)
 
 TypeScript definitions for [jsrsasign](https://github.com/kjur/jsrsasign).
 
