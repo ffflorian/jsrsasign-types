@@ -9,7 +9,7 @@
     "@types/node": "~12",
     "dtslint": "0.7.7",
     "jsrsasign": "8.0.6",
-    "prettier": "1.17.1"
+    "prettier": "1.18.0"
   },
   "license": "MIT",
   "main": "index.js",
