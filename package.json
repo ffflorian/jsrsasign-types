@@ -30,8 +30,8 @@
   "prettier": "@ffflorian/prettier-config",
   "repository": "https://github.com/ffflorian/jsrsasign-types",
   "scripts": {
-    "lint": "prettier --list-different \"types/**/*.d.ts\"",
-    "prettier": "prettier --write \"types/**/*.d.ts\"",
+    "lint": "prettier --list-different \"*.{d.ts,json,md,yml}\"",
+    "prettier": "prettier --write \"*.{d.ts,json,md,yml}\"",
     "test": "dtslint"
   },
   "version": "1.0.0"
