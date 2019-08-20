@@ -1,15 +1,28 @@
 {
   "author": "Florian Keller <github@floriankeller.de>",
   "dependencies": {
-    "@types/bigi": "1.4.2",
-    "typescript": "3.5.3"
+    "@types/bigi": "1.4.2"
   },
   "devDependencies": {
     "@ffflorian/prettier-config": "0.0.5",
     "@types/node": "~12",
     "dtslint": "0.9.1",
+    "husky": "3.0.4",
     "jsrsasign": "8.0.6",
-    "prettier": "1.18.2"
+    "lint-staged": "9.2.3",
+    "prettier": "1.18.2",
+    "typescript": "3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{d.ts,json,md,yml}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "license": "MIT",
   "main": "index.js",
@@ -17,8 +30,8 @@
   "prettier": "@ffflorian/prettier-config",
   "repository": "https://github.com/ffflorian/jsrsasign-types",
   "scripts": {
-    "lint": "yarn prettier --list-different",
-    "prettier": "prettier --ignore-path .gitignore --write 'types/**/*.d.ts'",
+    "lint": "prettier --list-different \"types/**/*.d.ts\"",
+    "prettier": "prettier --write \"types/**/*.d.ts\"",
     "test": "dtslint"
   },
   "version": "1.0.0"
