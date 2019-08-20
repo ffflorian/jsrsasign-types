@@ -11,10 +11,6 @@ declare namespace jsrsasign.KJUR.asn1.tsp {
    * ```
    */
   class PKIStatusInfo extends ASN1Object {
-    constructor(params?: {
-      failinfo?: NameParam | IntegerParam;
-      statstr?: ArrayParam<string>;
-      status: NameParam;
-    });
+    constructor(params?: {failinfo?: NameParam | IntegerParam; statstr?: ArrayParam<string>; status: NameParam});
   }
 }

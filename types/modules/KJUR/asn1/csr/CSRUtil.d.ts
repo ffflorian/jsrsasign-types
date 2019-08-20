@@ -78,21 +78,9 @@ declare namespace jsrsasign.KJUR.asn1.csr {
       ext?: Array<{
         subjectAltName: ArrayParam<{dns: string}>;
       }>;
-      sbjpubkey:
-        | RSAKey
-        | crypto.ECDSA
-        | crypto.DSA
-        | jws.JWS.JsonWebKey
-        | {n: string; e: string}
-        | string;
+      sbjpubkey: RSAKey | crypto.ECDSA | crypto.DSA | jws.JWS.JsonWebKey | {n: string; e: string} | string;
       sigalg: string;
-      sbjprvkey:
-        | RSAKey
-        | crypto.ECDSA
-        | crypto.DSA
-        | jws.JWS.JsonWebKey
-        | {n: string; e: string}
-        | string;
+      sbjprvkey: RSAKey | crypto.ECDSA | crypto.DSA | jws.JWS.JsonWebKey | {n: string; e: string} | string;
     }): string;
 
     /**

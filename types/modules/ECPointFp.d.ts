@@ -6,11 +6,6 @@ declare namespace jsrsasign {
     z: BigInteger;
     zinv: BigInteger | null;
 
-    constructor(
-      curve: ECFieldElementFp,
-      x: ECFieldElementFp,
-      y: ECFieldElementFp,
-      z: BigInteger | null
-    );
+    constructor(curve: ECFieldElementFp, x: ECFieldElementFp, y: ECFieldElementFp, z: BigInteger | null);
   }
 }

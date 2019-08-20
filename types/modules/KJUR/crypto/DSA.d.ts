@@ -22,13 +22,7 @@ declare namespace jsrsasign.KJUR.crypto {
      * @param y public key Y or null
      * @param x private key X
      */
-    setPrivate(
-      p: BigInteger,
-      q: BigInteger,
-      g: BigInteger,
-      y: BigInteger | null,
-      x: BigInteger
-    ): void;
+    setPrivate(p: BigInteger, q: BigInteger, g: BigInteger, y: BigInteger | null, x: BigInteger): void;
 
     /**
      * set DSA private key by key parameters of hexadecimal string
