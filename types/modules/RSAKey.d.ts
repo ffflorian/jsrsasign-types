@@ -151,11 +151,6 @@ declare namespace jsrsasign {
      *        DEFAULT is -1 (NOTE: OpenSSL's default is -2.)
      * @return returns true if valid, otherwise false
      */
-    static verifyWithMessageHashPSS(
-      hHash: string,
-      hSig: string,
-      hashAlg: string,
-      sLen: number
-    ): boolean;
+    static verifyWithMessageHashPSS(hHash: string, hSig: string, hashAlg: string, sLen: number): boolean;
   }
 }

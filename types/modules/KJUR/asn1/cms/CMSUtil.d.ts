@@ -30,10 +30,7 @@ declare namespace jsrsasign.KJUR.asn1.cms {
         hashAlg: string;
         sAttr: {
           SigningTime: TypeParam | StringParam;
-          SigningCertificateV2:
-            | ArrayParam<string>
-            | {array: string[]; hashalg: string}
-            | SigningCertificateV2;
+          SigningCertificateV2: ArrayParam<string> | {array: string[]; hashalg: string} | SigningCertificateV2;
           SignaturePolicyIdentifier: {
             oid: string;
             hash: {alg: string; hash: string} | cades.SignaturePolicyIdentifier;

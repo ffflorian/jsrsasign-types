@@ -49,20 +49,10 @@ declare namespace jsrsasign.KJUR.asn1.cms {
      *                                  eciObj: sd.dEncapContentInfo,
      *                                  hashAlg: 'sha256'});
      */
-    setForContentAndHash(params: {
-      eciObj: EncapsulatedContentInfo;
-      sdobj: SignedData;
-      hashAlg: string;
-    }): void;
+    setForContentAndHash(params: {eciObj: EncapsulatedContentInfo; sdobj: SignedData; hashAlg: string}): void;
 
     sign(
-      keyParam:
-        | RSAKey
-        | crypto.ECDSA
-        | crypto.DSA
-        | jws.JWS.JsonWebKey
-        | {n: string; e: string}
-        | string,
+      keyParam: RSAKey | crypto.ECDSA | crypto.DSA | jws.JWS.JsonWebKey | {n: string; e: string} | string,
       sigAlg: string
     ): void;
 

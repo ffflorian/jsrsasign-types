@@ -19,7 +19,7 @@
   "scripts": {
     "lint": "yarn prettier --list-different",
     "prettier": "prettier --ignore-path .gitignore --write 'types/**/*.d.ts'",
-    "test": "dtslint types"
+    "test": "dtslint"
   },
   "version": "1.0.0"
 }

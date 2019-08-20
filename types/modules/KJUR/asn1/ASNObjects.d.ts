@@ -571,14 +571,7 @@ declare namespace jsrsasign.KJUR.asn1 {
      * @param min minutes of date
      * @param sec seconds of date
      */
-    setByDateValue(
-      year: number,
-      month: number,
-      day: number,
-      hour: number,
-      min: number,
-      sec: number
-    ): void;
+    setByDateValue(year: number, month: number, day: number, hour: number, min: number, sec: number): void;
 
     getFreshValueHex(): string;
   }

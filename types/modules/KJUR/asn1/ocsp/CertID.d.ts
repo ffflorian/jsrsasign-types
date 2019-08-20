@@ -55,12 +55,7 @@ declare namespace jsrsasign.KJUR.asn1.ocsp {
      * o.setByValue("1fac...", "fd3a...", "1234"); // sha1 is used by default
      * o.setByValue("1fac...", "fd3a...", "1234", "sha256");
      */
-    setByValue(
-      issuerNameHashHex: string,
-      issuerKeyHashHex: string,
-      serialNumberHex: string,
-      algName?: string
-    ): void;
+    setByValue(issuerNameHashHex: string, issuerKeyHashHex: string, serialNumberHex: string, algName?: string): void;
 
     /**
      * set CertID ASN.1 object by PEM certificates.

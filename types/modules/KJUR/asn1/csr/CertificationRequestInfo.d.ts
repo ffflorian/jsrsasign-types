@@ -43,13 +43,7 @@ declare namespace jsrsasign.KJUR.asn1.csr {
      * @see KEYUTIL.getKey
      */
     setSubjectPublicKeyByGetKey(
-      keyParam:
-        | RSAKey
-        | crypto.ECDSA
-        | crypto.DSA
-        | jws.JWS.JsonWebKey
-        | {n: string; e: string}
-        | string
+      keyParam: RSAKey | crypto.ECDSA | crypto.DSA | jws.JWS.JsonWebKey | {n: string; e: string} | string
     ): void;
 
     /**

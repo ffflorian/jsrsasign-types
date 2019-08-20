@@ -77,12 +77,7 @@ declare namespace jsrsasign.KJUR.crypto {
 
     verify(hash: string, sig: string, pubkey: string): boolean;
 
-    verifyRaw(
-      e: string | BigInteger,
-      r: string | BigInteger,
-      s: string | BigInteger,
-      Q: string | BigInteger
-    ): boolean;
+    verifyRaw(e: string | BigInteger, r: string | BigInteger, s: string | BigInteger, Q: string | BigInteger): boolean;
 
     /**
      * Serialize a signature into DER format.
