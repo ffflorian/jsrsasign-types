@@ -21,32 +21,32 @@ declare namespace jsrsasign.KJUR.asn1 {
    *
    * __PROVIDED ATTRIBUTE CLASSES__
    *
-   * - {@link KJUR.asn1.cades.SignaturePolicyIdentifier} - for CAdES-EPES
-   * - {@link KJUR.asn1.cades.SignatureTimeStamp} - for CAdES-T
-   * - {@link KJUR.asn1.cades.CompleteCertificateRefs} - for CAdES-C(for future use)
+   * - `KJUR.asn1.cades.SignaturePolicyIdentifier` - for CAdES-EPES
+   * - `KJUR.asn1.cades.SignatureTimeStamp` - for CAdES-T
+   * - `KJUR.asn1.cades.CompleteCertificateRefs` - for CAdES-C(for future use)
    *
    * NOTE: Currntly CAdES-C is not supported since parser can't
    * handle unsigned attribute.
    *
    * __OTHER CLASSES__
    *
-   * - {@link KJUR.asn1.cades.OtherHashAlgAndValue}
-   * - {@link KJUR.asn1.cades.OtherHash}
-   * - {@link KJUR.asn1.cades.OtherCertID}
-   * - {@link KJUR.asn1.cades.CAdESUtil} - utilities for CAdES
+   * - `KJUR.asn1.cades.OtherHashAlgAndValue`
+   * - `KJUR.asn1.cades.OtherHash`
+   * - `KJUR.asn1.cades.OtherCertID`
+   * - `KJUR.asn1.cades.CAdESUtil` - utilities for CAdES
    *
    * __GENERATE CAdES-BES__
    *
-   * To generate CAdES-BES, {@link KJUR.asn.cades} namespace
-   * classes are not required and already {@link KJUR.asn.cms} namespace
+   * To generate CAdES-BES, `KJUR.asn.cades` namespace
+   * classes are not required and already `KJUR.asn.cms` namespace
    * provides attributes for CAdES-BES.
-   * Create {@link KJUR.asn1.cms.SignedData} with following
+   * Create `KJUR.asn1.cms.SignedData` with following
    * mandatory attribute in CAdES-BES:
    *
-   * - {@link KJUR.asn1.cms.ContentType}
-   * - {@link KJUR.asn1.cms.MessageDigest}
-   * - {@link KJUR.asn1.cms.SigningCertificate} or
-   * - {@link KJUR.asn1.cms.SigningCertificateV2}
+   * - `KJUR.asn1.cms.ContentType`
+   * - `KJUR.asn1.cms.MessageDigest`
+   * - `KJUR.asn1.cms.SigningCertificate`
+   * - `KJUR.asn1.cms.SigningCertificateV2`
    *
    * CMSUtil.newSignedData method is very useful to generate CAdES-BES.
    *
