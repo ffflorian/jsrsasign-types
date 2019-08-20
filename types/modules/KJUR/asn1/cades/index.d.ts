@@ -50,6 +50,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    *
    * CMSUtil.newSignedData method is very useful to generate CAdES-BES.
    *
+   * ```
    * sd = KJUR.asn1.cms.CMSUtil.newSignedData({
    *   content: {str: "aaa"},
    *   certs: [certPEM],
@@ -62,6 +63,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    *   }]
    * });
    * signedDataHex = sd.getContentInfoEncodedHex();
+   * ```
    *
    * NOTE: ContentType and MessageDigest signed attributes
    * are automatically added by default.
@@ -71,6 +73,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * If you need signature by multiple signers, you can
    * specify one or more items in 'signerInfos' property as below.
    *
+   * ```
    * sd = KJUR.asn1.cms.CMSUtil.newSignedData({
    *   content: {str: "aaa"},
    *   certs: [certPEM1, certPEM2],
@@ -89,6 +92,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    *   }]
    * });
    * signedDataHex = sd.getContentInfoEncodedHex();
+   * ```
    *
    * __GENERATE CAdES-EPES__
    *
@@ -96,6 +100,7 @@ declare namespace jsrsasign.KJUR.asn1 {
    * you just need to add 'SignaturePolicyIdentifier'
    * attribute as below.
    *
+   * ```
    * sd = KJUR.asn1.cms.CMSUtil.newSignedData({
    *   content: {str: "aaa"},
    *   certs: [certPEM],
@@ -114,24 +119,31 @@ declare namespace jsrsasign.KJUR.asn1 {
    *   }]
    * });
    * signedDataHex = sd.getContentInfoEncodedHex();
-   *
+   * ```
    *
    * __GENERATE CAdES-T__
+   *
    * After a signed CAdES-BES or CAdES-EPES signature have been generated,
    * you can generate CAdES-T by adding SigningTimeStamp unsigned attribute.
    *
+   * ```
    * beshex = "30..."; // hex of CAdES-BES or EPES data
    * info = KJUR.asn1.cades.CAdESUtil.parseSignedDataForAddingUnsigned(beshex);
+   * ```
+   *
    * // You can refer a hexadecimal string of signature value
    * // in the first signerInfo in the CAdES-BES/EPES with a variable:
    * // 'info.si[0].sigval'. You need to get RFC 3161 TimeStampToken
    * // from a trusted time stamp authority. Otherwise you can also
    * // get it by 'KJUR.asn1.tsp' module. We suppose that we could
    * // get proper time stamp.
+   *
+   * ```
    * tsthex0 = "30..."; // hex of TimeStampToken for signerInfo[0] sigval
    * si0 = info.obj.signerInfoList[0];
    * si0.addUnsigned(new KJUR.asn1.cades.SignatureTimeStamp({tst: tsthex0});
    * esthex = info.obj.getContentInfoEncodedHex(); // CAdES-T
+   * ```
    */
   namespace cades {
     //
