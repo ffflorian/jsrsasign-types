@@ -153,7 +153,7 @@ declare namespace jsrsasign.KJUR.jws {
      * // header and payload can be passed by both string and object
      * sJWS = KJUR.jws.JWS.sign(null, '{alg:"HS256",cty:"JWT"}', '{age:21}', "aaa");
      */
-    function sign(alg: string | null, spHeader: {alg: string}, spPayload: {}, pass: string): string;
+    function sign(alg: string | null, spHeader: {alg: string}, spPayload: {}, pass?: string): string;
 
     /**
      * verify JWS signature by specified key or certificate
@@ -218,7 +218,7 @@ declare namespace jsrsasign.KJUR.jws {
     function verify(
       sJWS: string,
       key: string,
-      acceptAlgs: string[] | {b64: string} | {hex: string} | {utf8: string}
+      acceptAlgs?: string[] | {b64: string} | {hex: string} | {utf8: string}
     ): boolean;
 
     /**
@@ -322,9 +322,7 @@ declare namespace jsrsasign.KJUR.jws {
      * - sub - array of acceptable subject names (ex. ['mailto:john@foo.com'])
      * - aud - array of acceptable audience name (ex. ['http://foo.com'])
      * - jti - string of acceptable JWT ID (OPTION) (ex. 'id1234')
-     * -
-     * verifyAt - time to verify 'nbf', 'iat' and 'exp' in UNIX seconds
-     * (OPTION) (ex. 1377663900).
+     * - verifyAt - time to verify 'nbf', 'iat' and 'exp' in UNIX seconds (OPTION) (ex. 1377663900).
      * If this is not specified, current time of verifier will be used.
      * `KJUR.jws.IntDate` may be useful to specify it.
      *
@@ -357,6 +355,7 @@ declare namespace jsrsasign.KJUR.jws {
         iss: string[];
         jti?: string;
         sub: string[];
+        verifyAt?: string | number
       }
     ): boolean;
 

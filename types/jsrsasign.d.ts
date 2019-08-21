@@ -291,7 +291,7 @@ declare namespace jsrsasign {
    * pemtohex("-----BEGIN CERTIFICATE...", "CERTIFICATE") → "3082..."
    * pemtohex(" \r\n-----BEGIN DSA PRIVATE KEY...") → "3082..."
    */
-  function pemtohex(s: string, sHead: string): string;
+  function pemtohex(s: string, sHead?: string): string;
 
   /**
    * read file and return file contents

@@ -7,8 +7,7 @@ declare namespace jsrsasign.KJUR.asn1.x509 {
    * The 'params' argument is an associative array and has following parameters:
    *
    * - name: algorithm name (MANDATORY, ex. sha1, SHA256withRSA)
-   * - asn1params: explicitly specify ASN.1 object for algorithm.
-   * (OPTION)
+   * - asn1params: explicitly specify ASN.1 object for algorithm. (OPTION)
    * - paramempty: set algorithm parameter to NULL by force.
    * If paramempty is false, algorithm parameter will be set automatically.
    * If paramempty is false and algorithm name is "*withDSA" or "withECDSA" parameter field of
@@ -26,7 +25,7 @@ declare namespace jsrsasign.KJUR.asn1.x509 {
    * algId = new KJUR.asn1.x509.AlgorithmIdentifier({name: "SHA256withRSA", paramempty: true});
    */
   class AlgorithmIdentifier extends ASN1Object {
-    constructor(params?: {name: string; asnparams?: ASN1Object; paramempty?: boolean});
+    constructor(params?: {name: string; asn1params?: ASN1Object; paramempty?: boolean});
     getEncodedHex(): string;
   }
 }
