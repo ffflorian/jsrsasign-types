@@ -153,7 +153,7 @@ declare namespace jsrsasign.KJUR.jws {
      * // header and payload can be passed by both string and object
      * sJWS = KJUR.jws.JWS.sign(null, '{alg:"HS256",cty:"JWT"}', '{age:21}', "aaa");
      */
-    function sign(alg: string | null, spHeader: {alg: string}, spPayload: {}, key: string, pass: string): string;
+    function sign(alg: string | null, spHeader: {alg: string}, spPayload: {}, pass: string): string;
 
     /**
      * verify JWS signature by specified key or certificate
