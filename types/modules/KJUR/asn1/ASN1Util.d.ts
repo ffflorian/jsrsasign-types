@@ -88,7 +88,7 @@ declare namespace jsrsasign.KJUR.asn1 {
      * YWFh
      * -----END PRIVATE KEY-----
      */
-    getPEMStringFromHex(dataHex: string, pemHeader: string): string;
+    static getPEMStringFromHex(dataHex: string, pemHeader: string): string;
 
     /**
      * generate ASN1Object specifed by JSON parameters
